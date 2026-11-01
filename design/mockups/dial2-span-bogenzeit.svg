@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" font-family="Inter, system-ui, sans-serif" width="450" height="450" viewBox="0 0 450 450" role="img" aria-label="Span dial: level horizon, sunrise at left, sunset at right, quarters at 45 degrees, outer kilosecond ring spaced by season">
+<defs>
+<clipPath id="sky2"><circle cx="225" cy="225" r="195"></circle></clipPath>
+</defs>
+<circle cx="225" cy="225" r="215" fill="#0F1726"></circle>
+<g fill="none" stroke="#8FA3BF" stroke-width="8">
+<path d="M 225 20 A 205 205 0 0 1 430 225" stroke-dasharray="1.4 14.826" stroke-dashoffset="0.7"></path>
+<path d="M 225 20 A 205 205 0 0 0 20 225" stroke-dasharray="1.4 14.826" stroke-dashoffset="0.7"></path>
+<path d="M 225 430 A 205 205 0 0 0 430 225" stroke-dasharray="1.4 12.388" stroke-dashoffset="0.7"></path>
+<path d="M 225 430 A 205 205 0 0 1 20 225" stroke-dasharray="1.4 12.388" stroke-dashoffset="0.7"></path>
+</g>
+<g fill="none" stroke="#DDE6F2" stroke-width="14">
+<path d="M 225 20 A 205 205 0 0 1 430 225" stroke-dasharray="2.6 78.53" stroke-dashoffset="1.3"></path>
+<path d="M 225 20 A 205 205 0 0 0 20 225" stroke-dasharray="2.6 78.53" stroke-dashoffset="1.3"></path>
+<path d="M 225 430 A 205 205 0 0 0 430 225" stroke-dasharray="2.6 66.34" stroke-dashoffset="1.3"></path>
+<path d="M 225 430 A 205 205 0 0 1 20 225" stroke-dasharray="2.6 66.34" stroke-dashoffset="1.3"></path>
+</g>
+<g clip-path="url(#sky2)">
+<rect x="0" y="0" width="450" height="450" fill="#0A1222"></rect>
+<rect x="0" y="0" width="450" height="225" fill="#4C86C4"></rect>
+<rect x="0" y="225" width="450" height="19.3" fill="#2A4470"></rect>
+<rect x="0" y="244.3" width="450" height="21.9" fill="#1B2D50"></rect>
+<rect x="0" y="266.2" width="450" height="21.2" fill="#121F38"></rect>
+<line x1="0" y1="225" x2="450" y2="225" stroke="#F2F5FA" stroke-opacity="0.55" stroke-width="1.5"></line>
+<circle cx="225" cy="225" r="160" fill="none" stroke="#F2F5FA" stroke-opacity="0.25" stroke-width="1"></circle>
+</g>
+<g stroke="#F2F5FA" stroke-opacity="0.8" stroke-width="2.5" stroke-linecap="round">
+<line x1="225" y1="30" x2="225" y2="46" transform="rotate(45 225 225)"></line>
+<line x1="225" y1="30" x2="225" y2="46" transform="rotate(-45 225 225)"></line>
+<line x1="225" y1="30" x2="225" y2="46" transform="rotate(135 225 225)"></line>
+<line x1="225" y1="30" x2="225" y2="46" transform="rotate(-135 225 225)"></line>
+</g>
+<g fill="none" stroke="#F2F5FA" stroke-width="2.2">
+<circle cx="225" cy="52" r="9"></circle>
+<circle cx="225" cy="398" r="9"></circle>
+</g>
+<circle cx="225" cy="52" r="2.6" fill="#F2F5FA"></circle>
+<circle cx="182.1" cy="70.8" r="20" fill="#FFE2A0" fill-opacity="0.25"></circle>
+<circle cx="182.1" cy="70.8" r="11" fill="#FFE2A0"></circle>
+<circle cx="225" cy="225" r="100" fill="#0A1222" fill-opacity="0.8" stroke="#F2F5FA" stroke-opacity="0.12"></circle>
+<text x="225" y="170" text-anchor="middle" font-size="13" font-weight="500" letter-spacing="1.5" fill="#A9B8CC">SUN 1 NOV</text>
+<text x="229" y="243" text-anchor="end" font-size="64" font-weight="600" fill="#F2F5FA">18</text>
+<circle cx="263" cy="220" r="21" fill="none" stroke="#F2F5FA" stroke-width="4.5"></circle>
+<circle cx="263" cy="220" r="6" fill="#F2F5FA"></circle>
+<text x="225" y="274" text-anchor="middle" font-size="19" font-weight="500" fill="#C9D5E4">[3.5 ks]</text>
+<text x="225" y="301" text-anchor="middle" font-size="13" font-weight="500" letter-spacing="1.5" fill="#A9B8CC">FORENOON</text>
+<text x="225" y="352" text-anchor="middle" font-size="11" font-weight="500" letter-spacing="1" fill="#A9B8CC">TAGBOGEN 39.7 ks</text>
+<text x="225" y="368" text-anchor="middle" font-size="11" font-weight="500" letter-spacing="1" fill="#A9B8CC">NACHTBOGEN 46.7 ks</text>
+</svg>

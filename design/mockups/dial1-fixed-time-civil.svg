@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" font-family="Inter, system-ui, sans-serif" width="450" height="450" viewBox="0 0 450 450" role="img" aria-label="Civil time 11:08 CST over the dimmed solar dial">
+<defs>
+<clipPath id="sky1c"><circle cx="225" cy="225" r="195"></circle></clipPath>
+</defs>
+<g opacity="0.35">
+<circle cx="225" cy="225" r="215" fill="#0F1726"></circle>
+<circle cx="225" cy="225" r="205" fill="none" stroke="#8FA3BF" stroke-width="8" stroke-dasharray="1.4 13.508" stroke-dashoffset="0.7" transform="rotate(-90 225 225)"></circle>
+<circle cx="225" cy="225" r="205" fill="none" stroke="#DDE6F2" stroke-width="14" stroke-dasharray="2.6 71.94" stroke-dashoffset="1.3" transform="rotate(-90 225 225)"></circle>
+<g clip-path="url(#sky1c)">
+<rect x="0" y="0" width="450" height="450" fill="#0A1222"></rect>
+<rect x="0" y="0" width="450" height="200.2" fill="#4C86C4"></rect>
+<rect x="0" y="200.2" width="450" height="20.8" fill="#2A4470"></rect>
+<rect x="0" y="221" width="450" height="24" fill="#1B2D50"></rect>
+<rect x="0" y="245" width="450" height="23.4" fill="#121F38"></rect>
+<line x1="0" y1="200.2" x2="450" y2="200.2" stroke="#F2F5FA" stroke-opacity="0.55" stroke-width="1.5"></line>
+</g>
+<circle cx="185.5" cy="69.9" r="11" fill="#FFE2A0"></circle>
+</g>
+<circle cx="225" cy="225" r="120" fill="#0A1222" fill-opacity="0.92" stroke="#F2F5FA" stroke-opacity="0.12"></circle>
+<text x="225" y="162" text-anchor="middle" font-size="13" font-weight="500" letter-spacing="1.5" fill="#A9B8CC">SUN 1 NOV 2026</text>
+<text x="225" y="240" text-anchor="middle" font-size="64" font-weight="600" fill="#F2F5FA">11:08</text>
+<text x="225" y="270" text-anchor="middle" font-size="15" font-weight="500" fill="#C9D5E4">CST | UTC−6</text>
+<text x="225" y="303" text-anchor="middle" font-size="13" font-weight="500" letter-spacing="1" fill="#A9B8CC">RISE 06:34 | SET 17:36</text>
+</svg>

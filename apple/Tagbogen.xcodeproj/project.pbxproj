@@ -1,0 +1,693 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B10000000000000000000001 /* Tagbogen Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B20000000000000000000001 /* Tagbogen Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B10000000000000000000002 /* TagbogenWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B20000000000000000000006 /* TagbogenWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B10000000000000000000003 /* Bogenzeit in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000001 /* Bogenzeit */; };
+		B10000000000000000000004 /* Bogenzeit in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000002 /* Bogenzeit */; };
+		B10000000000000000000005 /* Bogenzeit in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000003 /* Bogenzeit */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B30000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B90000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B80000000000000000000001;
+			remoteInfo = "Tagbogen Watch App";
+		};
+		B30000000000000000000002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B90000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B80000000000000000000001;
+			remoteInfo = "Tagbogen Watch App";
+		};
+		B30000000000000000000003 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B90000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B80000000000000000000004;
+			remoteInfo = TagbogenWidgets;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B40000000000000000000001 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				B10000000000000000000001 /* Tagbogen Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B40000000000000000000002 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B10000000000000000000002 /* TagbogenWidgets.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		B20000000000000000000001 /* Tagbogen Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tagbogen Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20000000000000000000002 /* Tagbogen Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tagbogen Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20000000000000000000003 /* Tagbogen.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tagbogen.xcconfig; sourceTree = "<group>"; };
+		B20000000000000000000004 /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
+		B20000000000000000000005 /* Tagbogen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tagbogen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20000000000000000000006 /* TagbogenWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TagbogenWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20000000000000000000007 /* Widgets-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Widgets-Info.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BF0000000000000000000001 /* Exceptions for "Shared" folder in "TagbogenWidgets" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Dial/AnchorGlyph.swift,
+				Dial/Palette.swift,
+				Support/AppGroup.swift,
+			);
+			target = B80000000000000000000004 /* TagbogenWidgets */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		B50000000000000000000001 /* Tagbogen Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Tagbogen Watch App";
+			sourceTree = "<group>";
+		};
+		B50000000000000000000002 /* Tagbogen Watch AppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Tagbogen Watch AppTests";
+			sourceTree = "<group>";
+		};
+		B50000000000000000000003 /* Tagbogen */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Tagbogen;
+			sourceTree = "<group>";
+		};
+		B50000000000000000000004 /* TagbogenWidgets */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TagbogenWidgets;
+			sourceTree = "<group>";
+		};
+		B50000000000000000000005 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BF0000000000000000000001 /* Exceptions for "Shared" folder in "TagbogenWidgets" target */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B60000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000003 /* Bogenzeit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B60000000000000000000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B60000000000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000005 /* Bogenzeit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B60000000000000000000004 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000004 /* Bogenzeit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B70000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				B50000000000000000000005 /* Shared */,
+				B50000000000000000000003 /* Tagbogen */,
+				B50000000000000000000001 /* Tagbogen Watch App */,
+				B50000000000000000000002 /* Tagbogen Watch AppTests */,
+				B50000000000000000000004 /* TagbogenWidgets */,
+				B70000000000000000000003 /* Config */,
+				B70000000000000000000002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B70000000000000000000002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B20000000000000000000001 /* Tagbogen Watch App.app */,
+				B20000000000000000000002 /* Tagbogen Watch AppTests.xctest */,
+				B20000000000000000000005 /* Tagbogen.app */,
+				B20000000000000000000006 /* TagbogenWidgets.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B70000000000000000000003 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				B20000000000000000000003 /* Tagbogen.xcconfig */,
+				B20000000000000000000004 /* Version.xcconfig */,
+				B20000000000000000000007 /* Widgets-Info.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B80000000000000000000001 /* Tagbogen Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE0000000000000000000002 /* Build configuration list for PBXNativeTarget "Tagbogen Watch App" */;
+			buildPhases = (
+				BA0000000000000000000001 /* Sources */,
+				B60000000000000000000001 /* Frameworks */,
+				BB0000000000000000000001 /* Resources */,
+				B40000000000000000000002 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BD0000000000000000000003 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B50000000000000000000001 /* Tagbogen Watch App */,
+				B50000000000000000000005 /* Shared */,
+			);
+			name = "Tagbogen Watch App";
+			packageProductDependencies = (
+				BC0000000000000000000001 /* Bogenzeit */,
+			);
+			productName = "Tagbogen Watch App";
+			productReference = B20000000000000000000001 /* Tagbogen Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B80000000000000000000002 /* Tagbogen Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE0000000000000000000003 /* Build configuration list for PBXNativeTarget "Tagbogen Watch AppTests" */;
+			buildPhases = (
+				BA0000000000000000000002 /* Sources */,
+				B60000000000000000000002 /* Frameworks */,
+				BB0000000000000000000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BD0000000000000000000001 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B50000000000000000000002 /* Tagbogen Watch AppTests */,
+			);
+			name = "Tagbogen Watch AppTests";
+			productName = "Tagbogen Watch AppTests";
+			productReference = B20000000000000000000002 /* Tagbogen Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B80000000000000000000003 /* Tagbogen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE0000000000000000000004 /* Build configuration list for PBXNativeTarget "Tagbogen" */;
+			buildPhases = (
+				BA0000000000000000000004 /* Sources */,
+				B60000000000000000000004 /* Frameworks */,
+				BB0000000000000000000003 /* Resources */,
+				B40000000000000000000001 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BD0000000000000000000002 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B50000000000000000000003 /* Tagbogen */,
+				B50000000000000000000005 /* Shared */,
+			);
+			name = Tagbogen;
+			packageProductDependencies = (
+				BC0000000000000000000002 /* Bogenzeit */,
+			);
+			productName = Tagbogen;
+			productReference = B20000000000000000000005 /* Tagbogen.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B80000000000000000000004 /* TagbogenWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE0000000000000000000005 /* Build configuration list for PBXNativeTarget "TagbogenWidgets" */;
+			buildPhases = (
+				BA0000000000000000000003 /* Sources */,
+				B60000000000000000000003 /* Frameworks */,
+				BB0000000000000000000004 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B50000000000000000000004 /* TagbogenWidgets */,
+			);
+			name = TagbogenWidgets;
+			packageProductDependencies = (
+				BC0000000000000000000003 /* Bogenzeit */,
+			);
+			productName = TagbogenWidgets;
+			productReference = B20000000000000000000006 /* TagbogenWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B90000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2630;
+				LastUpgradeCheck = 2630;
+				TargetAttributes = {
+					B80000000000000000000001 = {
+						CreatedOnToolsVersion = 26.3;
+					};
+					B80000000000000000000002 = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = B80000000000000000000001;
+					};
+					B80000000000000000000003 = {
+						CreatedOnToolsVersion = 26.3;
+					};
+					B80000000000000000000004 = {
+						CreatedOnToolsVersion = 26.3;
+					};
+				};
+			};
+			buildConfigurationList = BE0000000000000000000001 /* Build configuration list for PBXProject "Tagbogen" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B70000000000000000000001;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BB1000000000000000000001 /* XCLocalSwiftPackageReference "Bogenzeit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = B70000000000000000000002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B80000000000000000000003 /* Tagbogen */,
+				B80000000000000000000001 /* Tagbogen Watch App */,
+				B80000000000000000000002 /* Tagbogen Watch AppTests */,
+				B80000000000000000000004 /* TagbogenWidgets */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BB0000000000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB0000000000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB0000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB0000000000000000000004 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BA0000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA0000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA0000000000000000000003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA0000000000000000000004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BD0000000000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B80000000000000000000001 /* Tagbogen Watch App */;
+			targetProxy = B30000000000000000000001 /* PBXContainerItemProxy */;
+		};
+		BD0000000000000000000002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B80000000000000000000001 /* Tagbogen Watch App */;
+			targetProxy = B30000000000000000000002 /* PBXContainerItemProxy */;
+		};
+		BD0000000000000000000003 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B80000000000000000000004 /* TagbogenWidgets */;
+			targetProxy = B30000000000000000000003 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		BE1000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B20000000000000000000003 /* Tagbogen.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = watchos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		BE1000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B20000000000000000000003 /* Tagbogen.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				SDKROOT = watchos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		BE1000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Config/AppGroup.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(TAGBOGEN_DISPLAY_NAME)";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Tagbogen reads the Sun's arc for where you are.";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKApplication = YES;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(TAGBOGEN_CONTAINER_BUNDLE_ID)";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_BUNDLE_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		BE1000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Config/AppGroup.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(TAGBOGEN_DISPLAY_NAME)";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Tagbogen reads the Sun's arc for where you are.";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKApplication = YES;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(TAGBOGEN_CONTAINER_BUNDLE_ID)";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_BUNDLE_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		BE1000000000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_BUNDLE_ID).tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tagbogen Watch App.app/Tagbogen Watch App";
+			};
+			name = Debug;
+		};
+		BE1000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_BUNDLE_ID).tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tagbogen Watch App.app/Tagbogen Watch App";
+			};
+			name = Release;
+		};
+		BE1000000000000000000007 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(TAGBOGEN_DISPLAY_NAME)";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Tagbogen reads the Sun's arc for where you are.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_CONTAINER_BUNDLE_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		BE1000000000000000000008 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(TAGBOGEN_DISPLAY_NAME)";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Tagbogen reads the Sun's arc for where you are.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_CONTAINER_BUNDLE_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BE1000000000000000000009 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Config/AppGroup.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/Widgets-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = TagbogenWidgets;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_BUNDLE_ID).widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		BE1000000000000000000010 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Config/AppGroup.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/Widgets-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = TagbogenWidgets;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_BUNDLE_ID).widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BE0000000000000000000001 /* Build configuration list for PBXProject "Tagbogen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE1000000000000000000001 /* Debug */,
+				BE1000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE0000000000000000000002 /* Build configuration list for PBXNativeTarget "Tagbogen Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE1000000000000000000003 /* Debug */,
+				BE1000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE0000000000000000000003 /* Build configuration list for PBXNativeTarget "Tagbogen Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE1000000000000000000005 /* Debug */,
+				BE1000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE0000000000000000000004 /* Build configuration list for PBXNativeTarget "Tagbogen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE1000000000000000000007 /* Debug */,
+				BE1000000000000000000008 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE0000000000000000000005 /* Build configuration list for PBXNativeTarget "TagbogenWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE1000000000000000000009 /* Debug */,
+				BE1000000000000000000010 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		BB1000000000000000000001 /* XCLocalSwiftPackageReference "Bogenzeit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Bogenzeit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BC0000000000000000000001 /* Bogenzeit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Bogenzeit;
+		};
+		BC0000000000000000000002 /* Bogenzeit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Bogenzeit;
+		};
+		BC0000000000000000000003 /* Bogenzeit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Bogenzeit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = B90000000000000000000001 /* Project object */;
+}

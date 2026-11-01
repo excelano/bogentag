@@ -1,0 +1,15 @@
+// Tagbogen.xcconfig
+// Author: David M. Anderson
+// Built with AI assistance (Claude, Anthropic)
+//
+// The values a fork changes to build its own copy of the app.
+
+DEVELOPMENT_TEAM = 9K6W5PMFYP
+// The App Store record's bundle id, the iPhone app's, which the watch app's extends.
+TAGBOGEN_CONTAINER_BUNDLE_ID = com.excelano.tagbogen
+TAGBOGEN_BUNDLE_ID = $(TAGBOGEN_CONTAINER_BUNDLE_ID).watchkitapp
+TAGBOGEN_DISPLAY_NAME = Tagbogen
+// Shared by the watch app and its widgets; Shared/Support/AppGroup.swift names it too.
+TAGBOGEN_APP_GROUP = group.$(TAGBOGEN_CONTAINER_BUNDLE_ID)
+
+#include "Version.xcconfig"
