@@ -26,7 +26,7 @@ The build directory is the shared one in `~/.cargo/config.toml`, not `target/`.
     xcodebuild test -scheme "Tagbogen Watch App"    # on the Mac, on a watch simulator; reboot the simulator after
 
 A Debug build launched with `--demo` shows Houston on the spec's worked day; `--page span` (or `day`) and
-`--civil` pick the page, and `packaging/ios/shots.sh` takes the store screenshots from them.
+`--civil` pick the page, and `packaging/ios/shots.sh` at the repo root takes the store screenshots from them, where the release apps look.
 Releases: the apps in excelano/shipping, run from this directory.
 
 ## Rules
