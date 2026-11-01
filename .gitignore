@@ -1,6 +1,4 @@
-/target
 ship.toml
-__pycache__/
 .DS_Store
 xcuserdata/
 *.xcuserstate

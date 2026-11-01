@@ -1,41 +1,30 @@
-# Bogenzeit
+# Tagbogen
 
-Bogenzeit (BZ) reads time as position on the Sun's arc instead of as a count of
-hours. Solar noon (☉) and solar midnight (○) are the anchors; the readout is in
-spans, a hundred per half-arc so that they stretch with the season, and in
-kiloseconds, which do not. `18 [3.5 ks] ☉` is eighteen spans and 3.5 ks before
-solar noon. The standard is defined in `docs/bogenzeit-spec.md`, and that file
-is normative: an implementation that disagrees with it is wrong, and a change to
-a definition is a change to the spec first.
+Tagbogen is the Apple Watch and iPhone app that shows Bogenzeit, time read as
+position on the Sun's arc: spans from solar noon (☉) or solar midnight (○), a
+hundred per half-arc, with kiloseconds as the fixed scale beside them. The
+standard, its reference implementation and the test vectors every port passes
+live at https://github.com/excelano/bogenzeit; this repository is the face.
 
-Tagbogen is the watch face and app family that displays Bogenzeit, specified in
-`docs/tagbogen-spec.md` with mockups in `design/mockups/`.
+Apple Watch takes no third-party faces, so the watch app's screen is the dial:
+a sky with its horizon and twilight bands, the Sun on its track, the two anchors
+drawn as shapes, and the reading in the centre. A tap shows the civil clock.
+Complications put the reading on an Apple face, and the iPhone app shows the
+same dial larger with a short tour of the system. `docs/tagbogen-spec.md`
+describes the face and `design/mockups/` holds the drawings it was built to.
 
 ## What is here
 
-`core/` is the engine and the `bz` command in Rust, with no dependencies. It
-computes a reading from a UTC instant and coordinates, offline, using the NOAA
-solar position series that every Bogenzeit port implements step for step.
+`Bogenzeit/` is the engine as a Swift package, passing the vectors in
+`vectors/`, a copy of the standard's file. `Tagbogen.xcodeproj` builds the
+iPhone app, the watch app it embeds and the watch app's complications, all from
+`Shared/`. `packaging/` holds the store listing, the release notes, the privacy
+entry and the screenshot recipes the release apps read.
 
-`apple/` holds the Swift engine, a package passing the same vectors, and the
-Tagbogen Xcode project: an iPhone app, the Apple Watch app it embeds, and the
-watch's complications. The watch app's screen is the dial, since Apple Watch
-takes no third-party faces; a tap shows civil time.
+## Building
 
-`reference/bz_reference.py` is the prototype that defines the algorithm, and the
-only thing that writes `vectors/bz_vectors.json`. Every port, in whatever
-language, passes those vectors: event times within a second, displayed values
-exact. Add a vector by adding a case to the reference and regenerating the file.
+    cd Bogenzeit && swift test
 
-## Install and run
-
-    cargo install --path core
-
-    bz now --lat 29.76 --lon -95.37
-    bz at 2026-11-01T17:08:00Z --lat 29.76 --lon -95.37
-    bz day 2026-11-01 --lat 29.76 --lon -95.37
-
-`now` and `at` print the full timestamp, the quarter, the span length today and
-the day's events; `day` prints the day's table of anchors, quarter boundaries,
-sunrise, sunset and twilights in time order. `--json` gives either as an object;
-`bz --help` has the rest.
+The package tests run anywhere Swift does. The apps build with Xcode from the
+project at the root; a Debug build launched with `--demo` shows Houston on the
+spec's worked day.

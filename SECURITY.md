@@ -2,7 +2,7 @@
 
 ## Reporting a vulnerability
 
-Please report suspected vulnerabilities privately through GitHub Security Advisories at https://github.com/excelano/bogenzeit/security/advisories/new. If you would rather not use GitHub, email david.anderson@excelano.com instead. I aim to respond within seven days.
+Please report suspected vulnerabilities privately through GitHub Security Advisories at https://github.com/excelano/tagbogen/security/advisories/new. If you would rather not use GitHub, email david.anderson@excelano.com instead. I aim to respond within seven days.
 
 Please do not open public issues for security problems.
 
@@ -12,7 +12,7 @@ The latest release receives fixes. A security fix ships through `main` in a new 
 
 ## Security model
 
-**Tagbogen has no network surface.** The apps and the `bz` command make no network request, open no socket and link no networking or analytics code.
+**Tagbogen has no network surface.** The apps make no network request, open no socket and link no networking or analytics code.
 
 **Location is read only with permission, only on the device running the app, and only while the app is on screen.** A new position replaces the one in use only after a move of more than about ten kilometres. The iPhone app and the watch app do not exchange it.
 

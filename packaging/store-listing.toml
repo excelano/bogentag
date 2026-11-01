@@ -25,12 +25,12 @@ ON APPLE WATCH
 Turn the Digital Crown: the dial, a page with today's figures (the length of the day arc and the night arc, and sunrise, noon, sunset and midnight with their clock times), and Settings with the same two choices. Tap the dial for the clock. Complications are available in the circular, corner, rectangular and inline slots and show the current reading; they update when the reading changes, roughly every two to four minutes.
 
 DATA
-Location is read on the device and the coordinates in use are kept in the app's storage, shared on the watch only with its own complications. Nothing is sent anywhere. Privacy policy: https://excelano.com/legal/#tagbogen. Source code: https://github.com/excelano/bogenzeit.
+Location is read on the device and the coordinates in use are kept in the app's storage, shared on the watch only with its own complications. Nothing is sent anywhere. Privacy policy: https://excelano.com/legal/#tagbogen. Source code: https://github.com/excelano/tagbogen.
 """
 
 [locales."en-us"]
-website = "https://github.com/excelano/bogenzeit"
-support = "https://github.com/excelano/bogenzeit"
+website = "https://github.com/excelano/tagbogen"
+support = "https://github.com/excelano/tagbogen"
 privacy = "https://excelano.com/legal/#tagbogen"
 description = """
 Tagbogen tells time by the Sun. Instead of hours and minutes it shows where the Sun is on its arc for the day: how far it has climbed from sunrise, how long until solar noon, how far it has fallen toward sunset, and at night how far it has sunk toward solar midnight and how far it has come back. Every reading is computed from your position, offline, on the device in your hand or on your wrist.

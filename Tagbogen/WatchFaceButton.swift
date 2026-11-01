@@ -19,7 +19,8 @@ struct WatchFaceButton: View {
         if let face = Self.face {
             Button("Add the Tagbogen watch face") {
                 CLKWatchFaceLibrary().addWatchFace(at: face) { error in
-                    failure = error?.localizedDescription
+                    let message = error?.localizedDescription
+                    Task { @MainActor in failure = message }
                 }
             }
             .buttonStyle(.bordered)

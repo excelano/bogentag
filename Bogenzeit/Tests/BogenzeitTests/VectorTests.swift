@@ -12,7 +12,7 @@ final class VectorTests: XCTestCase {
     func testEveryVectorPasses() throws {
         let url = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
-            .deletingLastPathComponent().deletingLastPathComponent()
+            .deletingLastPathComponent()
             .appendingPathComponent("vectors/bz_vectors.json")
         let file = try JSONSerialization.jsonObject(with: Data(contentsOf: url)) as! [String: Any]
         let vectors = file["vectors"] as! [[String: Any]]
