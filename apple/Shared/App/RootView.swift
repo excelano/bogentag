@@ -57,7 +57,7 @@ struct RootView: View {
         }
         .padding(.horizontal)
         .onAppear {
-            if !tourSeen || Demo.page == "tour" { showsTour = true }
+            if (!tourSeen && !Demo.active) || Demo.page == "tour" { showsTour = true }
         }
         .sheet(isPresented: $showsTour, onDismiss: { tourSeen = true }) {
             TourView().environment(location)
