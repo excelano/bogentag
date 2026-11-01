@@ -21,7 +21,7 @@ All Bogenzeit calculation runs on the watch, offline (no phone or network needed
 ## 2. Interaction
 
 - **Default view: Bogenzeit.**
-- **Tap → civil time.** Tapping the face (or opening the app) switches to a civil view: civil time, time zone and UTC offset, date, and today's sunrise and sunset in civil time. Tap again to return. This replaces the day-length view of Apple's Solar Dial, which is less useful.
+- **Tap → civil time.** Tapping the face (or opening the app) switches to a civil view: UTC first, since it is the reference and the one time the device shows nowhere else, then local time with its zone and UTC offset, date, and today's sunrise and sunset in local time. Tap again to return. This replaces the day-length view of Apple's Solar Dial, which is less useful.
 - The dial stays visible, dimmed, behind the civil readout, so the switch doesn't lose context.
 
 ---
@@ -32,7 +32,7 @@ All Bogenzeit calculation runs on the watch, offline (no phone or network needed
 - **Sky:** day above the horizon, then civil, nautical and astronomical twilight bands, then night.
 - **Sun marker:** travels a fixed inner track.
 - **Quarter ticks:** at the 50-span points (the boundaries of Afterrise/Forenoon/Afternoon/Foreset and Afterset/Foremid/Aftermid/Forerise).
-- **Center readout:** date; large span position with glyph (`18 ☉`); offset `[3.5 ks]`; quarter name.
+- **Center readout:** date; large span position with glyph (`18 ☉`); offset `[3.43 ks]`; quarter name.
 - **No hour numerals, no civil hands** in the Bogenzeit view.
 
 ---

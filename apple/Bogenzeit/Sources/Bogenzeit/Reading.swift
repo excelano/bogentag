@@ -243,11 +243,11 @@ public struct Reading: Sendable, Equatable {
     /// Whole spans, floored toward the past (§5.2).
     public var displaySpan: Int? { span.map { Int($0.rounded(.down)) } }
 
-    /// The offset in hundreds of seconds, floored toward the past: the ks
-    /// readout's one-decimal digit count (§5.2).
-    public var displayOffsetSteps: Int { Int((offset / 100).rounded(.down)) }
+    /// The offset in tens of seconds, floored toward the past: the ks
+    /// readout's two-decimal digit count (§5.2).
+    public var displayOffsetSteps: Int { Int((offset / 10).rounded(.down)) }
 
-    public var displayOffsetKs: Double { Double(displayOffsetSteps) / 10 }
+    public var displayOffsetKs: Double { Double(displayOffsetSteps) / 100 }
 
     /// `59 ☉`, `☉`, `☉ 3`; nil on a polar day.
     public var spanForm: String? {
@@ -258,7 +258,7 @@ public struct Reading: Sendable, Equatable {
         return "\(g)\(separator)\(span)"
     }
 
-    /// `11.8 ks ☉`, `☉`, `☉ 0.7 ks`.
+    /// `11.77 ks ☉`, `☉`, `☉ 0.70 ks`.
     public var offsetForm: String {
         let g = String(anchor.glyph)
         let steps = displayOffsetSteps
@@ -267,7 +267,7 @@ public struct Reading: Sendable, Equatable {
         return "\(g)\(separator)\(ks(steps))"
     }
 
-    /// `59 [11.8 ks] ☉`, `☉`, `☉ 3 [0.7 ks]` (§3.7); nil on a polar day.
+    /// `59 [11.77 ks] ☉`, `☉`, `☉ 3 [0.70 ks]` (§3.7); nil on a polar day.
     public var combinedForm: String? {
         guard let span = displaySpan else { return nil }
         let g = String(anchor.glyph)
@@ -291,7 +291,7 @@ private func arcSpan(_ offset: Double, _ halfArc: Double) -> Double {
     min(100, max(-100, 100 * offset / halfArc))
 }
 
-/// Tenths of a kilosecond as `11.8 ks`.
+/// Hundredths of a kilosecond as `11.77 ks`.
 private func ks(_ steps: Int) -> String {
-    "\(steps / 10).\(steps % 10) ks"
+    String(format: "%d.%02d ks", steps / 100, steps % 100)
 }

@@ -1,0 +1,55 @@
+# The copy the App Store listing is filled in from. Every line is a claim about
+# the code, so it lives here, is reviewed and committed like anything else, and
+# ship-appstore pushes it on every release. Edit here; do not edit the listing
+# in a browser.
+#
+# Limits, counted in characters: apple.name and apple.subtitle 30,
+# apple.promotional-text 170, apple.keywords 100 including the commas,
+# description 4,000, apple-review-notes 4,000.
+
+apple-review-notes = """
+Tagbogen shows the time as the Sun's position on its daily arc rather than as hours and minutes. It is an Apple Watch app with complications, delivered inside an iPhone app that shows the same dial and explains the system. Each works on its own: the watch app needs no iPhone nearby, and neither needs an account or a network connection.
+
+PERMISSIONS
+On first open, each app asks for Location (while using the app). The Sun's path depends on where you are, so Tagbogen reads the device's position once, and again only after you have moved more than ten kilometres. Without the permission it explains what it needs and shows nothing else.
+
+WHAT YOU WILL SEE
+The dial is a sky: blue above the horizon, bands of twilight below it, night at the bottom, with the Sun travelling a ring. A ring symbol with a dot marks solar noon at the top; the same ring without the dot marks solar midnight at the bottom. In the centre, a number beside the symbol says where the Sun is in spans, a hundred spans between sunrise and noon and a hundred between noon and sunset: 18 before the symbol means eighteen spans before solar noon. Under it, the same moment in kiloseconds, and the name of the current quarter of the day.
+
+WHAT TO TRY ON IPHONE
+1. On first launch an eight-page explainer opens; the About Bogenzeit button reopens it.
+2. Tap the dial: UTC, the local time with its zone, the date and today's sunrise and sunset appear over it. Tap again to return.
+3. The two rows under the dial choose between the fixed-time dial, whose horizon moves with the season, and the span dial, which draws every day the same shape, and how many decimals the kilosecond readout shows.
+
+ON APPLE WATCH
+Turn the Digital Crown: the dial, a page with today's figures (the length of the day arc and the night arc, and sunrise, noon, sunset and midnight with their clock times), and Settings with the same two choices. Tap the dial for the clock. Complications are available in the circular, corner, rectangular and inline slots and show the current reading; they update when the reading changes, roughly every two to four minutes.
+
+DATA
+Location is read on the device and the coordinates in use are kept in the app's storage, shared on the watch only with its own complications. Nothing is sent anywhere. Privacy policy: https://excelano.com/legal/#tagbogen. Source code: https://github.com/excelano/bogenzeit.
+"""
+
+[locales."en-us"]
+website = "https://github.com/excelano/bogenzeit"
+support = "https://github.com/excelano/bogenzeit"
+privacy = "https://excelano.com/legal/#tagbogen"
+description = """
+Tagbogen tells time by the Sun. Instead of hours and minutes it shows where the Sun is on its arc for the day: how far it has climbed from sunrise, how long until solar noon, how far it has fallen toward sunset, and at night how far it has sunk toward solar midnight and how far it has come back. Every reading is computed from your position, offline, on the device in your hand or on your wrist.
+
+The dial is a sky. Blue above the horizon, three bands of twilight below it, night at the bottom, and the Sun travelling a ring through them. Solar noon sits at the top and solar midnight at the bottom, each marked with its own symbol. In the centre, a number beside the symbol says where the Sun is in spans: a hundred spans from sunrise to solar noon, a hundred from noon to sunset, and the same on either side of midnight. A span is a few minutes long and stretches with the season, so eighteen spans before noon is a different clock time in June and December but the same place on the arc. Under the spans, the same moment in kiloseconds, a fixed scale for comparing readings and adding up durations, and the name of the quarter of the day you are in: Afterrise, Forenoon, Afternoon, Foreset by day, Afterset, Foremid, Aftermid, Forerise by night.
+
+Two dials. The fixed-time dial turns once a day: its horizon rises and falls with the season, so a winter day is a thin slice of sky and a summer day fills most of the circle. The span dial draws every day the same shape, sunrise on the left, sunset on the right, and lets the season show in the numbers instead.
+
+When you need the clock, tap the dial: UTC, your local time with its zone and offset, the date, and today's sunrise and sunset appear over the dimmed sky. Tap again to return to the Sun.
+
+On Apple Watch, turn the Digital Crown for a page of today's figures, the length of the day arc and the night arc and the clock times of the four events, and for the settings. Complications put the reading on your watch face in the circular, corner, rectangular and inline slots, with a gauge of the Sun's progress along its arc.
+
+The iPhone app shows the same dial, larger, and opens with a short tour of the system: the arc, the two anchors, spans, kiloseconds, how to read the notation, the eight quarters, and why the date changes at solar midnight rather than at twelve o'clock.
+
+Tagbogen uses the device's location once, and again only after you have moved more than ten kilometres. It has no account, no network connection, no ads and no analytics.
+"""
+
+[locales."en-us".apple]
+name = "Tagbogen: Solar Dial"
+subtitle = "Time on the Sun's arc"
+promotional-text = "A watch dial that tells time by where the Sun is: spans from sunrise and sunset, solar noon and midnight as the anchors, and the sky drawn as it stands above you."
+keywords = "sunrise,sunset,noon,midnight,daylight,twilight,sundial,clock,complication,season,astronomy,horizon"

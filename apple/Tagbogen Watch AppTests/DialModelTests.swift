@@ -47,5 +47,6 @@ final class DialModelTests: XCTestCase {
         XCTAssertEqual(Labels.utcOffset(-6 * 3600), "UTC\u{2212}6")
         XCTAssertEqual(Labels.utcOffset(5 * 3600 + 1800), "UTC+5:30")
         XCTAssertEqual(Labels.utcOffset(0), "UTC")
+        XCTAssertEqual(Labels.utcClock(Date(rfc3339: "2026-11-01T17:08:59Z")!), "17:08")
     }
 }

@@ -1,0 +1,204 @@
+// TourView.swift
+// Author: David M. Anderson
+// Built with AI assistance (Claude, Anthropic)
+
+import Bogenzeit
+import SwiftUI
+
+/// The explainer (Tagbogen spec §5): eight pages, one per topic, each with
+/// a live piece of the dial computed for the place in use, so the numbers on
+/// the page are the reader's own.
+struct TourView: View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(SunLocation.self) private var location
+    @State private var page = Demo.tourPage ?? 0
+
+    var body: some View {
+        let place = location.place ?? Demo.place
+        let now = Demo.now(.now)
+        let reading = Reading(at: now, latitude: place.latitude, longitude: place.longitude)
+        VStack(spacing: 0) {
+            TabView(selection: $page) {
+                ForEach(Array(pages(reading).enumerated()), id: \.offset) { index, page in
+                    page.tag(index)
+                }
+            }
+            .tabViewStyle(.page(indexDisplayMode: .always))
+            .indexViewStyle(.page(backgroundDisplayMode: .always))
+            Button(page == 7 ? "Done" : "Skip") { dismiss() }
+                .buttonStyle(ChoiceButtonStyle(selected: page == 7))
+                .padding()
+        }
+        .background(Palette.night)
+        .preferredColorScheme(.dark)
+    }
+
+    private func pages(_ reading: Reading) -> [TourPage] {
+        let day = reading.day
+        let june = SolarDay(CalendarDay(year: day.day.year, month: 6, day: 21)!, latitude: reading.latitude, longitude: reading.longitude)
+        let december = SolarDay(CalendarDay(year: day.day.year, month: 12, day: 21)!, latitude: reading.latitude, longitude: reading.longitude)
+        let spanToday = day.daySpan.map { "\(Int($0.rounded(.down))) s" } ?? "undefined, the Sun never crosses the horizon"
+        let spanJune = june.daySpan.map { "\(Int($0.rounded(.down))) s" } ?? "none"
+        let spanDecember = december.daySpan.map { "\(Int($0.rounded(.down))) s" } ?? "none"
+        return [
+            TourPage(title: "Time on the Sun's arc", text: """
+            Every day the Sun rises, climbs to its highest point, sets, and passes beneath you to its lowest. Bogenzeit reads time off that arc: where the Sun is now, between those four events. The day arc, sunrise to sunset, is the Tagbogen. The night arc is the Nachtbogen.
+            """) {
+                DialView(model: DialModel(reading: reading, variant: .fixedTime))
+            },
+            TourPage(title: "Two anchors", text: """
+            {noon} is solar noon, the Sun at its highest. {midnight} is solar midnight, the Sun at its lowest. A clock puts noon at 12:00 for a whole zone; the Sun keeps its own time at your longitude. Here, today, solar noon is at \(Labels.clock(day.noon)) and solar midnight at \(Labels.clock(day.midnightEnd)).
+            """) {
+                HStack(spacing: 60) {
+                    VStack(spacing: 12) {
+                        AnchorGlyphView(anchor: .noon, radius: 36, lineWidth: 7)
+                        Text("solar noon").foregroundStyle(Palette.label)
+                    }
+                    VStack(spacing: 12) {
+                        AnchorGlyphView(anchor: .midnight, radius: 36, lineWidth: 7)
+                        Text("solar midnight").foregroundStyle(Palette.label)
+                    }
+                }
+            },
+            TourPage(title: "Spans", text: """
+            Each half of an arc is 100 spans: sunrise to {noon}, {noon} to sunset, and the same on either side of {midnight}. A span stretches and shrinks with the season. Here a day span is \(spanToday) today, \(spanJune) in June and \(spanDecember) in December. The span dial draws every day the same shape; the season shows in the numbers.
+            """) {
+                DialView(model: DialModel(reading: reading, variant: .span))
+            },
+            TourPage(title: "Kiloseconds", text: """
+            The fixed scale beside the spans. A kilosecond is 1,000 seconds, a little under seventeen minutes; a day is 86.4 of them. The bracketed number on the dial is the time from the nearest anchor in kiloseconds, so two readings can be compared and a duration added up.
+            """) {
+                VStack(spacing: 10) {
+                    Text("[\(Settings.offsetKs(reading.offset, decimals: Settings.defaultOffsetDecimals))]")
+                        .font(.system(size: 44, weight: .medium).monospacedDigit())
+                    Text("from \(reading.anchor == .noon ? "solar noon" : "solar midnight")")
+                        .foregroundStyle(Palette.label)
+                }
+            },
+            TourPage(title: "Reading the notation", text: """
+            The number sits on the side of the glyph where that moment lies. Left of the glyph, the anchor is still to come: 18 {noon} is eighteen spans before solar noon. Right of it, the anchor has passed: {noon} 3 is three spans after. No plus, no minus. At night the same reading runs against {midnight}.
+            """) {
+                VStack(spacing: 18) {
+                    NotationExample(number: "18", anchor: .noon, before: true, meaning: "before solar noon")
+                    NotationExample(number: "3", anchor: .noon, before: false, meaning: "after solar noon")
+                    NotationExample(number: "48", anchor: .midnight, before: true, meaning: "before solar midnight")
+                }
+            },
+            TourPage(title: "Eight quarters", text: """
+            Each arc splits at its 50-span marks into four quarters, each named for the event nearest it: Fore- before it, After- after it. By day: Afterrise, Forenoon, Afternoon, Foreset. By night: Afterset, Foremid, Aftermid, Forerise. A quarter is about as long as it feels: a tenth of the day in Houston, shorter in winter and longer in summer.
+            """) {
+                QuarterWheel()
+            },
+            TourPage(title: "The date turns at solar midnight", text: """
+            A Bogenzeit day runs from one solar midnight to the next, so the date changes at {midnight} rather than at 00:00. Tonight {midnight} falls at \(Labels.clock(day.midnightEnd)); until then it is still \(Labels.day(day.day)) here, whatever the calendar says.
+            """) {
+                VStack(spacing: 10) {
+                    AnchorGlyphView(anchor: .midnight, radius: 36, lineWidth: 7)
+                    Text(Labels.day(day.day))
+                        .font(.title2.weight(.semibold))
+                    Text("until \(Labels.clock(day.midnightEnd))")
+                        .foregroundStyle(Palette.label)
+                }
+            },
+            TourPage(title: "Tap for the clock", text: """
+            The dial shows no hours and no minutes. When you need them, tap it: UTC, the reference every reading is computed from, then the local clock with its zone, the date, and today's sunrise and sunset, over the dimmed dial. Tap again to return to the Sun.
+            """) {
+                ZStack {
+                    DialView(model: DialModel(reading: reading, variant: .fixedTime), showsReadout: false)
+                        .opacity(0.35)
+                    CivilView(reading: reading, now: reading.instant)
+                }
+            },
+        ]
+    }
+}
+
+struct TourPage: View {
+    let title: String
+    let text: String
+    let visual: AnyView
+
+    init(title: String, text: String, @ViewBuilder visual: () -> some View) {
+        self.title = title
+        self.text = text
+        self.visual = AnyView(visual())
+    }
+
+    var body: some View {
+        VStack(spacing: 20) {
+            visual
+                .frame(maxWidth: .infinity)
+                .frame(height: 300)
+            Text(title)
+                .font(.title2.weight(.semibold))
+                .foregroundStyle(Palette.line)
+            GlyphText.text(text)
+                .font(.body)
+                .foregroundStyle(Palette.secondary)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 28)
+        .padding(.top, 24)
+        .padding(.bottom, 40)
+    }
+}
+
+/// One line of notation with the number on its side of the glyph.
+struct NotationExample: View {
+    let number: String
+    let anchor: SolarAnchor
+    let before: Bool
+    let meaning: String
+
+    var body: some View {
+        HStack(spacing: 10) {
+            if before { digits }
+            AnchorGlyphView(anchor: anchor, radius: 14, lineWidth: 3)
+            if !before { digits }
+            Spacer()
+            Text(meaning)
+                .foregroundStyle(Palette.label)
+        }
+        .frame(maxWidth: 320)
+    }
+
+    private var digits: some View {
+        Text(number)
+            .font(.system(size: 40, weight: .semibold).monospacedDigit())
+            .foregroundStyle(Palette.line)
+    }
+}
+
+/// The eight quarter names around a ring, day on top and night below.
+struct QuarterWheel: View {
+    private static let names: [(String, Double)] = [
+        ("Forenoon", -22.5), ("Afternoon", 22.5), ("Foreset", 67.5), ("Afterset", 112.5),
+        ("Foremid", 157.5), ("Aftermid", 202.5), ("Forerise", 247.5), ("Afterrise", 292.5),
+    ]
+
+    var body: some View {
+        GeometryReader { geometry in
+            let c = CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2)
+            let r = min(geometry.size.width, geometry.size.height) / 2 - 44
+            ZStack {
+                Circle().stroke(Palette.line.opacity(0.25), lineWidth: 1).frame(width: 2 * r, height: 2 * r)
+                Rectangle().fill(Palette.line.opacity(0.4)).frame(width: 2 * r, height: 1)
+                ForEach([0.0, 45.0, 135.0], id: \.self) { angle in
+                    Rectangle().fill(Palette.line.opacity(0.4)).frame(width: 1, height: 2 * r)
+                        .rotationEffect(.degrees(angle))
+                }
+                AnchorGlyphView(anchor: .noon, radius: 9, lineWidth: 2.2).position(x: c.x, y: c.y - r - 16)
+                AnchorGlyphView(anchor: .midnight, radius: 9, lineWidth: 2.2).position(x: c.x, y: c.y + r + 16)
+                ForEach(Self.names, id: \.0) { name, angle in
+                    let a = angle * .pi / 180
+                    Text(name)
+                        .font(.footnote.weight(.medium))
+                        .foregroundStyle(angle > 90 && angle < 270 ? Palette.label : Palette.line)
+                        .position(x: c.x + (r + 34) * sin(a), y: c.y - (r + 22) * cos(a))
+                }
+            }
+        }
+    }
+}

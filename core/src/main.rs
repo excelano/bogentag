@@ -296,7 +296,7 @@ fn reading_json(r: &Reading) -> String {
         "display_span",
         r.display_span().map_or("null".into(), |s| s.to_string()),
     ));
-    fields.push(("display_offset_ks", format!("{:.1}", r.display_offset_ks())));
+    fields.push(("display_offset_ks", format!("{:.2}", r.display_offset_ks())));
     fields.push((
         "quarter",
         r.quarter().map_or("null".into(), |q| quoted(q.name())),

@@ -12,6 +12,8 @@ import SwiftUI
 struct DialView: View {
     let model: DialModel
     var showsReadout = true
+    var showsDate = true
+    var showsArcLengths = true
 
     var body: some View {
         GeometryReader { geometry in
@@ -22,8 +24,8 @@ struct DialView: View {
                     draw(in: context, size: size, scale: s)
                 }
                 if showsReadout {
-                    ReadoutView(reading: model.reading, scale: s)
-                    if model.variant == .span {
+                    ReadoutView(reading: model.reading, scale: s, showsDate: showsDate)
+                    if showsArcLengths && model.variant == .span {
                         arcLengths(scale: s)
                     }
                 }
@@ -34,30 +36,19 @@ struct DialView: View {
     }
 
     private func arcLengths(scale s: CGFloat) -> some View {
-        VStack(spacing: 3 * s) {
+        VStack(spacing: 2) {
             if let tagbogen = model.reading.day.tagbogen {
-                Text("TAGBOGEN \(ks(tagbogen))")
+                Text("TAGBOGEN \(ArcLengths.ks(tagbogen))")
             }
-            if let night = nachtbogen {
-                Text("NACHTBOGEN \(ks(night))")
+            if let night = ArcLengths.nachtbogen(of: model.reading) {
+                Text("NACHTBOGEN \(ArcLengths.ks(night))")
             }
         }
-        .font(.system(size: 11 * s, weight: .medium))
-        .tracking(1 * s)
+        .font(.system(size: max(11 * s, 11), weight: .medium))
+        .tracking(max(1 * s, 0.6))
         .foregroundStyle(Palette.label)
+        .fixedSize()
         .offset(y: 135 * s)
-    }
-
-    /// Tonight: sunset to the next sunrise.
-    private var nachtbogen: Double? {
-        let day = model.reading.day
-        let next = SolarDay(day.day.adding(days: 1), latitude: model.reading.latitude, longitude: model.reading.longitude)
-        guard let evening = day.halfNightEvening, let morning = next.halfNightMorning else { return nil }
-        return evening + morning
-    }
-
-    private func ks(_ seconds: Double) -> String {
-        String(format: "%.1f ks", (seconds / 100).rounded(.down) / 10)
     }
 
     private func draw(in context: GraphicsContext, size: CGSize, scale s: CGFloat) {
@@ -128,8 +119,26 @@ struct DialView: View {
         context.fill(circle(sun, 11), with: .color(Palette.sun))
 
         if showsReadout {
-            context.fill(circle(c, 100), with: .color(Palette.night.opacity(0.8)))
-            context.stroke(circle(c, 100), with: .color(Palette.line.opacity(0.12)), lineWidth: 1 * s)
+            let disc = ReadoutView.discRadius(scale: s)
+            let path = Path(ellipseIn: CGRect(x: c.x - disc, y: c.y - disc, width: 2 * disc, height: 2 * disc))
+            context.fill(path, with: .color(Palette.night.opacity(0.8)))
+            context.stroke(path, with: .color(Palette.line.opacity(0.12)), lineWidth: 1 * s)
         }
+    }
+}
+
+/// Today's arc lengths as the dial and the day page state them.
+enum ArcLengths {
+    /// Tonight: sunset to the next sunrise.
+    static func nachtbogen(of reading: Reading) -> Double? {
+        let day = reading.day
+        let next = SolarDay(day.day.adding(days: 1), latitude: reading.latitude, longitude: reading.longitude)
+        guard let evening = day.halfNightEvening, let morning = next.halfNightMorning else { return nil }
+        return evening + morning
+    }
+
+    /// Kiloseconds to one decimal, floored like every readout.
+    static func ks(_ seconds: Double) -> String {
+        String(format: "%.1f ks", (seconds / 100).rounded(.down) / 10)
     }
 }

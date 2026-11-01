@@ -52,7 +52,7 @@ Status: draft 0.12. First lives as this file; the **Tagbogen** watch face comes 
 | Term | Definition |
 |---|---|
 | **Bogenzeit (BZ)** *(coined)* | This time standard: spans, ks offsets, ☉/○ anchors, and positional notation, built on local apparent solar time. Name chosen over "Local Solar Time" (already means sundial time; LST also = Local Sidereal Time). |
-| **Noon offset** *(coined, working name)* | Time from today's local solar noon, in kiloseconds, one decimal (100 s resolution). Written with the ☉ glyph (§3). |
+| **Noon offset** *(coined, working name)* | Time from today's local solar noon, in kiloseconds, two decimals (10 s resolution). Written with the ☉ glyph (§3). |
 | **Midnight offset** *(coined, working name)* | Time from local solar midnight, in kiloseconds. Written with the ○ glyph (§3). Used at night in place of the noon offset. |
 | **Span** *(coined, working name)* | Proportional unit: each half of the Tagbogen is 100 spans, and each half of the Nachtbogen is 100 spans. Span length in seconds = (that half's length in s) / 100, so it changes with season and latitude. |
 
@@ -96,10 +96,10 @@ The glyph is a fixed point on a timeline read left to right. **Position replaces
 
 | Display | Meaning |
 |---|---|
-| `11.8 ☉` | 11.8 ks *before* solar noon (the number comes first: still to come) |
+| `11.77 ☉` | 11.77 ks *before* solar noon (the number comes first: still to come) |
 | `☉` | exactly solar noon |
-| `☉ 5.5` | 5.5 ks *after* solar noon |
-| `8.0 ○` | 8.0 ks before solar midnight |
+| `☉ 5.50` | 5.50 ks *after* solar noon |
+| `8.00 ○` | 8.00 ks before solar midnight |
 | `☉ 100` / `100 ○` | sunset (end of daylight / start of night — the same instant) |
 
 - No `+` or `−` characters in display.
@@ -111,14 +111,14 @@ The glyph is a fixed point on a timeline read left to right. **Position replaces
 ### 3.3 Tagbogen (sunrise → sunset)
 
 - **Primary (large): span position**, e.g. `59 ☉`. Sunrise is `100 ☉`, sunset is `☉ 100`.
-- **Secondary (small): noon offset**, e.g. `11.8 ks ☉`.
+- **Secondary (small): noon offset**, e.g. `11.77 ks ☉`.
 - Context: half-daylight length, e.g. `½ day 19.8 ks` (so a span is 198 s today).
 - Civil time shown small, for coordination only.
 
 ### 3.4 Nachtbogen (sunset → sunrise)
 
 - **Primary: span position** relative to ○, e.g. `48 ○`. Sunset is `100 ○`, sunrise is `○ 100`.
-- **Secondary: midnight offset**, e.g. `11.1 ks ○`.
+- **Secondary: midnight offset**, e.g. `11.11 ks ○`.
 - At sunset the anchor switches from ☉ to ○; at sunrise it switches back. Each half of the day is read against its own center.
 - Twilight phases shown by name (civil / nautical / astronomical) when active.
 
@@ -166,20 +166,20 @@ Spans and ks do not nest the way hours, minutes, and seconds do: a span is not a
 | Form | Before ☉ | After ☉ | Use |
 |---|---|---|---|
 | **Span** | `59 ☉` | `☉ 3` | Everyday, glanceable |
-| **Offset** | `11.8 ks ☉` | `☉ 0.7 ks` | Fixed length; comparison and durations |
-| **Combined** | `59 [11.8 ks] ☉` | `☉ 3 [0.7 ks]` | Notes, logs, full readout |
+| **Offset** | `11.77 ks ☉` | `☉ 0.70 ks` | Fixed length; comparison and durations |
+| **Combined** | `59 [11.77 ks] ☉` | `☉ 3 [0.70 ks]` | Notes, logs, full readout |
 
 Rules:
 - The glyph appears once; all numbers sit on the side the positional rule (§3.2) puts them.
 - Combined form: span first, then the offset in square brackets. Brackets mean "the same moment, as a fixed offset".
 - Spans are bare numbers; offsets always carry `ks`.
-- Same forms at night with ○: `40 [8.0 ks] ○`.
+- Same forms at night with ○: `40 [8.00 ks] ○`.
 
-**Precision:** ks with three decimals is exact to the second (`11.766 ks ☉` = 11,766 s before solar noon). This is the true counterpart of `hh:mm:ss`: one decimal for display, three for exact.
+**Precision:** ks with three decimals is exact to the second (`11.766 ks ☉` = 11,766 s before solar noon). This is the true counterpart of `hh:mm:ss`: two decimals for display, three for exact.
 
 **Separators:**
 - `[ ]` — parallel reading (offset alongside span).
-- `|` — between fields of a full timestamp or readout: `2026-11-01 | 29.76, −95.37 | 59 [11.8 ks] ☉`; `Forenoon | 21 ☉`.
+- `|` — between fields of a full timestamp or readout: `2026-11-01 | 29.76, −95.37 | 59 [11.77 ks] ☉`; `Forenoon | 21 ☉`.
 - Not used: `·` (confusable with `.`), `~` (reads as "approximately"), `/` (reads as a ratio), `,` (decimal mark in German).
 - Markdown note: in Markdown files, a bracketed reading directly followed by `(` would form a link; keep a space or other text after `]`.
 
@@ -215,7 +215,7 @@ Days, weeks, months, and years are unchanged Gregorian units. Only the **switcho
 | Readout | Resolution | Typical size |
 |---|---|---|
 | Span | whole number | ~200 s (varies with season and arc) |
-| Offset | ks, one decimal | 100 s |
+| Offset | ks, two decimals | 10 s |
 | Second | whole number | 1 s (data and precise work) |
 
 **Rounding rule: round down the signed value** (floor toward the past). The display always shows the last boundary that has been crossed, never the next one, as a clock does with hours and minutes.
@@ -223,7 +223,7 @@ Days, weeks, months, and years are unchanged Gregorian units. Only the **switcho
 - After an anchor: `☉ 3.7` spans → shows `☉ 3`.
 - Before an anchor: −59.3 spans (59.3 before ☉) → floor is −60 → shows `60 ☉`. It changes to `59 ☉` exactly when 59 spans remain.
 - So `☉` appears only from exact solar noon, and `☉ 100` (sunset) only at exact sunset. No event is shown early.
-- The same rule applies to ks offsets (floor of signed seconds ÷ 100).
+- The same rule applies to ks offsets (floor of signed seconds ÷ 10). A readout that cannot refresh every 10 s, such as a watch-face complication, may show one decimal, floored the same way.
 
 **No intermediate unit.** Quarters (~10 ks) → spans (~200 s) → seconds is a usable ladder, comparable to hours → minutes → seconds. ks is a parallel fixed scale, not a level in that ladder.
 
@@ -233,7 +233,7 @@ A position alone (`59 ☉`) is ambiguous, since spans depend on date and place. 
 
 **Gregorian date (per §5.1) + coordinates + position**
 
-- Display: `2026-11-01 | 29.76, −95.37 | 59 [11.8 ks] ☉` (see §3.7)
+- Display: `2026-11-01 | 29.76, −95.37 | 59 [11.77 ks] ☉` (see §3.7)
 - Data: `{date: "2026-11-01", lat: 29.76, lon: -95.37, anchor: "noon", span: -59.3}` (or `offset_s` instead of `span`)
 - Coordinates in decimal degrees. Two decimals (~1 km) are enough for display, since 0.01° of longitude ≈ 2.4 s of solar time; data should keep full GPS precision.
 - The UTC instant remains canonical. A Bogenzeit timestamp converts to exactly one UTC instant, and back.
@@ -269,7 +269,7 @@ A span's length in seconds = (half of its arc) / 100. Computed with the §6 meth
 **Properties**
 - **Day span + night span = 432 s, always.** Half the daylight plus half the night is always 12 h (43,200 s), so 100 day spans + 100 night spans = 43,200 s. When day spans shrink, night spans grow by exactly the same amount.
 - **Hard bounds: 0 < span < 432 s** (7.2 min, 0.432 ks). A span is always smaller than 1 ks. It reaches the bounds only at polar day or polar night (§3.5).
-- **Readout rhythm:** the ks offset steps every 100 s; at mid-latitudes a span lasts ~150–300 s, so the secondary ks readout ticks about twice per span.
+- **Readout rhythm:** the ks offset steps every 10 s; at mid-latitudes a span lasts ~150–300 s, so the secondary ks readout ticks fifteen to thirty times per span.
 - At Houston's latitude spans stay within ~3–4 min year-round, close to the scale of familiar clock minutes.
 
 ---
@@ -285,7 +285,7 @@ A span's length in seconds = (half of its arc) / 100. Computed with the §6 meth
 - Solar position: NOAA solar calculator algorithm (equation of time + declination). Good to about a minute at mid-latitudes. A higher-precision method (e.g. SPA) can replace it later.
 - Solar noon (UTC) = 12:00 − 4 min × longitude° − equation of time.
 - Sunrise/sunset: hour angle at −0.833° altitude. Twilights at −6°, −12°, −18°.
-- Noon offset (s) = instant − solar noon of the current apparent solar day; display ÷ 1000, one decimal.
+- Noon offset (s) = instant − solar noon of the current apparent solar day; display ÷ 1000, two decimals.
 - Midnight offset (s) = instant − nearest solar midnight (during the night).
 - Day span = 100 × (instant − solar noon) / (solar noon − sunrise) before noon, or / (sunset − solar noon) after.
 - Night span = 100 × (instant − solar midnight) / (solar midnight − sunset) before midnight, or / (sunrise − solar midnight) after.
@@ -303,11 +303,11 @@ Location: 29.76° N, 95.37° W. DST ended at 02:00 this morning; now CST (UTC−
 
 | Event | Civil (CST) | Offset | Span |
 |---|---|---|---|
-| Sunrise | 06:34 | 19.8 ks ☉ | 100 ☉ |
-| 08:49 (example) | 08:49 | 11.8 ks ☉ | 59 ☉ |
+| Sunrise | 06:34 | 19.83 ks ☉ | 100 ☉ |
+| 08:49 (example) | 08:49 | 11.77 ks ☉ | 59 ☉ |
 | Solar noon | 12:05 | ☉ | ☉ |
-| Sunset | 17:36 | ☉ 19.8 ks | ☉ 100 = 100 ○ |
-| 21:00 (example) | 21:00 | 11.1 ks ○ | 48 ○ |
+| Sunset | 17:36 | ☉ 19.83 ks | ☉ 100 = 100 ○ |
+| 21:00 (example) | 21:00 | 11.11 ks ○ | 48 ○ |
 | Solar midnight | ~00:05 (2 Nov) | ○ | ○ |
 
 Half-daylight ≈ 19,845 s, so one day span ≈ 198 s. Half-night ≈ 23.3 ks, so one night span ≈ 233 s. (Night values approximate.)
@@ -338,6 +338,7 @@ Yesterday under CDT, solar noon was about 13:05 civil. The civil clock jumped an
 - ~~Names for quarter boundaries~~ — decided: none. The 50-span points are written in notation only (`50 ☉`, `☉ 50`, `50 ○`, `○ 50`). Named transitions are limited to sunrise, solar noon, sunset, solar midnight.
 - ~~Date switchover~~ — decided: at solar midnight (§5.1).
 - ~~Rounding~~ — decided: whole spans, floor of signed value (§5.2).
+- ~~Offset resolution~~ — decided: two decimals of ks (10 s) for display; one is allowed where a readout cannot refresh that often (§5.2).
 - ~~Full timestamp~~ — decided: Gregorian date + coordinates + position (§5.3).
 - ~~Elevation/terrain~~ — decided: ignored (§5.4).
 - ~~Written forms~~ — decided: span, offset, and combined `59 [11.8 ks] ☉`; `|` between fields (§3.7).

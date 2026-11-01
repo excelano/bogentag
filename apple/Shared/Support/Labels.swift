@@ -21,15 +21,25 @@ enum Labels {
         date.formatted(.dateTime.hour().minute())
     }
 
-    /// `CST | UTC−6`, or the offset alone where the zone has no short name.
-    static func zone(_ date: Date) -> String {
+    /// The UTC clock, `17:08`: always 24-hour, whatever the device's clock does.
+    static func utcClock(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: date)
+    }
+
+    /// The local clock with its zone, `11:08 am CST | UTC−6`, or the offset
+    /// alone where the zone has no short name.
+    static func localClock(_ date: Date) -> String {
         let zone = TimeZone.current
         let offset = utcOffset(zone.secondsFromGMT(for: date))
         let style: TimeZone.NameStyle = zone.isDaylightSavingTime(for: date) ? .shortDaylightSaving : .shortStandard
         guard let name = zone.localizedName(for: style, locale: .current), !name.hasPrefix("GMT"), !name.hasPrefix("UTC") else {
-            return offset
+            return "\(clock(date)) \(offset)"
         }
-        return "\(name) | \(offset)"
+        return "\(clock(date)) \(name) | \(offset)"
     }
 
     static func utcOffset(_ seconds: Int) -> String {

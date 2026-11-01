@@ -22,8 +22,8 @@ final class BoundaryTests: XCTestCase {
         let noon = houstonDay.noon
         let before = houston(noon.addingTimeInterval(-0.001))
         XCTAssertEqual(before.spanForm, "1 ☉")
-        XCTAssertEqual(before.offsetForm, "0.1 ks ☉")
-        XCTAssertEqual(before.combinedForm, "1 [0.1 ks] ☉")
+        XCTAssertEqual(before.offsetForm, "0.01 ks ☉")
+        XCTAssertEqual(before.combinedForm, "1 [0.01 ks] ☉")
         XCTAssertEqual(before.quarter, .forenoon)
         let at = houston(noon)
         XCTAssertEqual(at.spanForm, "☉")
@@ -32,7 +32,7 @@ final class BoundaryTests: XCTestCase {
         XCTAssertEqual(at.quarter, .afternoon)
         let after = houston(noon.addingTimeInterval(150))
         XCTAssertEqual(after.spanForm, "☉")
-        XCTAssertEqual(after.combinedForm, "☉ 0 [0.1 ks]")
+        XCTAssertEqual(after.combinedForm, "☉ 0 [0.15 ks]")
     }
 
     func testSunsetShowsOnlyAtExactSunsetAndSwitchesAnchor() {
@@ -67,12 +67,13 @@ final class BoundaryTests: XCTestCase {
         XCTAssertEqual(justBefore.quarter, .afterrise)
     }
 
-    func testKilosecondReadoutStepsEveryHundredSeconds() {
+    func testKilosecondReadoutStepsEveryTenSeconds() {
         let noon = houstonDay.noon
-        XCTAssertEqual(houston(noon.addingTimeInterval(99.999)).offsetForm, "☉")
-        XCTAssertEqual(houston(noon.addingTimeInterval(100)).offsetForm, "☉ 0.1 ks")
-        XCTAssertEqual(houston(noon.addingTimeInterval(-100)).offsetForm, "0.1 ks ☉")
-        XCTAssertEqual(houston(noon.addingTimeInterval(-100.001)).offsetForm, "0.2 ks ☉")
+        XCTAssertEqual(houston(noon.addingTimeInterval(9.999)).offsetForm, "☉")
+        XCTAssertEqual(houston(noon.addingTimeInterval(10)).offsetForm, "☉ 0.01 ks")
+        XCTAssertEqual(houston(noon.addingTimeInterval(-10)).offsetForm, "0.01 ks ☉")
+        XCTAssertEqual(houston(noon.addingTimeInterval(-10.001)).offsetForm, "0.02 ks ☉")
+        XCTAssertEqual(houston(noon.addingTimeInterval(1234.5)).offsetForm, "☉ 1.23 ks")
     }
 
     func testDateChangesAtSolarMidnight() {

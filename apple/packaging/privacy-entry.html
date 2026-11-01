@@ -1,0 +1,14 @@
+<h3 id="tagbogen">Tagbogen (iPhone and Apple Watch) &mdash; Privacy</h3>
+<p>Tagbogen is a clock that tells time by the Sun's position, and the Sun's path depends on where you are, so the one personal fact it works with is your location. This section says what it does with it. In brief: it reads your position on the device in your hand or on your wrist, keeps the coordinates there, and sends them nowhere. Tagbogen has no server, no account and no network code at all. Its App Store privacy label reads &ldquo;Data Not Collected&rdquo;.</p>
+
+<h4>Your position</h4>
+<p>With your permission, Tagbogen reads your location while the app is on screen, to compute the Sun's arc for where you are. It adopts a new position only when you have moved more than about ten kilometres from the one in use, since a smaller move changes the Sun's timing by less than the dial can show. Location is not used in the background. The iPhone app and the watch app each read their own position and do not exchange it.</p>
+
+<h4>What Tagbogen saves</h4>
+<p>The app's preferences hold the coordinates in use, your choice of dial and of decimals, and whether the tour has been shown. On the watch, the coordinates in use are kept in storage the app shares only with its own complications, so that they can compute the reading without the app running. Nothing else is written. Removing the app from a device removes all of it from that device.</p>
+
+<h4>Nothing is sent</h4>
+<p>Tagbogen contains no code that opens a network connection: no analytics, no crash reporter, no update check and no third-party libraries. Apple, separately, may show developers anonymous install counts and, from people who have turned on Share With App Developers, crash reports. That setting belongs to Apple and covers every app; it is on the iPhone under Settings &gt; Privacy &amp; Security &gt; Analytics &amp; Improvements.</p>
+
+<h4>Checking this</h4>
+<p>Tagbogen's source is public at <a href="https://github.com/excelano/bogenzeit" rel="noopener noreferrer">github.com/excelano/bogenzeit</a>. Location comes through <code>SunLocation.swift</code> and the coordinates are written by <code>AppGroup.swift</code>, both shared by the two apps. This text lives in the same repository, at <code>apple/packaging/privacy-entry.html</code>, and its history there is the record of every change.</p>

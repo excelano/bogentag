@@ -18,7 +18,7 @@ You are picking up a design that is finished on paper. Your job is to build it. 
 ## Rules that are easy to get wrong
 
 - **Rounding:** displayed spans and ks are the **floor of the signed value** (toward the past). 59.3 spans before ☉ shows `60 ☉`. `☉` appears only from exact solar noon; sunset only at exact sunset. (BZ §5.2)
-- **Notation:** position replaces sign. Number left of glyph = before, right = after: `18 [3.5 ks] ☉`, `☉ 3 [0.7 ks]`. No `+`/`−`, no middle dot, no `~`. (BZ §3.2, §3.7)
+- **Notation:** position replaces sign. Number left of glyph = before, right = after: `18 [3.43 ks] ☉`, `☉ 3 [0.70 ks]`. No `+`/`−`, no middle dot, no `~`. (BZ §3.2, §3.7)
 - **Date switchover at solar midnight (○)**, not civil midnight. Day includes its starting ○, excludes its ending ○. (BZ §5.1)
 - **Quarter boundaries:** start inclusive, end exclusive; exactly ☉ is Afternoon. Boundaries have no names. (BZ §3.6)
 - **Glyphs ☉ and ○ are drawn as vector shapes from one shared circle definition**, never rendered from a font: no font draws them at matching sizes. (BZ §3.1)
@@ -57,7 +57,7 @@ David decides the order of phases 2 and 3; ask before starting either.
 ## Acceptance (per platform)
 
 - Passes `vectors/bz_vectors.json` (event times within 1 s; displayed values exact).
-- Houston 1 Nov 2026 17:08 UTC renders `18 ☉`, `[3.5 ks]`, `Forenoon`; tap shows `11:08`, `CST | UTC−6`.
+- Houston 1 Nov 2026 17:08 UTC renders `18 ☉`, `[3.43 ks]`, `Forenoon`; tap shows `11:08`, `CST | UTC−6`.
 - Display changes exactly on boundaries (floor rule), verified by a test that steps through a boundary.
 - ☉ and ○ render at identical size.
 - Works offline; recomputes on location change per the 10 km rule.

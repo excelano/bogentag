@@ -25,7 +25,7 @@ The build directory is the shared one in `~/.cargo/config.toml`, not `target/`.
     xcremote install                                # onto David's iPhone and watch, as ~/notes/shipping.md says
     xcodebuild test -scheme "Tagbogen Watch App"    # on the Mac, on a watch simulator; reboot the simulator after
 
-A Debug build launched with `--demo` shows Houston on the spec's worked day; `--dial span` and
+A Debug build launched with `--demo` shows Houston on the spec's worked day; `--page span` (or `day`) and
 `--civil` pick the page, and `packaging/ios/shots.sh` takes the store screenshots from them.
 Releases: the apps in excelano/shipping, run from this directory.
 

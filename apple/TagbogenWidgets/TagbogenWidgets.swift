@@ -53,7 +53,7 @@ struct ArcProvider: TimelineProvider {
     }
 
     /// The first instant after the reading at which its displayed span or
-    /// kilosecond offset changes.
+    /// one-decimal kilosecond offset changes.
     static func nextChange(after reading: Reading) -> Date {
         let intoStep = reading.offset - (reading.offset / 100).rounded(.down) * 100
         var ahead = 100 - intoStep
@@ -157,9 +157,11 @@ struct ArcWidgetView: View {
         return reading.quarter.map { "\(form) \($0.name)" } ?? form
     }
 
+    /// One decimal, floored: a complication cannot step every ten seconds,
+    /// which the spec allows (§5.2).
     private func ksText(_ reading: Reading) -> String {
-        let steps = abs(reading.displayOffsetSteps)
-        return "\(steps / 10).\(steps % 10) ks"
+        let tenths = abs(Int((reading.offset / 100).rounded(.down)))
+        return "\(tenths / 10).\(tenths % 10) ks"
     }
 
     /// How far along its arc the Sun is, sunrise to sunset or sunset to sunrise.

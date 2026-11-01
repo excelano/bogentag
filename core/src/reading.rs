@@ -353,14 +353,14 @@ impl Reading {
         self.span().map(|s| s.floor() as i64)
     }
 
-    /// The offset in hundreds of seconds, floored toward the past: the ks
-    /// readout's one-decimal digit count (§5.2).
+    /// The offset in tens of seconds, floored toward the past: the ks
+    /// readout's two-decimal digit count (§5.2).
     pub fn display_offset_steps(&self) -> i64 {
-        (self.offset_s / 100.0).floor() as i64
+        (self.offset_s / 10.0).floor() as i64
     }
 
     pub fn display_offset_ks(&self) -> f64 {
-        self.display_offset_steps() as f64 / 10.0
+        self.display_offset_steps() as f64 / 100.0
     }
 
     /// `59 ☉`, `☉`, `☉ 3`; None on a polar day.
@@ -373,7 +373,7 @@ impl Reading {
         })
     }
 
-    /// `11.8 ks ☉`, `☉`, `☉ 0.7 ks`.
+    /// `11.77 ks ☉`, `☉`, `☉ 0.70 ks`.
     pub fn offset_form(&self) -> String {
         let g = self.anchor.glyph();
         match self.display_offset_steps() {
@@ -383,7 +383,7 @@ impl Reading {
         }
     }
 
-    /// `59 [11.8 ks] ☉`, `☉`, `☉ 3 [0.7 ks]` (§3.7); None on a polar day.
+    /// `59 [11.77 ks] ☉`, `☉`, `☉ 3 [0.70 ks]` (§3.7); None on a polar day.
     pub fn combined_form(&self) -> Option<String> {
         let g = self.anchor.glyph();
         let steps = self.display_offset_steps();
@@ -416,7 +416,7 @@ fn arc_span(offset_s: f64, half_arc_s: f64) -> f64 {
     (100.0 * offset_s / half_arc_s).clamp(-100.0, 100.0)
 }
 
-/// Tenths of a kilosecond as `11.8 ks`.
+/// Hundredths of a kilosecond as `11.77 ks`.
 fn ks(steps: i64) -> String {
-    format!("{}.{} ks", steps / 10, steps % 10)
+    format!("{}.{:02} ks", steps / 100, steps % 100)
 }

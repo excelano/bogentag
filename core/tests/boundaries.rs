@@ -22,8 +22,8 @@ fn noon_glyph_appears_only_from_exact_solar_noon() {
     let noon = houston_day().noon;
     let before = houston(noon - 0.001);
     assert_eq!(before.span_form().unwrap(), "1 ☉");
-    assert_eq!(before.offset_form(), "0.1 ks ☉");
-    assert_eq!(before.combined_form().unwrap(), "1 [0.1 ks] ☉");
+    assert_eq!(before.offset_form(), "0.01 ks ☉");
+    assert_eq!(before.combined_form().unwrap(), "1 [0.01 ks] ☉");
     assert_eq!(before.quarter(), Some(Quarter::Forenoon));
     let at = houston(noon);
     assert_eq!(at.span_form().unwrap(), "☉");
@@ -32,7 +32,7 @@ fn noon_glyph_appears_only_from_exact_solar_noon() {
     assert_eq!(at.quarter(), Some(Quarter::Afternoon));
     let after = houston(noon + 150.0);
     assert_eq!(after.span_form().unwrap(), "☉");
-    assert_eq!(after.combined_form().unwrap(), "☉ 0 [0.1 ks]");
+    assert_eq!(after.combined_form().unwrap(), "☉ 0 [0.15 ks]");
 }
 
 #[test]
@@ -71,12 +71,13 @@ fn quarter_boundary_belongs_to_the_quarter_it_starts() {
 }
 
 #[test]
-fn kilosecond_readout_steps_every_hundred_seconds() {
+fn kilosecond_readout_steps_every_ten_seconds() {
     let noon = houston_day().noon;
-    assert_eq!(houston(noon + 99.999).offset_form(), "☉");
-    assert_eq!(houston(noon + 100.0).offset_form(), "☉ 0.1 ks");
-    assert_eq!(houston(noon - 100.0).offset_form(), "0.1 ks ☉");
-    assert_eq!(houston(noon - 100.001).offset_form(), "0.2 ks ☉");
+    assert_eq!(houston(noon + 9.999).offset_form(), "☉");
+    assert_eq!(houston(noon + 10.0).offset_form(), "☉ 0.01 ks");
+    assert_eq!(houston(noon - 10.0).offset_form(), "0.01 ks ☉");
+    assert_eq!(houston(noon - 10.001).offset_form(), "0.02 ks ☉");
+    assert_eq!(houston(noon + 1234.5).offset_form(), "☉ 1.23 ks");
 }
 
 #[test]

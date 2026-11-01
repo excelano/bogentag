@@ -8,9 +8,20 @@ import SwiftUI
 /// One dial, read for the place in use once a second, and the civil view a
 /// tap puts over it (Tagbogen spec §2).
 struct DialScreen: View {
-    let variant: DialVariant
     @Environment(SunLocation.self) private var location
+    @AppStorage(Settings.dialVariantKey) private var storedVariant = DialVariant.fixedTime.rawValue
     @State private var showsCivil = Demo.civil
+
+    /// The chosen dial, or the one a `--page` launch argument names.
+    private var variant: DialVariant {
+        Demo.page.flatMap(DialVariant.init) ?? DialVariant(rawValue: storedVariant) ?? .fixedTime
+    }
+
+    #if os(watchOS)
+    private let isWatch = true
+    #else
+    private let isWatch = false
+    #endif
 
     var body: some View {
         TimelineView(.periodic(from: .now, by: 1)) { context in
@@ -18,7 +29,8 @@ struct DialScreen: View {
             if let place = location.place {
                 let reading = Reading(at: now, latitude: place.latitude, longitude: place.longitude)
                 ZStack {
-                    DialView(model: DialModel(reading: reading, variant: variant), showsReadout: !showsCivil)
+                    DialView(model: DialModel(reading: reading, variant: variant), showsReadout: !showsCivil,
+                             showsArcLengths: !isWatch)
                         .opacity(showsCivil ? 0.35 : 1)
                     if showsCivil {
                         CivilView(reading: reading, now: now)
@@ -27,7 +39,7 @@ struct DialScreen: View {
                 .ignoresSafeArea()
                 .contentShape(Rectangle())
                 .onTapGesture { showsCivil.toggle() }
-                .accessibilityLabel(showsCivil ? Labels.clock(now) : reading.timestamp)
+                .accessibilityLabel(showsCivil ? "\(Labels.utcClock(now)) UTC, \(Labels.localClock(now))" : reading.timestamp)
             } else {
                 WaitingView(status: location.status)
             }

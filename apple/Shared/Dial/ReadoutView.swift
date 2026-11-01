@@ -11,26 +11,38 @@ import SwiftUI
 struct ReadoutView: View {
     let reading: Reading
     let scale: CGFloat
+    var showsDate = true
+    @AppStorage(Settings.offsetDecimalsKey) private var storedDecimals = Settings.defaultOffsetDecimals
+
+    /// The disc the readout sits in: the mockups' 100 units, and never so
+    /// small that watch-sized type does not fit.
+    static func discRadius(scale: CGFloat) -> CGFloat {
+        max(100 * scale, 50)
+    }
 
     var body: some View {
         VStack(spacing: 2 * scale) {
-            caption(Labels.day(reading.day.day))
+            if showsDate {
+                caption(Labels.day(reading.day.day))
+            }
             position
             if reading.polar == nil {
                 Text("[\(offsetKs)]")
-                    .font(.system(size: 19 * scale, weight: .medium).monospacedDigit())
+                    .font(.system(size: max(19 * scale, 15), weight: .medium).monospacedDigit())
                     .foregroundStyle(Palette.secondary)
             }
             caption(context)
         }
+        .frame(width: 2 * Self.discRadius(scale: scale) - 6)
     }
 
     private func caption(_ text: String) -> some View {
         Text(text)
-            .font(.system(size: 13 * scale, weight: .medium))
-            .tracking(1.5 * scale)
+            .font(.system(size: max(13 * scale, 11), weight: .medium))
+            .tracking(max(1.5 * scale, 0.8))
             .foregroundStyle(Palette.label)
             .lineLimit(1)
+            .minimumScaleFactor(0.7)
     }
 
     @ViewBuilder
@@ -70,8 +82,7 @@ struct ReadoutView: View {
     }
 
     private var offsetKs: String {
-        let steps = abs(reading.displayOffsetSteps)
-        return "\(steps / 10).\(steps % 10) ks"
+        Settings.offsetKs(reading.offset, decimals: Demo.decimals ?? storedDecimals)
     }
 
     private var context: String {

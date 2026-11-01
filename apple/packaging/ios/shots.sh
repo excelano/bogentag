@@ -42,7 +42,7 @@ shot() {
     echo "$name"
 }
 shot 01-fixed-time --demo
-shot 02-span --demo --dial span
+shot 02-span --demo --page span
 shot 03-civil --demo --civil
-shot 04-span-civil --demo --dial span --civil
+shot 04-span-civil --demo --page span --civil
 xcrun simctl terminate "$device" "$bundle" >/dev/null 2>&1 || true

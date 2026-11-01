@@ -119,7 +119,7 @@ def bogenzeit(t: datetime, lat: float, lon: float) -> dict:
         anchor_t = noon if out["anchor"] == "noon" else (mid_before if t < noon else mid_after)
         off = (t - anchor_t).total_seconds()
         out["offset_s"] = round(off, 3)
-        out["display_offset_ks"] = round(floor_div(off, 100) / 1000, 1)
+        out["display_offset_ks"] = round(floor_div(off, 10) / 1000, 2)
         out["span"] = None
         out["display_span"] = None
         out["quarter"] = None
@@ -155,7 +155,7 @@ def bogenzeit(t: datetime, lat: float, lon: float) -> dict:
     out["offset_s"] = round(off, 3)
     out["span"] = round(span, 4)
     out["display_span"] = int(math.floor(span))              # floor of signed value (BZ spec §5.2)
-    out["display_offset_ks"] = round(floor_div(off, 100) / 1000, 1)
+    out["display_offset_ks"] = round(floor_div(off, 10) / 1000, 2)
     out["quarter"] = q
     out["written"] = written_form(out["display_span"], out["display_offset_ks"], anchor)
     return out
@@ -165,10 +165,10 @@ def written_form(span: int, ks: float, anchor: str) -> str:
     """Combined written form (BZ spec §3.7): number left of glyph = before, right = after."""
     g = "☉" if anchor == "noon" else "○"
     if span < 0:
-        return f"{-span} [{-ks:.1f} ks] {g}"
+        return f"{-span} [{-ks:.2f} ks] {g}"
     if span == 0 and ks == 0:
         return g
-    return f"{g} {span} [{ks:.1f} ks]"
+    return f"{g} {span} [{ks:.2f} ks]"
 
 
 CASES = [

@@ -4,11 +4,10 @@
 
 import SwiftUI
 
-/// The dials, and the location they need while the app is on screen.
+/// The pages, and the location they need while the app is on screen.
 struct RootView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(SunLocation.self) private var location
-    @State private var variant: DialVariant = Demo.dial ?? .fixedTime
 
     var body: some View {
         content
@@ -23,28 +22,45 @@ struct RootView: View {
     }
 
     #if os(watchOS)
-    /// One page per dial variant, turned with the Digital Crown.
+    enum Page: String {
+        case dial
+        case day
+        case settings
+    }
+
+    @State private var page: Page = Demo.page.flatMap(Page.init) ?? .dial
+
+    /// Pages turned with the Digital Crown. The dials take the whole screen,
+    /// under the clock watchOS draws in the corner of every app.
     private var content: some View {
-        TabView(selection: $variant) {
-            ForEach(DialVariant.allCases) { variant in
-                DialScreen(variant: variant).tag(variant)
-            }
+        TabView(selection: $page) {
+            DialScreen().tag(Page.dial)
+            DayScreen().tag(Page.day)
+            SettingsScreen().tag(Page.settings)
         }
         .tabViewStyle(.verticalPage)
-        .ignoresSafeArea()
     }
     #else
+    @AppStorage("tourSeen") private var tourSeen = false
+    @State private var showsTour = false
+
     private var content: some View {
-        VStack {
-            DialScreen(variant: variant)
+        VStack(spacing: 12) {
+            DialScreen()
                 .padding()
-            Picker("Dial", selection: $variant) {
-                ForEach(DialVariant.allCases) { variant in
-                    Text(variant.title).tag(variant)
-                }
-            }
-            .pickerStyle(.segmented)
-            .padding([.horizontal, .bottom])
+            DialVariantChoice()
+            OffsetDecimalsChoice()
+            Button("About Bogenzeit") { showsTour = true }
+                .buttonStyle(ChoiceButtonStyle(selected: false))
+            WatchFaceButton()
+                .padding(.bottom)
+        }
+        .padding(.horizontal)
+        .onAppear {
+            if !tourSeen || Demo.page == "tour" { showsTour = true }
+        }
+        .sheet(isPresented: $showsTour, onDismiss: { tourSeen = true }) {
+            TourView().environment(location)
         }
     }
     #endif
