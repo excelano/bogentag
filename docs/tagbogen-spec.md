@@ -2,7 +2,7 @@
 
 Tagbogen is the watch face and app family that displays **Bogenzeit (BZ)**. The time standard itself is defined in `bogenzeit-spec.md`; Tagbogen only decides how it looks. Because the standard is fixed, Tagbogen can offer **several dial variants**.
 
-Status: draft. Mockups of variants 1 and 2 are on the Tagbogen design canvas.
+Status: draft. Mockups of variants 1 and 2 are on the Tagbogen design canvas. The variants are named Spans and Kiloseconds, for what the Sun's angle measures on each; Spans is the default.
 
 ---
 
@@ -31,28 +31,29 @@ All Bogenzeit calculation runs on the watch, offline (no phone or network needed
 - **Anchors:** ☉ at top (solar noon), ○ at bottom (solar midnight), drawn as vector shapes from one circle definition (BZ spec §3.1 matching rule).
 - **Sky:** day above the horizon, then civil, nautical and astronomical twilight bands, then night.
 - **Sun marker:** travels a fixed inner track.
-- **Quarter ticks:** at the 50-span points (the boundaries of Afterrise/Forenoon/Afternoon/Foreset and Afterset/Foremid/Aftermid/Forerise).
+- **Quarter ticks:** at the 50-span points (the boundaries of Afterrise/Forenoon/Afternoon/Foreset and Afterset/Foremid/Aftermid/Forerise), and the current quarter's stretch of the outer ring lit in the Sun's colour.
 - **Center readout:** date; large span position with glyph (`18 ☉`); offset `[3.43 ks]`; quarter name.
+- **Arc lengths:** where the screen has room, `DAY ARC 39.6 ks` above the center readout in the sky and `NIGHT ARC 46.7 ks` below it in the night, the English terms on screen and the German ones in the standard; the watch carries them on its day page instead.
 - **No hour numerals, no civil hands** in the Bogenzeit view.
 
 ---
 
 ## 4. Variants
 
-### 4.1 Fixed-time dial
+### 4.1 Span dial
+
+- Angle tracks spans: each half-arc = 90°, each quarter = 45°. Sunrise is always at 9 o'clock, sunset at 3 o'clock, horizon always level. The dial looks the same every day.
+- Outer ring: span ticks, one every 10 spans, the quarter boundaries long, so the ring is in the unit the angle measures.
+- The season shows instead in:
+  - the **twilight bands**, whose depth below the horizon changes with the season,
+  - and the arc lengths as text.
+
+### 4.2 Kilosecond dial
 
 - Angle tracks real elapsed time: one turn = 86.4 ks, ☉ at top.
 - The horizon is a horizontal chord that moves up and down with the seasons; day length is visible as the size of the blue area.
 - Outer ring: uniform ks ticks (minor every 1 ks, major every 5 ks from ☉).
 - Quarters occupy uneven angles (day quarters smaller in winter).
-
-### 4.2 Span dial
-
-- Angle tracks spans: each half-arc = 90°, each quarter = 45°. Sunrise is always at 9 o'clock, sunset at 3 o'clock, horizon always level. The dial looks the same every day.
-- The season shows instead in:
-  - the **outer ks ring**, whose tick spacing differs between day and night (denser where the arc is longer), and
-  - the **twilight bands**, whose depth below the horizon changes with the season,
-  - plus day and night arc lengths as text (`TAGBOGEN 39.7 ks`, `NACHTBOGEN 46.7 ks`).
 
 ### 4.3 Further variants (to explore)
 

@@ -25,7 +25,7 @@ struct DialView: View {
                 }
                 if showsReadout {
                     ReadoutView(reading: model.reading, scale: s, showsDate: showsDate)
-                    if showsArcLengths && model.variant == .span {
+                    if showsArcLengths {
                         arcLengths(scale: s)
                     }
                 }
@@ -35,20 +35,24 @@ struct DialView: View {
         }
     }
 
+    /// The day arc's length up in the sky, the night arc's down in the night.
     private func arcLengths(scale s: CGFloat) -> some View {
-        VStack(spacing: 2) {
+        ZStack {
             if let tagbogen = model.reading.day.tagbogen {
-                Text("TAGBOGEN \(ArcLengths.ks(tagbogen))")
+                arcLength("DAY ARC \(ArcLengths.ks(tagbogen))", scale: s, color: Palette.line.opacity(0.9)).offset(y: -122 * s)
             }
             if let night = ArcLengths.nachtbogen(of: model.reading) {
-                Text("NACHTBOGEN \(ArcLengths.ks(night))")
+                arcLength("NIGHT ARC \(ArcLengths.ks(night))", scale: s, color: Palette.label).offset(y: 122 * s)
             }
         }
-        .font(.system(size: max(11 * s, 11), weight: .medium))
-        .tracking(max(1 * s, 0.6))
-        .foregroundStyle(Palette.label)
-        .fixedSize()
-        .offset(y: 135 * s)
+    }
+
+    private func arcLength(_ text: String, scale s: CGFloat, color: Color) -> some View {
+        Text(text)
+            .font(.system(size: max(11 * s, 11), weight: .medium))
+            .tracking(max(1 * s, 0.6))
+            .foregroundStyle(color)
+            .fixedSize()
     }
 
     private func draw(in context: GraphicsContext, size: CGSize, scale s: CGFloat) {
@@ -68,6 +72,12 @@ struct DialView: View {
         }
 
         context.fill(circle(c, 215), with: .color(Palette.bezel))
+
+        if let arc = model.quarterArc {
+            var lit = Path()
+            lit.addArc(center: c, radius: 205 * s, startAngle: .degrees(arc.start - 90), endAngle: .degrees(arc.end - 90), clockwise: false)
+            context.stroke(lit, with: .color(Palette.sun.opacity(0.3)), lineWidth: 14 * s)
+        }
 
         for tick in model.ringTicks {
             let (inner, outer, width, color) = tick.major

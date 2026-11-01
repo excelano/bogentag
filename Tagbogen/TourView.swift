@@ -42,9 +42,9 @@ struct TourView: View {
         let spanDecember = december.daySpan.map { "\(Int($0.rounded(.down))) s" } ?? "none"
         return [
             TourPage(title: "Time on the Sun's arc", text: """
-            Every day the Sun rises, climbs to its highest point, sets, and passes beneath you to its lowest. Bogenzeit reads time off that arc: where the Sun is now, between those four events. The day arc, sunrise to sunset, is the Tagbogen. The night arc is the Nachtbogen.
+            Every day the Sun rises, climbs to its highest point, sets, and passes beneath you to its lowest. Bogenzeit reads time off that arc: where the Sun is now, between those four events. The day arc runs from sunrise to sunset and the night arc from sunset to sunrise. Tagbogen is the German word for the day arc, and the app's name.
             """) {
-                DialView(model: DialModel(reading: reading, variant: .fixedTime))
+                DialView(model: DialModel(reading: reading, variant: .spans))
             },
             TourPage(title: "Two anchors", text: """
             {noon} is solar noon, the Sun at its highest. {midnight} is solar midnight, the Sun at its lowest. A clock puts noon at 12:00 for a whole zone; the Sun keeps its own time at your longitude. Here, today, solar noon is at \(Labels.clock(day.noon)) and solar midnight at \(Labels.clock(day.midnightEnd)).
@@ -63,7 +63,7 @@ struct TourView: View {
             TourPage(title: "Spans", text: """
             Each half of an arc is 100 spans: sunrise to {noon}, {noon} to sunset, and the same on either side of {midnight}. A span stretches and shrinks with the season. Here a day span is \(spanToday) today, \(spanJune) in June and \(spanDecember) in December. The span dial draws every day the same shape; the season shows in the numbers.
             """) {
-                DialView(model: DialModel(reading: reading, variant: .span))
+                DialView(model: DialModel(reading: reading, variant: .spans))
             },
             TourPage(title: "Kiloseconds", text: """
             The fixed scale beside the spans. A kilosecond is 1,000 seconds, a little under seventeen minutes; a day is 86.4 of them. The bracketed number on the dial is the time from the nearest anchor in kiloseconds, so two readings can be compared and a duration added up.
@@ -104,7 +104,7 @@ struct TourView: View {
             The dial shows no hours and no minutes. When you need them, tap it: UTC, the reference every reading is computed from, then the local clock with its zone, the date, and today's sunrise and sunset, over the dimmed dial. Tap again to return to the Sun.
             """) {
                 ZStack {
-                    DialView(model: DialModel(reading: reading, variant: .fixedTime), showsReadout: false)
+                    DialView(model: DialModel(reading: reading, variant: .kiloseconds), showsReadout: false)
                         .opacity(0.35)
                     CivilView(reading: reading, now: reading.instant)
                 }

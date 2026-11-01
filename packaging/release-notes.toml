@@ -6,5 +6,5 @@ version = "1.0.0"
 
 [locales."en-us"]
 whats-new = """
-Tagbogen's first release: the solar dial on Apple Watch and iPhone, in a fixed-time and a span variant, with complications for the watch face, a day page with today's figures, a tap for the civil clock, and a short tour of the system on iPhone.
+Tagbogen's first release: the solar dial on Apple Watch and iPhone, in a Spans and a Kiloseconds variant, with complications for the watch face, a day page with today's figures, a tap for the civil clock, and a short tour of the system on iPhone.
 """

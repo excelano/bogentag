@@ -9,12 +9,12 @@ import SwiftUI
 /// tap puts over it (Tagbogen spec §2).
 struct DialScreen: View {
     @Environment(SunLocation.self) private var location
-    @AppStorage(Settings.dialVariantKey) private var storedVariant = DialVariant.fixedTime.rawValue
+    @AppStorage(Settings.dialVariantKey) private var storedVariant = DialVariant.spans.rawValue
     @State private var showsCivil = Demo.civil
 
     /// The chosen dial, or the one a `--page` launch argument names.
     private var variant: DialVariant {
-        Demo.page.flatMap(DialVariant.init) ?? DialVariant(rawValue: storedVariant) ?? .fixedTime
+        Demo.page.flatMap(DialVariant.init) ?? DialVariant(rawValue: storedVariant) ?? .spans
     }
 
     #if os(watchOS)

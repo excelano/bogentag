@@ -19,7 +19,7 @@ The dial is a sky: blue above the horizon, bands of twilight below it, night at 
 WHAT TO TRY ON IPHONE
 1. On first launch an eight-page explainer opens; the About Bogenzeit button reopens it.
 2. Tap the dial: UTC, the local time with its zone, the date and today's sunrise and sunset appear over it. Tap again to return.
-3. The two rows under the dial choose between the fixed-time dial, whose horizon moves with the season, and the span dial, which draws every day the same shape, and how many decimals the kilosecond readout shows.
+3. The two rows under the dial choose between the Spans dial, which draws every day the same shape, and the Kiloseconds dial, on which the Sun moves evenly and the horizon moves with the season, and how many decimals the kilosecond readout shows.
 
 ON APPLE WATCH
 Turn the Digital Crown: the dial, a page with today's figures (the length of the day arc and the night arc, and sunrise, noon, sunset and midnight with their clock times), and Settings with the same two choices. Tap the dial for the clock. Complications are available in the circular, corner, rectangular and inline slots and show the current reading; they update when the reading changes, roughly every two to four minutes.
@@ -37,7 +37,7 @@ Tagbogen tells time by the Sun. Instead of hours and minutes it shows where the 
 
 The dial is a sky. Blue above the horizon, three bands of twilight below it, night at the bottom, and the Sun travelling a ring through them. Solar noon sits at the top and solar midnight at the bottom, each marked with its own symbol. In the centre, a number beside the symbol says where the Sun is in spans: a hundred spans from sunrise to solar noon, a hundred from noon to sunset, and the same on either side of midnight. A span is a few minutes long and stretches with the season, so eighteen spans before noon is a different clock time in June and December but the same place on the arc. Under the spans, the same moment in kiloseconds, a fixed scale for comparing readings and adding up durations, and the name of the quarter of the day you are in: Afterrise, Forenoon, Afternoon, Foreset by day, Afterset, Foremid, Aftermid, Forerise by night.
 
-Two dials. The fixed-time dial turns once a day: its horizon rises and falls with the season, so a winter day is a thin slice of sky and a summer day fills most of the circle. The span dial draws every day the same shape, sunrise on the left, sunset on the right, and lets the season show in the numbers instead.
+Two dials. On the Spans dial the Sun moves in spans, every day the same shape, sunrise on the left and sunset on the right, and the season shows in the numbers. On the Kiloseconds dial the Sun moves evenly, one turn a day, and the horizon rises and falls with the season, so a winter day is a thin slice of sky and a summer day fills most of the circle. On both, the ring is marked in the dial's own unit and the quarter you are in is lit.
 
 When you need the clock, tap the dial: UTC, your local time with its zone and offset, the date, and today's sunrise and sunset appear over the dimmed sky. Tap again to return to the Sun.
 

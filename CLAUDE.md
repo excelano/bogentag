@@ -14,7 +14,7 @@ spec and `design/mockups/` the drawings.
     xcremote install                                # onto David's iPhone and watch, as ~/notes/shipping.md says
     xcodebuild test -scheme "Tagbogen Watch App"    # on the Mac, on a watch simulator; reboot the simulator after
 
-A Debug build launched with `--demo` shows Houston on the spec's worked day; `--page span` (or `day`,
+A Debug build launched with `--demo` shows Houston on the spec's worked day; `--page spans` (or `kiloseconds`, `day`,
 `settings`, `tour`) and `--civil` pick the page, `--decimals` the offset's decimals, and
 `packaging/ios/shots.sh` takes the store screenshots from them. Releases: the apps in
 excelano/shipping, run from this directory.

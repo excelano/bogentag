@@ -10,7 +10,7 @@ import Foundation
 ///
 ///     --demo          Houston on 1 November 2026 at 17:08 UTC, the worked
 ///                     example of the Bogenzeit spec
-///     --page span     open on that dial (fixedTime, span), or on the watch's
+///     --page spans    open on that dial (kiloseconds, spans), or on the watch's
 ///                     day or settings page
 ///     --civil         open with the civil view over the dial
 ///     --decimals 3    show the kilosecond offset with that many decimals

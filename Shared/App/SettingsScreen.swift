@@ -30,7 +30,7 @@ struct SettingsScreen: View {
 
 /// Fixed-time or span dial.
 struct DialVariantChoice: View {
-    @AppStorage(Settings.dialVariantKey) private var variant = DialVariant.fixedTime.rawValue
+    @AppStorage(Settings.dialVariantKey) private var variant = DialVariant.spans.rawValue
 
     var body: some View {
         ChoiceButtons(choices: DialVariant.allCases.map { ($0.rawValue, $0.title) }, selection: $variant)

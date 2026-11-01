@@ -34,10 +34,10 @@ struct DayView: View {
                     .font(.headline)
                     .foregroundStyle(Palette.line)
                 if let tagbogen = day.tagbogen, let span = day.daySpan {
-                    arc("TAGBOGEN", length: tagbogen, span: span)
+                    arc("DAY ARC", length: tagbogen, span: span)
                 }
                 if let night = ArcLengths.nachtbogen(of: reading), let span = day.halfNightEvening {
-                    arc("NACHTBOGEN", length: night, span: span / 100)
+                    arc("NIGHT ARC", length: night, span: span / 100)
                 }
                 if let polar = day.polar {
                     Text(polar == .alwaysAbove ? "POLAR DAY" : "POLAR NIGHT")

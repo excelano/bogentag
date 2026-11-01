@@ -41,10 +41,10 @@ shot() {
     xcrun simctl io "$device" screenshot --type=png "$outdir/$name.png" >/dev/null
     echo "$name"
 }
-shot 01-fixed-time --demo
-shot 02-span --demo --page span
+shot 01-spans --demo
+shot 02-kiloseconds --demo --page kiloseconds
 shot 03-civil --demo --civil
-shot 04-span-civil --demo --page span --civil
+shot 04-kiloseconds-civil --demo --page kiloseconds --civil
 if [ -n "$watch" ]; then
     shot 05-day --demo --page day
 else
