@@ -2,9 +2,9 @@
 # against the release being cut, so notes left from last time stop the release
 # rather than reaching the listing.
 
-version = "1.0.0"
+version = "1.0.1"
 
 [locales."en-us"]
 whats-new = """
-Tagbogen's first release: the solar dial on Apple Watch and iPhone, in a Spans and a Kiloseconds variant, with complications for the watch face, a day page with today's figures, a tap for the civil clock, and a short tour of the system on iPhone.
+The dials are now Spans and Kiloseconds, Spans by default, each with its ring marked in its own unit and the quarter you are in lit along it, and the day and night arc lengths above and below the reading. Five complications for the watch face: the reading, the reading with its quarter, the dial without words, a gauge of the Sun's arc, and what comes next. The same five on the iPhone's Lock Screen, and the dial on the Home Screen in two sizes. The kilosecond readout shows two decimals, with one or three a tap away in Settings.
 """
