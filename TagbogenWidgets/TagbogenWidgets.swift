@@ -84,14 +84,25 @@ struct ArcWidgetView: View {
         if let reading = entry.reading {
             switch family {
             case .accessoryRectangular:
-                VStack(alignment: .leading, spacing: 2) {
-                    position(reading, size: 24, glyph: 8, line: 2)
-                    Text(reading.quarter?.name ?? (reading.polar == .alwaysAbove ? "Polar day" : "Polar night"))
-                        .font(.headline)
-                    if reading.span != nil {
-                        Text("[\(ksText(reading))]")
-                            .font(.footnote.monospacedDigit())
-                            .foregroundStyle(.secondary)
+                VStack(alignment: .leading, spacing: 3) {
+                    HStack(alignment: .center) {
+                        position(reading, size: 28, glyph: 9, line: 2.2)
+                        Spacer(minLength: 8)
+                        VStack(alignment: .trailing, spacing: 0) {
+                            Text(reading.quarter?.name ?? (reading.polar == .alwaysAbove ? "Polar day" : "Polar night"))
+                                .font(.headline)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.7)
+                            if reading.span != nil {
+                                Text("[\(ksText(reading))]")
+                                    .font(.footnote.monospacedDigit())
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                    if let progress = progress(reading) {
+                        Gauge(value: progress, in: 0...1) { EmptyView() }
+                            .gaugeStyle(.accessoryLinear)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -130,7 +141,7 @@ struct ArcWidgetView: View {
         }
     }
 
-    /// The span with its glyph on the right side, as vector shapes.
+    /// The span with its glyph on its side of the number, as vector shapes.
     private func position(_ reading: Reading, size: CGFloat, glyph: CGFloat, line: CGFloat) -> some View {
         HStack(spacing: 4) {
             let glyphView = AnchorGlyphView(anchor: reading.anchor, radius: glyph, lineWidth: line, color: .primary)
