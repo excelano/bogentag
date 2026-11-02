@@ -28,7 +28,7 @@ struct SettingsScreen: View {
     }
 }
 
-/// Fixed-time or span dial.
+/// Spans or Kiloseconds dial.
 struct DialVariantChoice: View {
     @AppStorage(Settings.dialVariantKey) private var variant = DialVariant.spans.rawValue
 
