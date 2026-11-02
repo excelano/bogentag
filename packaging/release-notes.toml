@@ -2,9 +2,9 @@
 # against the release being cut, so notes left from last time stop the release
 # rather than reaching the listing.
 
-version = "1.1.0"
+version = "1.1.1"
 
 [locales."en-us"]
 whats-new = """
-Each dial now reads in its own unit only: spans on the Spans dial, kiloseconds on the Kiloseconds dial, and the complications and widgets follow the dial you choose. Spans can now show decimals, and one Precision setting chooses how finely either unit is read, with the decimals set smaller than the whole number. Sunrise and sunset have symbols of their own, triangles pointing up and down, shown in place of the 100 that begins each arc. The day and night arc lengths stay on the Kiloseconds dial and the watch's day page.
+The solar calculations and the drawn symbols now come from a shared Bogenzeit engine. Every reading, dial, complication and widget should look and read as before; please report anything that differs.
 """
