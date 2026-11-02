@@ -3,6 +3,7 @@
 // Built with AI assistance (Claude, Anthropic)
 
 import Bogenzeit
+import BogenzeitUI
 import SwiftUI
 
 /// The explainer (Tagbogen spec §5): eight pages, one per topic, each with
@@ -51,11 +52,11 @@ struct TourView: View {
             """) {
                 HStack(spacing: 60) {
                     VStack(spacing: 12) {
-                        GlyphView(glyph: .noon, radius: 36, lineWidth: 7)
+                        GlyphView(.noon, radius: 36, lineWidth: 7, color: Palette.line)
                         Text("solar noon").foregroundStyle(Palette.label)
                     }
                     VStack(spacing: 12) {
-                        GlyphView(glyph: .midnight, radius: 36, lineWidth: 7)
+                        GlyphView(.midnight, radius: 36, lineWidth: 7, color: Palette.line)
                         Text("solar midnight").foregroundStyle(Palette.label)
                     }
                 }
@@ -68,7 +69,7 @@ struct TourView: View {
             TourPage(title: "Kiloseconds", text: """
             The fixed scale, the other way to read the same moment. A kilosecond is 1,000 seconds, a little under seventeen minutes; a day is 86.4 of them. The Kiloseconds dial gives the time from the nearest anchor in kiloseconds, so two readings can be compared and a duration added up. Each dial shows its own scale, and Precision sets how many decimals.
             """) {
-                let shown = DisplayedPosition(reading, variant: .kiloseconds, precision: .standard)
+                let shown = DisplayedPosition(reading, scale: .kiloseconds, precision: .standard)
                 NotationExample(number: shown.number, unit: shown.unit, glyph: shown.glyph, before: shown.side == .before,
                                 meaning: "\(shown.side == .before ? "before" : "after") \(Glyph(reading.anchor).name)")
             },
@@ -91,7 +92,7 @@ struct TourView: View {
             A Bogenzeit day runs from one solar midnight to the next, so the date changes at {midnight} rather than at 00:00. Tonight {midnight} falls at \(Labels.clock(day.midnightEnd)); until then it is still \(Labels.day(day.day)) here, whatever the calendar says.
             """) {
                 VStack(spacing: 10) {
-                    GlyphView(glyph: .midnight, radius: 36, lineWidth: 7)
+                    GlyphView(.midnight, radius: 36, lineWidth: 7, color: Palette.line)
                     Text(Labels.day(day.day))
                         .font(.title2.weight(.semibold))
                     Text("until \(Labels.clock(day.midnightEnd))")
@@ -154,7 +155,7 @@ struct NotationExample: View {
     var body: some View {
         HStack(spacing: 10) {
             if before, let number { digits(number) }
-            GlyphView(glyph: glyph, radius: 14, lineWidth: 3)
+            GlyphView(glyph, radius: 14, lineWidth: 3, color: Palette.line)
             if !before, let number { digits(number) }
             Spacer()
             Text(meaning)
@@ -187,8 +188,8 @@ struct QuarterWheel: View {
                     Rectangle().fill(Palette.line.opacity(0.4)).frame(width: 1, height: 2 * r)
                         .rotationEffect(.degrees(angle))
                 }
-                GlyphView(glyph: .noon, radius: 9, lineWidth: 2.2).position(x: c.x, y: c.y - r - 16)
-                GlyphView(glyph: .midnight, radius: 9, lineWidth: 2.2).position(x: c.x, y: c.y + r + 16)
+                GlyphView(.noon, radius: 9, lineWidth: 2.2, color: Palette.line).position(x: c.x, y: c.y - r - 16)
+                GlyphView(.midnight, radius: 9, lineWidth: 2.2, color: Palette.line).position(x: c.x, y: c.y + r + 16)
                 ForEach(Self.names, id: \.0) { name, angle in
                     let a = angle * .pi / 180
                     Text(name)

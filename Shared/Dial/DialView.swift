@@ -3,6 +3,7 @@
 // Built with AI assistance (Claude, Anthropic)
 
 import Bogenzeit
+import BogenzeitUI
 import SwiftUI
 
 /// The dial, drawn to the mockups' 450-unit design and scaled to the space

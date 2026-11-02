@@ -5,24 +5,6 @@
 import Bogenzeit
 import Foundation
 
-enum DialVariant: String, CaseIterable, Identifiable {
-    /// The Sun's angle is spans: one quarter is 45°, and the horizon is level
-    /// every day (Tagbogen spec §4.1). The default.
-    case spans
-    /// The Sun's angle is kiloseconds: one turn is 86.4 ks, and the horizon
-    /// moves with the season (Tagbogen spec §4.2).
-    case kiloseconds
-
-    var id: String { rawValue }
-
-    var title: String {
-        switch self {
-        case .kiloseconds: "Kiloseconds"
-        case .spans: "Spans"
-        }
-    }
-}
-
 /// The geometry of one dial for one reading. Angles are degrees clockwise
 /// from the top, where ☉ sits; ○ is at 180, sunset on the right, sunrise on
 /// the left. A chord angle is the angle at which the Sun crosses that height
@@ -37,7 +19,7 @@ struct DialModel {
     }
 
     let reading: Reading
-    let variant: DialVariant
+    let variant: Scale
     let sunAngle: Double
     let sunsetAngle: Double?
     let civilAngle: Double?
@@ -51,7 +33,7 @@ struct DialModel {
     /// The span dial has no span geometry on a polar day and draws kiloseconds instead.
     var usesSpanGeometry: Bool { variant == .spans && reading.polar == nil }
 
-    init(reading: Reading, variant: DialVariant) {
+    init(reading: Reading, variant: Scale) {
         self.reading = reading
         self.variant = variant
         let day = reading.day

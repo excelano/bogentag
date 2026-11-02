@@ -3,6 +3,7 @@
 // Built with AI assistance (Claude, Anthropic)
 
 import Bogenzeit
+import BogenzeitUI
 import SwiftUI
 
 /// The center of the dial: the Bogenzeit date, the position in the dial's
@@ -10,7 +11,7 @@ import SwiftUI
 /// the glyph the positional rule gives it (Bogenzeit spec §3.2).
 struct ReadoutView: View {
     let reading: Reading
-    let variant: DialVariant
+    let variant: Scale
     let scale: CGFloat
     var showsDate = true
     @AppStorage(Settings.precisionKey) private var storedPrecision = Precision.standard.rawValue
@@ -51,8 +52,8 @@ struct ReadoutView: View {
 
     @ViewBuilder
     private var position: some View {
-        let shown = DisplayedPosition(reading, variant: variant, precision: precision)
-        let glyph = GlyphView(glyph: shown.glyph, radius: 21 * scale, lineWidth: 4.5 * scale)
+        let shown = DisplayedPosition(reading, scale: variant, precision: precision)
+        let glyph = GlyphView(shown.glyph, radius: 21 * scale, lineWidth: 4.5 * scale, color: Palette.line)
         HStack(spacing: 8 * scale) {
             if let number = shown.number {
                 if shown.side == .before {

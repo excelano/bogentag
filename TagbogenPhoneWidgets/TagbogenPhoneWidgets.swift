@@ -3,6 +3,7 @@
 // Built with AI assistance (Claude, Anthropic)
 
 import Bogenzeit
+import BogenzeitUI
 import SwiftUI
 import WidgetKit
 
@@ -33,7 +34,7 @@ private struct Empty: View {
         if family == .accessoryInline {
             Text("Open Tagbogen to find the Sun")
         } else {
-            GlyphView(glyph: .noon, radius: 10, lineWidth: 2.4, color: .primary)
+            GlyphView(.noon, radius: 10, lineWidth: 2.4, color: .primary)
         }
     }
 }
@@ -125,7 +126,7 @@ struct PhoneHorizonWidget: Widget {
 /// A Lock Screen widget built from one of the shared complication views.
 struct PhoneSlotView: View {
     let entry: ArcEntry
-    let make: (Reading, DialVariant, ComplicationSlot) -> AnyView
+    let make: (Reading, Scale, ComplicationSlot) -> AnyView
     @Environment(\.widgetFamily) private var family
 
     var body: some View {

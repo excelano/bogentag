@@ -3,6 +3,7 @@
 // Built with AI assistance (Claude, Anthropic)
 
 import Bogenzeit
+import BogenzeitUI
 import SwiftUI
 
 /// The watch face slots a complication can fill, named without WidgetKit so
@@ -50,7 +51,7 @@ struct NextEvent {
     /// What is left in the chosen scale: `23` and `spans`, or `2.6` and
     /// `ks` to the tenth a complication can keep up with (§5.2). A polar
     /// day has no spans and counts kiloseconds on either dial.
-    func left(_ variant: DialVariant) -> (number: String, unit: String) {
+    func left(_ variant: Scale) -> (number: String, unit: String) {
         if variant == .spans, let spans {
             let whole = Int(spans.rounded(.up))
             return ("\(whole)", whole == 1 ? "span" : "spans")
@@ -60,7 +61,7 @@ struct NextEvent {
     }
 
     /// `Sunset in 23 spans`, `Sunset in 2.6 ks`.
-    func sentence(_ variant: DialVariant) -> String {
+    func sentence(_ variant: Scale) -> String {
         let (number, unit) = left(variant)
         return "\(name) in \(number) \(unit)"
     }
@@ -69,13 +70,13 @@ struct NextEvent {
 /// The number and the glyph, on the number's side, as vector shapes.
 struct ReadingText: View {
     let reading: Reading
-    let variant: DialVariant
+    let variant: Scale
     var size: CGFloat = 24
     var color: Color = .primary
 
     var body: some View {
         let shown = Complications.position(reading, variant)
-        let glyph = GlyphView(glyph: shown.glyph, radius: size * 0.33, lineWidth: size * 0.085, color: color)
+        let glyph = GlyphView(shown.glyph, radius: size * 0.33, lineWidth: size * 0.085, color: color)
         HStack(spacing: size * 0.15) {
             if let number = shown.number {
                 if shown.side == .before {
@@ -103,13 +104,13 @@ struct ReadingText: View {
 enum Complications {
     /// The chosen scale at the low precision: a complication refreshes too
     /// rarely for a finer step (§5.2).
-    static func position(_ reading: Reading, _ variant: DialVariant) -> DisplayedPosition {
-        DisplayedPosition(reading, variant: variant, precision: .low)
+    static func position(_ reading: Reading, _ variant: Scale) -> DisplayedPosition {
+        DisplayedPosition(reading, scale: variant, precision: .low)
     }
 
     /// Text-only slots cannot draw the glyph, so they carry the Unicode
     /// characters, the plain-text form the spec accepts (§3.1).
-    static func plain(_ reading: Reading, _ variant: DialVariant) -> String {
+    static func plain(_ reading: Reading, _ variant: Scale) -> String {
         position(reading, variant).text
     }
 
@@ -126,7 +127,7 @@ enum Complications {
 /// `86 ☉` or `3.4 ks ☉` and nothing else.
 struct ReadingComplication: View {
     let reading: Reading
-    let variant: DialVariant
+    let variant: Scale
     let slot: ComplicationSlot
 
     var body: some View {
@@ -135,7 +136,7 @@ struct ReadingComplication: View {
             ReadingText(reading: reading, variant: variant, size: 17)
                 .minimumScaleFactor(0.7)
         case .corner:
-            GlyphView(glyph: Complications.position(reading, variant).glyph, radius: 10, lineWidth: 2.4, color: .primary)
+            GlyphView(Complications.position(reading, variant).glyph, radius: 10, lineWidth: 2.4, color: .primary)
         case .rectangular:
             ReadingText(reading: reading, variant: variant, size: 30)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -148,7 +149,7 @@ struct ReadingComplication: View {
 /// The reading with the quarter it falls in.
 struct QuarterComplication: View {
     let reading: Reading
-    let variant: DialVariant
+    let variant: Scale
     let slot: ComplicationSlot
 
     var body: some View {
@@ -179,7 +180,7 @@ struct QuarterComplication: View {
                     .minimumScaleFactor(0.6)
             }
         case .corner:
-            GlyphView(glyph: Complications.position(reading, variant).glyph, radius: 10, lineWidth: 2.4, color: .primary)
+            GlyphView(Complications.position(reading, variant).glyph, radius: 10, lineWidth: 2.4, color: .primary)
         case .inline:
             Text("\(Complications.plain(reading, variant)) \(Complications.quarter(reading))")
         }
@@ -189,7 +190,7 @@ struct QuarterComplication: View {
 /// The sky and the Sun, no words: the dial reduced to what a slot can hold.
 struct DialComplication: View {
     let reading: Reading
-    let variant: DialVariant
+    let variant: Scale
     let slot: ComplicationSlot
     /// False in the tinted and vibrant rendering modes, where the sky is one colour.
     var fullColor = true
@@ -284,7 +285,7 @@ struct MiniDial: View {
 /// The Sun's progress along its arc, with the reading inside.
 struct GaugeComplication: View {
     let reading: Reading
-    let variant: DialVariant
+    let variant: Scale
     let slot: ComplicationSlot
 
     var body: some View {
@@ -293,7 +294,7 @@ struct GaugeComplication: View {
         case .circular:
             if let progress = Complications.progress(reading) {
                 Gauge(value: progress, in: 0...1) {
-                    GlyphView(glyph: shown.glyph, radius: 4, lineWidth: 1.2, color: .primary)
+                    GlyphView(shown.glyph, radius: 4, lineWidth: 1.2, color: .primary)
                 } currentValueLabel: {
                     Numerals.text(shown.number ?? "", unit: shown.unit, size: shown.unit == nil ? 18 : 14)
                         .minimumScaleFactor(0.6)
@@ -311,7 +312,7 @@ struct GaugeComplication: View {
 /// What comes next and how far away it is.
 struct HorizonComplication: View {
     let reading: Reading
-    let variant: DialVariant
+    let variant: Scale
     let slot: ComplicationSlot
 
     var body: some View {
@@ -360,7 +361,7 @@ struct HorizonComplication: View {
 /// next: the Home Screen's medium widget.
 struct DialCard: View {
     let reading: Reading
-    let variant: DialVariant
+    let variant: Scale
 
     var body: some View {
         HStack(spacing: 16) {

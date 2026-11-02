@@ -3,6 +3,7 @@
 // Built with AI assistance (Claude, Anthropic)
 
 import Bogenzeit
+import BogenzeitUI
 import SwiftUI
 
 /// Today in numbers: the two arcs and their span lengths, and the four
@@ -77,7 +78,7 @@ struct DayView: View {
             Text(label)
             Spacer()
             VStack(alignment: .trailing, spacing: 2) {
-                GlyphView(glyph: glyph, radius: 7, lineWidth: 1.8)
+                GlyphView(glyph, radius: 7, lineWidth: 1.8, color: Palette.line)
                 Text(instant.map(Labels.clock) ?? "none")
                     .font(.footnote)
                     .foregroundStyle(Palette.secondary)

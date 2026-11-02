@@ -15,16 +15,14 @@ describes the face and `design/mockups/` holds the drawings it was built to.
 
 ## What is here
 
-`Bogenzeit/` is the engine as a Swift package, passing the vectors in
-`vectors/`, a copy of the standard's file. `Tagbogen.xcodeproj` builds the
+The engine comes from https://github.com/excelano/bogenzeit-swift, the Swift
+package that passes the standard's vectors. `Tagbogen.xcodeproj` builds the
 iPhone app, the watch app it embeds and the watch app's complications, all from
 `Shared/`. `packaging/` holds the store listing, the release notes, the privacy
 entry and the screenshot recipes the release apps read.
 
 ## Building
 
-    cd Bogenzeit && swift test
-
-The package tests run anywhere Swift does. The apps build with Xcode from the
-project at the root; a Debug build launched with `--demo` shows Houston on the
-spec's worked day.
+The apps build with Xcode from the project at the root, which fetches the
+engine package on first build; a Debug build launched with `--demo` shows
+Houston on the spec's worked day.

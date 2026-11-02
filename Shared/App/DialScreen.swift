@@ -3,18 +3,19 @@
 // Built with AI assistance (Claude, Anthropic)
 
 import Bogenzeit
+import BogenzeitUI
 import SwiftUI
 
 /// One dial, read for the place in use once a second, and the civil view a
 /// tap puts over it (Tagbogen spec §2).
 struct DialScreen: View {
     @Environment(SunLocation.self) private var location
-    @AppStorage(Settings.dialVariantKey, store: AppGroup.defaults) private var storedVariant = DialVariant.spans.rawValue
+    @AppStorage(Settings.dialVariantKey, store: AppGroup.defaults) private var storedVariant = Scale.spans.rawValue
     @State private var showsCivil = Demo.civil
 
     /// The chosen dial, or the one a `--page` launch argument names.
-    private var variant: DialVariant {
-        Demo.page.flatMap(DialVariant.init) ?? DialVariant(rawValue: storedVariant) ?? .spans
+    private var variant: Scale {
+        Demo.page.flatMap(Scale.init) ?? Scale(rawValue: storedVariant) ?? .spans
     }
 
     #if os(watchOS)
@@ -53,7 +54,7 @@ struct WaitingView: View {
 
     var body: some View {
         VStack(spacing: 12) {
-            GlyphView(glyph: .noon, radius: 18, lineWidth: 3.5)
+            GlyphView(.noon, radius: 18, lineWidth: 3.5, color: Palette.line)
             Text(status == .denied
                  ? "Tagbogen needs your location to find the Sun's arc. Allow Location for Tagbogen in Settings."
                  : "Finding the Sun's arc for where you are.")

@@ -2,6 +2,7 @@
 // Author: David M. Anderson
 // Built with AI assistance (Claude, Anthropic)
 
+import Bogenzeit
 import SwiftUI
 import WidgetKit
 
@@ -32,10 +33,10 @@ struct SettingsScreen: View {
 /// Spans or Kiloseconds dial. The widgets show the same scale, so they are
 /// redrawn when it changes.
 struct DialVariantChoice: View {
-    @AppStorage(Settings.dialVariantKey, store: AppGroup.defaults) private var variant = DialVariant.spans.rawValue
+    @AppStorage(Settings.dialVariantKey, store: AppGroup.defaults) private var variant = Scale.spans.rawValue
 
     var body: some View {
-        ChoiceButtons(choices: DialVariant.allCases.map { ($0.rawValue, $0.title) }, selection: $variant)
+        ChoiceButtons(choices: Scale.allCases.map { ($0.rawValue, $0.title) }, selection: $variant)
             .onChange(of: variant) { WidgetCenter.shared.reloadAllTimelines() }
     }
 }
@@ -44,10 +45,10 @@ struct DialVariantChoice: View {
 /// chosen dial's scale: `0`, `0.0`, `0.00` for spans, one more for kiloseconds.
 struct PrecisionChoice: View {
     @AppStorage(Settings.precisionKey) private var precision = Precision.standard.rawValue
-    @AppStorage(Settings.dialVariantKey, store: AppGroup.defaults) private var variant = DialVariant.spans.rawValue
+    @AppStorage(Settings.dialVariantKey, store: AppGroup.defaults) private var variant = Scale.spans.rawValue
 
     var body: some View {
-        let scale = DialVariant(rawValue: variant) ?? .spans
+        let scale = Scale(rawValue: variant) ?? .spans
         ChoiceButtons(choices: Precision.allCases.map { ($0.rawValue, Self.label($0.decimals(for: scale))) },
                       selection: $precision)
     }

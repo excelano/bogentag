@@ -3,6 +3,7 @@
 // Built with AI assistance (Claude, Anthropic)
 
 import Bogenzeit
+import BogenzeitUI
 import SwiftUI
 import WidgetKit
 
@@ -35,7 +36,7 @@ private struct Empty: View {
         if family == .accessoryInline {
             Text("Open Tagbogen to find the Sun")
         } else {
-            GlyphView(glyph: .noon, radius: 10, lineWidth: 2.4, color: .primary)
+            GlyphView(.noon, radius: 10, lineWidth: 2.4, color: .primary)
         }
     }
 }

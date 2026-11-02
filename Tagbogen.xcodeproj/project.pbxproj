@@ -10,10 +10,14 @@
 		B10000000000000000000001 /* Tagbogen Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B20000000000000000000001 /* Tagbogen Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B10000000000000000000002 /* TagbogenWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B20000000000000000000006 /* TagbogenWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B10000000000000000000003 /* Bogenzeit in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000001 /* Bogenzeit */; };
+		B10000000000000000000008 /* BogenzeitUI in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000005 /* BogenzeitUI */; };
 		B10000000000000000000004 /* Bogenzeit in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000002 /* Bogenzeit */; };
+		B10000000000000000000009 /* BogenzeitUI in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000006 /* BogenzeitUI */; };
 		B10000000000000000000005 /* Bogenzeit in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000003 /* Bogenzeit */; };
+		B1000000000000000000000A /* BogenzeitUI in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000007 /* BogenzeitUI */; };
 		B10000000000000000000006 /* TagbogenPhoneWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B20000000000000000000008 /* TagbogenPhoneWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B10000000000000000000007 /* Bogenzeit in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000004 /* Bogenzeit */; };
+		B1000000000000000000000B /* BogenzeitUI in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000008 /* BogenzeitUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B10000000000000000000003 /* Bogenzeit in Frameworks */,
+				B10000000000000000000008 /* BogenzeitUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B10000000000000000000005 /* Bogenzeit in Frameworks */,
+				B1000000000000000000000A /* BogenzeitUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B10000000000000000000004 /* Bogenzeit in Frameworks */,
+				B10000000000000000000009 /* BogenzeitUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B10000000000000000000007 /* Bogenzeit in Frameworks */,
+				B1000000000000000000000B /* BogenzeitUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +273,7 @@
 			name = "Tagbogen Watch App";
 			packageProductDependencies = (
 				BC0000000000000000000001 /* Bogenzeit */,
+				BC0000000000000000000005 /* BogenzeitUI */,
 			);
 			productName = "Tagbogen Watch App";
 			productReference = B20000000000000000000001 /* Tagbogen Watch App.app */;
@@ -314,6 +323,7 @@
 			name = Tagbogen;
 			packageProductDependencies = (
 				BC0000000000000000000002 /* Bogenzeit */,
+				BC0000000000000000000006 /* BogenzeitUI */,
 			);
 			productName = Tagbogen;
 			productReference = B20000000000000000000005 /* Tagbogen.app */;
@@ -337,6 +347,7 @@
 			name = TagbogenWidgets;
 			packageProductDependencies = (
 				BC0000000000000000000003 /* Bogenzeit */,
+				BC0000000000000000000007 /* BogenzeitUI */,
 			);
 			productName = TagbogenWidgets;
 			productReference = B20000000000000000000006 /* TagbogenWidgets.appex */;
@@ -360,6 +371,7 @@
 			name = TagbogenPhoneWidgets;
 			packageProductDependencies = (
 				BC0000000000000000000004 /* Bogenzeit */,
+				BC0000000000000000000008 /* BogenzeitUI */,
 			);
 			productName = TagbogenPhoneWidgets;
 			productReference = B20000000000000000000008 /* TagbogenPhoneWidgets.appex */;
@@ -403,7 +415,7 @@
 			mainGroup = B70000000000000000000001;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				BB1000000000000000000001 /* XCLocalSwiftPackageReference "Bogenzeit" */,
+				BB1000000000000000000001 /* XCRemoteSwiftPackageReference "bogenzeit-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B70000000000000000000002 /* Products */;
@@ -829,29 +841,57 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		BB1000000000000000000001 /* XCLocalSwiftPackageReference "Bogenzeit" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Bogenzeit;
+/* Begin XCRemoteSwiftPackageReference section */
+		BB1000000000000000000001 /* XCRemoteSwiftPackageReference "bogenzeit-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/excelano/bogenzeit-swift";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.1.0;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		BC0000000000000000000001 /* Bogenzeit */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = BB1000000000000000000001 /* XCRemoteSwiftPackageReference "bogenzeit-swift" */;
 			productName = Bogenzeit;
+		};
+		BC0000000000000000000005 /* BogenzeitUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB1000000000000000000001 /* XCRemoteSwiftPackageReference "bogenzeit-swift" */;
+			productName = BogenzeitUI;
 		};
 		BC0000000000000000000002 /* Bogenzeit */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = BB1000000000000000000001 /* XCRemoteSwiftPackageReference "bogenzeit-swift" */;
 			productName = Bogenzeit;
+		};
+		BC0000000000000000000006 /* BogenzeitUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB1000000000000000000001 /* XCRemoteSwiftPackageReference "bogenzeit-swift" */;
+			productName = BogenzeitUI;
 		};
 		BC0000000000000000000003 /* Bogenzeit */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = BB1000000000000000000001 /* XCRemoteSwiftPackageReference "bogenzeit-swift" */;
 			productName = Bogenzeit;
+		};
+		BC0000000000000000000007 /* BogenzeitUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB1000000000000000000001 /* XCRemoteSwiftPackageReference "bogenzeit-swift" */;
+			productName = BogenzeitUI;
 		};
 		BC0000000000000000000004 /* Bogenzeit */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = BB1000000000000000000001 /* XCRemoteSwiftPackageReference "bogenzeit-swift" */;
 			productName = Bogenzeit;
+		};
+		BC0000000000000000000008 /* BogenzeitUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB1000000000000000000001 /* XCRemoteSwiftPackageReference "bogenzeit-swift" */;
+			productName = BogenzeitUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
