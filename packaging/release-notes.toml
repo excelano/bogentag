@@ -2,9 +2,9 @@
 # against the release being cut, so notes left from last time stop the release
 # rather than reaching the listing.
 
-version = "1.0.1"
+version = "1.1.0"
 
 [locales."en-us"]
 whats-new = """
-The dials are now Spans and Kiloseconds, Spans by default, each with its ring marked in its own unit and the quarter you are in lit along it, and the day and night arc lengths above and below the reading. Five complications for the watch face: the reading, the reading with its quarter, the dial without words, a gauge of the Sun's arc, and what comes next. The same five on the iPhone's Lock Screen, and the dial on the Home Screen in two sizes. The kilosecond readout shows two decimals, with one or three a tap away in Settings.
+Each dial now reads in its own unit only: spans on the Spans dial, kiloseconds on the Kiloseconds dial, and the complications and widgets follow the dial you choose. Spans can now show decimals, and one Precision setting chooses how finely either unit is read, with the decimals set smaller than the whole number. Sunrise and sunset have symbols of their own, triangles pointing up and down, shown in place of the 100 that begins each arc. The day and night arc lengths stay on the Kiloseconds dial and the watch's day page.
 """
