@@ -9,7 +9,11 @@ import WidgetKit
 @main
 struct TagbogenWidgets: WidgetBundle {
     var body: some Widget {
-        ArcWidget()
+        ReadingWidget()
+        QuarterWidget()
+        DialWidget()
+        GaugeWidget()
+        HorizonWidget()
     }
 }
 
@@ -19,8 +23,8 @@ struct ArcEntry: TimelineEntry {
 }
 
 /// Readings for the place the watch app left in the App Group, one entry per
-/// change of the displayed span or kilosecond, so the complication steps on
-/// the boundary like the dial does.
+/// change of the displayed span or kilosecond, so a complication steps on the
+/// boundary like the dial does.
 struct ArcProvider: TimelineProvider {
     private static let sample = Reading(at: Date(rfc3339: "2026-11-01T17:08:00Z")!, latitude: 29.76, longitude: -95.37)
 
@@ -64,119 +68,178 @@ struct ArcProvider: TimelineProvider {
     }
 }
 
-struct ArcWidget: Widget {
+/// The slot WidgetKit is rendering, in the shared views' terms.
+private func slot(_ family: WidgetFamily) -> ComplicationSlot {
+    switch family {
+    case .accessoryCorner: .corner
+    case .accessoryRectangular: .rectangular
+    case .accessoryInline: .inline
+    default: .circular
+    }
+}
+
+/// What a slot shows before the app has a place: the glyph, or a sentence inline.
+private struct Empty: View {
+    let family: WidgetFamily
+
+    var body: some View {
+        if family == .accessoryInline {
+            Text("Open Tagbogen to find the Sun")
+        } else {
+            AnchorGlyphView(anchor: .noon, radius: 10, lineWidth: 2.4, color: .primary)
+        }
+    }
+}
+
+struct ReadingWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "Arc", provider: ArcProvider()) { entry in
-            ArcWidgetView(entry: entry)
+        StaticConfiguration(kind: "Reading", provider: ArcProvider()) { entry in
+            ReadingWidgetView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
-        .configurationDisplayName("Tagbogen")
-        .description("Where the Sun is on its arc: spans from solar noon or solar midnight, and the quarter.")
+        .configurationDisplayName("Reading")
+        .description("Spans from solar noon or solar midnight, beside its glyph.")
         .supportedFamilies([.accessoryCircular, .accessoryCorner, .accessoryRectangular, .accessoryInline])
     }
 }
 
-struct ArcWidgetView: View {
+struct ReadingWidgetView: View {
     let entry: ArcEntry
     @Environment(\.widgetFamily) private var family
 
     var body: some View {
         if let reading = entry.reading {
-            switch family {
-            case .accessoryRectangular:
-                VStack(alignment: .leading, spacing: 3) {
-                    HStack(alignment: .center) {
-                        position(reading, size: 28, glyph: 9, line: 2.2)
-                        Spacer(minLength: 8)
-                        VStack(alignment: .trailing, spacing: 0) {
-                            Text(reading.quarter?.name ?? (reading.polar == .alwaysAbove ? "Polar day" : "Polar night"))
-                                .font(.headline)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.7)
-                            if reading.span != nil {
-                                Text("[\(ksText(reading))]")
-                                    .font(.footnote.monospacedDigit())
-                                    .foregroundStyle(.secondary)
-                            }
-                        }
-                    }
-                    if let progress = progress(reading) {
-                        Gauge(value: progress, in: 0...1) { EmptyView() }
-                            .gaugeStyle(.accessoryLinear)
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-            case .accessoryInline:
-                Text(inlineText(reading))
-            case .accessoryCorner:
-                AnchorGlyphView(anchor: reading.anchor, radius: 10, lineWidth: 2.4, color: .primary)
-                    .widgetLabel(inlineText(reading))
-            default:
-                if let progress = progress(reading) {
-                    Gauge(value: progress, in: 0...1) {
-                        AnchorGlyphView(anchor: reading.anchor, radius: 4, lineWidth: 1.2, color: .primary)
-                    } currentValueLabel: {
-                        Text(reading.displaySpan.map { "\(abs($0))" } ?? "")
-                            .font(.system(size: 18, weight: .semibold).monospacedDigit())
-                    }
-                    .gaugeStyle(.accessoryCircular)
-                } else {
-                    ZStack {
-                        AccessoryWidgetBackground()
-                        VStack(spacing: 1) {
-                            AnchorGlyphView(anchor: reading.anchor, radius: 6, lineWidth: 1.6, color: .primary)
-                            Text(ksText(reading))
-                                .font(.caption2.monospacedDigit())
-                        }
-                    }
-                }
+            if family == .accessoryCorner {
+                ReadingComplication(reading: reading, slot: .corner)
+                    .widgetLabel(Complications.plain(reading))
+            } else {
+                ReadingComplication(reading: reading, slot: slot(family))
             }
         } else {
-            switch family {
-            case .accessoryInline:
-                Text("Open Tagbogen to find the Sun")
-            default:
-                AnchorGlyphView(anchor: .noon, radius: 10, lineWidth: 2.4, color: .primary)
-            }
+            Empty(family: family)
         }
     }
+}
 
-    /// The span with its glyph on its side of the number, as vector shapes.
-    private func position(_ reading: Reading, size: CGFloat, glyph: CGFloat, line: CGFloat) -> some View {
-        HStack(spacing: 4) {
-            let glyphView = AnchorGlyphView(anchor: reading.anchor, radius: glyph, lineWidth: line, color: .primary)
-            let number = Text(reading.displaySpan.map { "\(abs($0))" } ?? ksText(reading))
-                .font(.system(size: size, weight: .semibold).monospacedDigit())
-            let before = (reading.displaySpan ?? reading.displayOffsetSteps) < 0
-            let at = (reading.displaySpan ?? reading.displayOffsetSteps) == 0
-            if before {
-                number
-                glyphView
-            } else if at {
-                glyphView
+struct QuarterWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "Quarter", provider: ArcProvider()) { entry in
+            QuarterWidgetView(entry: entry)
+                .containerBackground(.fill.tertiary, for: .widget)
+        }
+        .configurationDisplayName("Quarter")
+        .description("The reading and the quarter of the day it falls in.")
+        .supportedFamilies([.accessoryCircular, .accessoryCorner, .accessoryRectangular, .accessoryInline])
+    }
+}
+
+struct QuarterWidgetView: View {
+    let entry: ArcEntry
+    @Environment(\.widgetFamily) private var family
+
+    var body: some View {
+        if let reading = entry.reading {
+            if family == .accessoryCorner {
+                QuarterComplication(reading: reading, slot: .corner)
+                    .widgetLabel("\(Complications.plain(reading)) \(Complications.quarter(reading))")
             } else {
-                glyphView
-                number
+                QuarterComplication(reading: reading, slot: slot(family))
             }
+        } else {
+            Empty(family: family)
         }
     }
+}
 
-    /// Text-only families cannot draw the glyph, so they carry the Unicode
-    /// characters, the plain-text form the spec accepts (§3.1).
-    private func inlineText(_ reading: Reading) -> String {
-        let form = reading.spanForm ?? reading.offsetForm
-        return reading.quarter.map { "\(form) \($0.name)" } ?? form
+struct DialWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "Dial", provider: ArcProvider()) { entry in
+            DialWidgetView(entry: entry)
+                .containerBackground(.fill.tertiary, for: .widget)
+        }
+        .configurationDisplayName("Dial")
+        .description("The sky and the Sun on its arc, without words.")
+        .supportedFamilies([.accessoryCircular, .accessoryCorner, .accessoryRectangular])
     }
+}
 
-    /// One decimal, floored: a complication cannot step every ten seconds,
-    /// which the spec allows (§5.2).
-    private func ksText(_ reading: Reading) -> String {
-        let tenths = abs(Int((reading.offset / 100).rounded(.down)))
-        return "\(tenths / 10).\(tenths % 10) ks"
+struct DialWidgetView: View {
+    let entry: ArcEntry
+    @Environment(\.widgetFamily) private var family
+    @Environment(\.widgetRenderingMode) private var renderingMode
+
+    var body: some View {
+        if let reading = entry.reading {
+            if family == .accessoryCorner {
+                DialComplication(reading: reading, slot: .corner, fullColor: renderingMode == .fullColor)
+                    .widgetLabel(Complications.plain(reading))
+            } else {
+                DialComplication(reading: reading, slot: slot(family), fullColor: renderingMode == .fullColor)
+            }
+        } else {
+            Empty(family: family)
+        }
     }
+}
 
-    /// How far along its arc the Sun is, sunrise to sunset or sunset to sunrise.
-    private func progress(_ reading: Reading) -> Double? {
-        reading.span.map { ($0 + 100) / 200 }
+struct GaugeWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "Gauge", provider: ArcProvider()) { entry in
+            GaugeWidgetView(entry: entry)
+                .containerBackground(.fill.tertiary, for: .widget)
+        }
+        .configurationDisplayName("Gauge")
+        .description("How far along its arc the Sun is, with the reading inside.")
+        .supportedFamilies([.accessoryCircular, .accessoryCorner])
+    }
+}
+
+struct GaugeWidgetView: View {
+    let entry: ArcEntry
+    @Environment(\.widgetFamily) private var family
+
+    var body: some View {
+        if let reading = entry.reading {
+            if family == .accessoryCorner, let progress = Complications.progress(reading) {
+                GaugeComplication(reading: reading, slot: .corner)
+                    .widgetLabel {
+                        Gauge(value: progress, in: 0...1) { EmptyView() }
+                    }
+            } else {
+                GaugeComplication(reading: reading, slot: slot(family))
+            }
+        } else {
+            Empty(family: family)
+        }
+    }
+}
+
+struct HorizonWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "Horizon", provider: ArcProvider()) { entry in
+            HorizonWidgetView(entry: entry)
+                .containerBackground(.fill.tertiary, for: .widget)
+        }
+        .configurationDisplayName("Next")
+        .description("What comes next on the arc and how many spans away it is.")
+        .supportedFamilies([.accessoryCircular, .accessoryCorner, .accessoryRectangular, .accessoryInline])
+    }
+}
+
+struct HorizonWidgetView: View {
+    let entry: ArcEntry
+    @Environment(\.widgetFamily) private var family
+
+    var body: some View {
+        if let reading = entry.reading {
+            if family == .accessoryCorner, let next = NextEvent(reading) {
+                HorizonComplication(reading: reading, slot: .corner)
+                    .widgetLabel(next.wholeSpans.map { "\(next.name) in \($0)" } ?? "\(next.name) in \(next.ks)")
+            } else {
+                HorizonComplication(reading: reading, slot: slot(family))
+            }
+        } else {
+            Empty(family: family)
+        }
     }
 }

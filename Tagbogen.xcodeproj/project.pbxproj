@@ -78,8 +78,10 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Dial/AnchorGlyph.swift,
+				Dial/DialModel.swift,
 				Dial/Palette.swift,
 				Support/AppGroup.swift,
+				Widget/Complications.swift,
 			);
 			target = B80000000000000000000004 /* TagbogenWidgets */;
 		};
