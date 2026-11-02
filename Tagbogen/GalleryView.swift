@@ -23,16 +23,14 @@ struct GalleryView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 14) {
                 Text("Home Screen").font(.headline)
-                HStack(spacing: 14) {
-                    MiniDial(model: DialModel(reading: reading, variant: .spans))
-                        .padding(14)
-                        .frame(width: 158, height: 158)
-                        .background(RoundedRectangle(cornerRadius: 22).fill(Palette.night).stroke(Palette.line.opacity(0.2)))
-                    DialCard(reading: reading)
-                        .padding(14)
-                        .frame(width: 180, height: 158)
-                        .background(RoundedRectangle(cornerRadius: 22).fill(Palette.night).stroke(Palette.line.opacity(0.2)))
-                }
+                MiniDial(model: DialModel(reading: reading, variant: .spans))
+                    .padding(14)
+                    .frame(width: 158, height: 158)
+                    .background(RoundedRectangle(cornerRadius: 22).fill(Palette.night).stroke(Palette.line.opacity(0.2)))
+                DialCard(reading: reading)
+                    .padding(16)
+                    .frame(width: 338, height: 158)
+                    .background(RoundedRectangle(cornerRadius: 22).fill(Palette.night).stroke(Palette.line.opacity(0.2)))
                 ForEach(kinds, id: \.0) { name, make in
                     Text(name).font(.headline)
                     HStack(alignment: .center, spacing: 14) {
