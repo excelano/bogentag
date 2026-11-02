@@ -19,6 +19,15 @@ public enum SolarAnchor: Sendable, Equatable {
         }
     }
 
+    /// The horizon glyph written for the 100-span position before this
+    /// anchor (§3.2): △ after sunrise, ▽ after sunset.
+    public var horizonGlyph: Character {
+        switch self {
+        case .noon: "△"
+        case .midnight: "▽"
+        }
+    }
+
     public var name: String {
         switch self {
         case .noon: "noon"
@@ -249,10 +258,12 @@ public struct Reading: Sendable, Equatable {
 
     public var displayOffsetKs: Double { Double(displayOffsetSteps) / 100 }
 
-    /// `59 ☉`, `☉`, `☉ 3`; nil on a polar day.
+    /// `59 ☉`, `☉`, `☉ 3`, and `△` or `▽` for the first span after sunrise
+    /// or sunset (§3.2); nil on a polar day.
     public var spanForm: String? {
         guard let span = displaySpan else { return nil }
         let g = String(anchor.glyph)
+        if span == -100 { return String(anchor.horizonGlyph) }
         if span < 0 { return "\(-span)\(separator)\(g)" }
         if span == 0 { return g }
         return "\(g)\(separator)\(span)"

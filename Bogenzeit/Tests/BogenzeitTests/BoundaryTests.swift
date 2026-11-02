@@ -41,7 +41,8 @@ final class BoundaryTests: XCTestCase {
         XCTAssertEqual(before.spanForm, "☉ 99")
         XCTAssertEqual(before.quarter, .foreset)
         let at = houston(sunset)
-        XCTAssertEqual(at.spanForm, "100 ○")
+        XCTAssertEqual(at.spanForm, "▽")
+        XCTAssertEqual(at.combinedForm, "100 [23.37 ks] ○")
         XCTAssertEqual(at.quarter, .afterset)
         XCTAssertEqual(at.day.day, before.day.day)
     }
@@ -52,7 +53,8 @@ final class BoundaryTests: XCTestCase {
         XCTAssertEqual(before.spanForm, "○ 99")
         XCTAssertEqual(before.quarter, .forerise)
         let at = houston(sunrise)
-        XCTAssertEqual(at.spanForm, "100 ☉")
+        XCTAssertEqual(at.spanForm, "△")
+        XCTAssertEqual(at.combinedForm, "100 [19.84 ks] ☉")
         XCTAssertEqual(at.quarter, .afterrise)
     }
 
