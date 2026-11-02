@@ -28,12 +28,13 @@ All Bogenzeit calculation runs on the watch, offline (no phone or network needed
 
 ## 3. Shared elements (all variants)
 
-- **Anchors:** ☉ at top (solar noon), ○ at bottom (solar midnight), drawn as vector shapes from one circle definition (BZ spec §3.1 matching rule).
+- **Anchors:** ☉ at top (solar noon), ○ at bottom (solar midnight). They, and the horizon glyphs △ and ▽, are drawn as vector shapes from one definition (BZ spec §3.1 matching rule).
 - **Sky:** day above the horizon, then civil, nautical and astronomical twilight bands, then night.
 - **Sun marker:** travels a fixed inner track.
 - **Quarter ticks:** at the 50-span points (the boundaries of Afterrise/Forenoon/Afternoon/Foreset and Afterset/Foremid/Aftermid/Forerise), and the current quarter's stretch of the outer ring lit in the Sun's colour.
-- **Center readout:** date; large span position with glyph (`18 ☉`); offset `[3.43 ks]`; quarter name.
-- **Arc lengths:** where the screen has room, `DAY ARC 39.6 ks` above the center readout in the sky and `NIGHT ARC 46.7 ks` below it in the night, the English terms on screen and the German ones in the standard; the watch carries them on its day page instead.
+- **Center readout:** date; the position in the dial's own unit with its glyph, spans on the Span dial (`17.3 ☉`) and the offset on the Kilosecond dial (`3.43 ks ☉`), never both, the decimals smaller than the whole part and the unit smaller still; quarter name. For the first step after sunrise or sunset the span position is △ or ▽ alone (BZ spec §3.2). A polar day has no spans, so both dials show the offset. Complications and widgets show the unit of the chosen dial.
+- **Precision:** one setting, Low, Medium or High, for whichever unit the dial shows: whole spans, one or two decimals; one, two or three decimals of ks (BZ spec §5.2). Medium by default. The readout drops to Low while the watch screen is dimmed, and complications always show Low, as neither refreshes often enough for a finer step.
+- **Arc lengths:** on the Kilosecond dial where the screen has room, `DAY ARC 39.6 ks` above the center readout in the sky and `NIGHT ARC 46.7 ks` below it in the night, the English terms on screen and the German ones in the standard. The Span dial has none, since every arc is 200 spans; the watch carries both lengths on its day page.
 - **No hour numerals, no civil hands** in the Bogenzeit view.
 
 ---
@@ -44,9 +45,7 @@ All Bogenzeit calculation runs on the watch, offline (no phone or network needed
 
 - Angle tracks spans: each half-arc = 90°, each quarter = 45°. Sunrise is always at 9 o'clock, sunset at 3 o'clock, horizon always level. The dial looks the same every day.
 - Outer ring: span ticks, one every 10 spans, the quarter boundaries long, so the ring is in the unit the angle measures.
-- The season shows instead in:
-  - the **twilight bands**, whose depth below the horizon changes with the season,
-  - and the arc lengths as text.
+- The season shows instead in the **twilight bands**, whose depth below the horizon changes with the season.
 
 ### 4.2 Kilosecond dial
 

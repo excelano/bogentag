@@ -12,22 +12,22 @@ struct GalleryView: View {
     let reading: Reading
 
     private let kinds: [(String, (Reading, ComplicationSlot) -> AnyView)] = [
-        ("Reading", { AnyView(ReadingComplication(reading: $0, slot: $1)) }),
-        ("Quarter", { AnyView(QuarterComplication(reading: $0, slot: $1)) }),
-        ("Dial", { AnyView(DialComplication(reading: $0, slot: $1)) }),
-        ("Gauge", { AnyView(GaugeComplication(reading: $0, slot: $1)) }),
-        ("Next", { AnyView(HorizonComplication(reading: $0, slot: $1)) }),
+        ("Reading", { AnyView(ReadingComplication(reading: $0, variant: Settings.dialVariant, slot: $1)) }),
+        ("Quarter", { AnyView(QuarterComplication(reading: $0, variant: Settings.dialVariant, slot: $1)) }),
+        ("Dial", { AnyView(DialComplication(reading: $0, variant: Settings.dialVariant, slot: $1)) }),
+        ("Gauge", { AnyView(GaugeComplication(reading: $0, variant: Settings.dialVariant, slot: $1)) }),
+        ("Next", { AnyView(HorizonComplication(reading: $0, variant: Settings.dialVariant, slot: $1)) }),
     ]
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 14) {
                 Text("Home Screen").font(.headline)
-                MiniDial(model: DialModel(reading: reading, variant: .spans))
+                MiniDial(model: DialModel(reading: reading, variant: Settings.dialVariant))
                     .padding(14)
                     .frame(width: 158, height: 158)
                     .background(RoundedRectangle(cornerRadius: 22).fill(Palette.night).stroke(Palette.line.opacity(0.2)))
-                DialCard(reading: reading)
+                DialCard(reading: reading, variant: Settings.dialVariant)
                     .padding(16)
                     .frame(width: 338, height: 158)
                     .background(RoundedRectangle(cornerRadius: 22).fill(Palette.night).stroke(Palette.line.opacity(0.2)))

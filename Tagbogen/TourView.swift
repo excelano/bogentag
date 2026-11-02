@@ -51,11 +51,11 @@ struct TourView: View {
             """) {
                 HStack(spacing: 60) {
                     VStack(spacing: 12) {
-                        AnchorGlyphView(anchor: .noon, radius: 36, lineWidth: 7)
+                        GlyphView(glyph: .noon, radius: 36, lineWidth: 7)
                         Text("solar noon").foregroundStyle(Palette.label)
                     }
                     VStack(spacing: 12) {
-                        AnchorGlyphView(anchor: .midnight, radius: 36, lineWidth: 7)
+                        GlyphView(glyph: .midnight, radius: 36, lineWidth: 7)
                         Text("solar midnight").foregroundStyle(Palette.label)
                     }
                 }
@@ -66,22 +66,20 @@ struct TourView: View {
                 DialView(model: DialModel(reading: reading, variant: .spans))
             },
             TourPage(title: "Kiloseconds", text: """
-            The fixed scale beside the spans. A kilosecond is 1,000 seconds, a little under seventeen minutes; a day is 86.4 of them. The bracketed number on the dial is the time from the nearest anchor in kiloseconds, so two readings can be compared and a duration added up.
+            The fixed scale, the other way to read the same moment. A kilosecond is 1,000 seconds, a little under seventeen minutes; a day is 86.4 of them. The Kiloseconds dial gives the time from the nearest anchor in kiloseconds, so two readings can be compared and a duration added up. Each dial shows its own scale, and Precision sets how many decimals.
             """) {
-                VStack(spacing: 10) {
-                    Text("[\(Settings.offsetKs(reading.offset, decimals: Settings.defaultOffsetDecimals))]")
-                        .font(.system(size: 44, weight: .medium).monospacedDigit())
-                    Text("from \(reading.anchor == .noon ? "solar noon" : "solar midnight")")
-                        .foregroundStyle(Palette.label)
-                }
+                let shown = DisplayedPosition(reading, variant: .kiloseconds, precision: .standard)
+                NotationExample(number: shown.number, unit: shown.unit, glyph: shown.glyph, before: shown.side == .before,
+                                meaning: "\(shown.side == .before ? "before" : "after") \(Glyph(reading.anchor).name)")
             },
             TourPage(title: "Reading the notation", text: """
-            The number sits on the side of the glyph where that moment lies. Left of the glyph, the anchor is still to come: 18 {noon} is eighteen spans before solar noon. Right of it, the anchor has passed: {noon} 3 is three spans after. No plus, no minus. At night the same reading runs against {midnight}.
+            The number sits on the side of the glyph where that moment lies. Left of the glyph, the anchor is still to come: 18 {noon} is eighteen spans before solar noon. Right of it, the anchor has passed: {noon} 3 is three spans after. No plus, no minus. At night the same reading runs against {midnight}. Sunrise and sunset have glyphs of their own, {sunrise} and {sunset}, shown in place of the 100 that starts each arc.
             """) {
                 VStack(spacing: 18) {
-                    NotationExample(number: "18", anchor: .noon, before: true, meaning: "before solar noon")
-                    NotationExample(number: "3", anchor: .noon, before: false, meaning: "after solar noon")
-                    NotationExample(number: "48", anchor: .midnight, before: true, meaning: "before solar midnight")
+                    NotationExample(number: "18", glyph: .noon, before: true, meaning: "before solar noon")
+                    NotationExample(number: "3", glyph: .noon, before: false, meaning: "after solar noon")
+                    NotationExample(number: nil, glyph: .sunrise, before: false, meaning: "sunrise")
+                    NotationExample(number: nil, glyph: .sunset, before: false, meaning: "sunset")
                 }
             },
             TourPage(title: "Eight quarters", text: """
@@ -93,7 +91,7 @@ struct TourView: View {
             A Bogenzeit day runs from one solar midnight to the next, so the date changes at {midnight} rather than at 00:00. Tonight {midnight} falls at \(Labels.clock(day.midnightEnd)); until then it is still \(Labels.day(day.day)) here, whatever the calendar says.
             """) {
                 VStack(spacing: 10) {
-                    AnchorGlyphView(anchor: .midnight, radius: 36, lineWidth: 7)
+                    GlyphView(glyph: .midnight, radius: 36, lineWidth: 7)
                     Text(Labels.day(day.day))
                         .font(.title2.weight(.semibold))
                     Text("until \(Labels.clock(day.midnightEnd))")
@@ -145,18 +143,19 @@ struct TourPage: View {
     }
 }
 
-/// One line of notation with the number on its side of the glyph.
+/// One line of notation with the number, if any, on its side of the glyph.
 struct NotationExample: View {
-    let number: String
-    let anchor: SolarAnchor
+    let number: String?
+    var unit: String?
+    let glyph: Glyph
     let before: Bool
     let meaning: String
 
     var body: some View {
         HStack(spacing: 10) {
-            if before { digits }
-            AnchorGlyphView(anchor: anchor, radius: 14, lineWidth: 3)
-            if !before { digits }
+            if before, let number { digits(number) }
+            GlyphView(glyph: glyph, radius: 14, lineWidth: 3)
+            if !before, let number { digits(number) }
             Spacer()
             Text(meaning)
                 .foregroundStyle(Palette.label)
@@ -164,9 +163,8 @@ struct NotationExample: View {
         .frame(maxWidth: 320)
     }
 
-    private var digits: some View {
-        Text(number)
-            .font(.system(size: 40, weight: .semibold).monospacedDigit())
+    private func digits(_ number: String) -> some View {
+        Numerals.text(number, unit: unit, size: 40)
             .foregroundStyle(Palette.line)
     }
 }
@@ -189,8 +187,8 @@ struct QuarterWheel: View {
                     Rectangle().fill(Palette.line.opacity(0.4)).frame(width: 1, height: 2 * r)
                         .rotationEffect(.degrees(angle))
                 }
-                AnchorGlyphView(anchor: .noon, radius: 9, lineWidth: 2.2).position(x: c.x, y: c.y - r - 16)
-                AnchorGlyphView(anchor: .midnight, radius: 9, lineWidth: 2.2).position(x: c.x, y: c.y + r + 16)
+                GlyphView(glyph: .noon, radius: 9, lineWidth: 2.2).position(x: c.x, y: c.y - r - 16)
+                GlyphView(glyph: .midnight, radius: 9, lineWidth: 2.2).position(x: c.x, y: c.y + r + 16)
                 ForEach(Self.names, id: \.0) { name, angle in
                     let a = angle * .pi / 180
                     Text(name)

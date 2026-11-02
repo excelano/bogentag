@@ -63,7 +63,7 @@ struct RootView: View {
             DialScreen()
                 .padding()
             DialVariantChoice()
-            OffsetDecimalsChoice()
+            PrecisionChoice()
             Button("About Bogenzeit") { showsTour = true }
                 .buttonStyle(ChoiceButtonStyle(selected: false))
             WatchFaceButton()

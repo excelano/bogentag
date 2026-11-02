@@ -8,6 +8,8 @@ import WidgetKit
 struct ArcEntry: TimelineEntry {
     let date: Date
     let reading: Reading?
+    /// The scale chosen in the app, which every complication shows.
+    var variant = Settings.dialVariant
 }
 
 /// Readings for the place the watch app left in the App Group, one entry per

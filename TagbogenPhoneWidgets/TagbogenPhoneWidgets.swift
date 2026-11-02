@@ -33,7 +33,7 @@ private struct Empty: View {
         if family == .accessoryInline {
             Text("Open Tagbogen to find the Sun")
         } else {
-            AnchorGlyphView(anchor: .noon, radius: 10, lineWidth: 2.4, color: .primary)
+            GlyphView(glyph: .noon, radius: 10, lineWidth: 2.4, color: .primary)
         }
     }
 }
@@ -61,12 +61,12 @@ struct PhoneDialView: View {
         if let reading = entry.reading {
             switch family {
             case .systemSmall:
-                MiniDial(model: DialModel(reading: reading, variant: .spans))
+                MiniDial(model: DialModel(reading: reading, variant: entry.variant))
                     .padding(2)
             case .systemMedium:
-                DialCard(reading: reading)
+                DialCard(reading: reading, variant: entry.variant)
             default:
-                DialComplication(reading: reading, slot: slot(family), fullColor: renderingMode == .fullColor)
+                DialComplication(reading: reading, variant: entry.variant, slot: slot(family), fullColor: renderingMode == .fullColor)
             }
         } else {
             Empty(family: family)
@@ -77,11 +77,11 @@ struct PhoneDialView: View {
 struct PhoneReadingWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "Reading", provider: ArcProvider()) { entry in
-            PhoneSlotView(entry: entry) { reading, slot in AnyView(ReadingComplication(reading: reading, slot: slot)) }
+            PhoneSlotView(entry: entry) { reading, variant, slot in AnyView(ReadingComplication(reading: reading, variant: variant, slot: slot)) }
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("Reading")
-        .description("Spans from solar noon or solar midnight, beside its glyph.")
+        .description("The reading in the scale chosen in the app, beside its glyph.")
         .supportedFamilies([.accessoryCircular, .accessoryRectangular, .accessoryInline])
     }
 }
@@ -89,7 +89,7 @@ struct PhoneReadingWidget: Widget {
 struct PhoneQuarterWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "Quarter", provider: ArcProvider()) { entry in
-            PhoneSlotView(entry: entry) { reading, slot in AnyView(QuarterComplication(reading: reading, slot: slot)) }
+            PhoneSlotView(entry: entry) { reading, variant, slot in AnyView(QuarterComplication(reading: reading, variant: variant, slot: slot)) }
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("Quarter")
@@ -101,7 +101,7 @@ struct PhoneQuarterWidget: Widget {
 struct PhoneGaugeWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "Gauge", provider: ArcProvider()) { entry in
-            PhoneSlotView(entry: entry) { reading, slot in AnyView(GaugeComplication(reading: reading, slot: slot)) }
+            PhoneSlotView(entry: entry) { reading, variant, slot in AnyView(GaugeComplication(reading: reading, variant: variant, slot: slot)) }
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("Gauge")
@@ -113,11 +113,11 @@ struct PhoneGaugeWidget: Widget {
 struct PhoneHorizonWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "Horizon", provider: ArcProvider()) { entry in
-            PhoneSlotView(entry: entry) { reading, slot in AnyView(HorizonComplication(reading: reading, slot: slot)) }
+            PhoneSlotView(entry: entry) { reading, variant, slot in AnyView(HorizonComplication(reading: reading, variant: variant, slot: slot)) }
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("Next")
-        .description("What comes next on the arc and how many spans away it is.")
+        .description("What comes next on the arc and how far away it is.")
         .supportedFamilies([.accessoryCircular, .accessoryRectangular, .accessoryInline])
     }
 }
@@ -125,12 +125,12 @@ struct PhoneHorizonWidget: Widget {
 /// A Lock Screen widget built from one of the shared complication views.
 struct PhoneSlotView: View {
     let entry: ArcEntry
-    let make: (Reading, ComplicationSlot) -> AnyView
+    let make: (Reading, DialVariant, ComplicationSlot) -> AnyView
     @Environment(\.widgetFamily) private var family
 
     var body: some View {
         if let reading = entry.reading {
-            make(reading, slot(family))
+            make(reading, entry.variant, slot(family))
         } else {
             Empty(family: family)
         }

@@ -16,6 +16,7 @@ enum ComplicationSlot {
 
 /// What a reading says comes next: the nearest event ahead, in spans and
 /// seconds. Before ☉ it is ☉ itself; after it, sunset; and so on round.
+/// What is left is rounded up, as it counts down rather than up.
 struct NextEvent {
     let name: String
     let spans: Double?
@@ -46,53 +47,70 @@ struct NextEvent {
         }
     }
 
-    var wholeSpans: Int? { spans.map { Int($0.rounded(.up)) } }
+    /// What is left in the chosen scale: `23` and `spans`, or `2.6` and
+    /// `ks` to the tenth a complication can keep up with (§5.2). A polar
+    /// day has no spans and counts kiloseconds on either dial.
+    func left(_ variant: DialVariant) -> (number: String, unit: String) {
+        if variant == .spans, let spans {
+            let whole = Int(spans.rounded(.up))
+            return ("\(whole)", whole == 1 ? "span" : "spans")
+        }
+        let tenths = Int((seconds / 100).rounded(.up))
+        return ("\(tenths / 10).\(tenths % 10)", "ks")
+    }
 
-    /// `2.57 ks`, rounded up: what is left, not what has passed.
-    var ks: String {
-        let hundredths = Int((seconds / 10).rounded(.up))
-        return String(format: "%d.%02d ks", hundredths / 100, hundredths % 100)
+    /// `Sunset in 23 spans`, `Sunset in 2.6 ks`.
+    func sentence(_ variant: DialVariant) -> String {
+        let (number, unit) = left(variant)
+        return "\(name) in \(number) \(unit)"
     }
 }
 
 /// The number and the glyph, on the number's side, as vector shapes.
 struct ReadingText: View {
     let reading: Reading
+    let variant: DialVariant
     var size: CGFloat = 24
     var color: Color = .primary
 
     var body: some View {
-        let glyph = AnchorGlyphView(anchor: reading.anchor, radius: size * 0.33, lineWidth: size * 0.085, color: color)
-        let value = reading.displaySpan ?? reading.displayOffsetSteps
-        let number = Text(reading.displaySpan.map { "\(abs($0))" } ?? Complications.ks(reading))
-            .font(.system(size: size, weight: .semibold).monospacedDigit())
-            .foregroundStyle(color)
+        let shown = Complications.position(reading, variant)
+        let glyph = GlyphView(glyph: shown.glyph, radius: size * 0.33, lineWidth: size * 0.085, color: color)
         HStack(spacing: size * 0.15) {
-            if value < 0 {
-                number
-                glyph
-            } else if value == 0 {
-                glyph
+            if let number = shown.number {
+                if shown.side == .before {
+                    value(number, unit: shown.unit)
+                    glyph
+                } else {
+                    glyph
+                    value(number, unit: shown.unit)
+                }
             } else {
                 glyph
-                number
             }
         }
+    }
+
+    /// One line: a slot short of room shrinks the number rather than wrap its unit.
+    private func value(_ number: String, unit: String?) -> some View {
+        Numerals.text(number, unit: unit, size: size)
+            .foregroundStyle(color)
+            .lineLimit(1)
+            .minimumScaleFactor(0.6)
     }
 }
 
 enum Complications {
-    /// One decimal, floored: a complication cannot step every ten seconds,
-    /// which the spec allows (§5.2).
-    static func ks(_ reading: Reading) -> String {
-        let tenths = abs(Int((reading.offset / 100).rounded(.down)))
-        return "\(tenths / 10).\(tenths % 10) ks"
+    /// The chosen scale at the low precision: a complication refreshes too
+    /// rarely for a finer step (§5.2).
+    static func position(_ reading: Reading, _ variant: DialVariant) -> DisplayedPosition {
+        DisplayedPosition(reading, variant: variant, precision: .low)
     }
 
     /// Text-only slots cannot draw the glyph, so they carry the Unicode
     /// characters, the plain-text form the spec accepts (§3.1).
-    static func plain(_ reading: Reading) -> String {
-        reading.spanForm ?? reading.offsetForm
+    static func plain(_ reading: Reading, _ variant: DialVariant) -> String {
+        position(reading, variant).text
     }
 
     static func quarter(_ reading: Reading) -> String {
@@ -105,30 +123,24 @@ enum Complications {
     }
 }
 
-/// `86 ☉` and nothing else.
+/// `86 ☉` or `3.4 ks ☉` and nothing else.
 struct ReadingComplication: View {
     let reading: Reading
+    let variant: DialVariant
     let slot: ComplicationSlot
 
     var body: some View {
         switch slot {
         case .circular:
-            ReadingText(reading: reading, size: 17)
+            ReadingText(reading: reading, variant: variant, size: 17)
                 .minimumScaleFactor(0.7)
         case .corner:
-            AnchorGlyphView(anchor: reading.anchor, radius: 10, lineWidth: 2.4, color: .primary)
+            GlyphView(glyph: Complications.position(reading, variant).glyph, radius: 10, lineWidth: 2.4, color: .primary)
         case .rectangular:
-            HStack(alignment: .lastTextBaseline, spacing: 10) {
-                ReadingText(reading: reading, size: 30)
-                if reading.span != nil {
-                    Text("[\(Complications.ks(reading))]")
-                        .font(.footnote.monospacedDigit())
-                        .foregroundStyle(.secondary)
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            ReadingText(reading: reading, variant: variant, size: 30)
+                .frame(maxWidth: .infinity, alignment: .leading)
         case .inline:
-            Text(Complications.plain(reading))
+            Text(Complications.plain(reading, variant))
         }
     }
 }
@@ -136,6 +148,7 @@ struct ReadingComplication: View {
 /// The reading with the quarter it falls in.
 struct QuarterComplication: View {
     let reading: Reading
+    let variant: DialVariant
     let slot: ComplicationSlot
 
     var body: some View {
@@ -143,19 +156,13 @@ struct QuarterComplication: View {
         case .rectangular:
             VStack(alignment: .leading, spacing: 3) {
                 HStack(alignment: .center) {
-                    ReadingText(reading: reading, size: 28)
+                    ReadingText(reading: reading, variant: variant, size: 28)
+                        .layoutPriority(1)
                     Spacer(minLength: 8)
-                    VStack(alignment: .trailing, spacing: 0) {
-                        Text(Complications.quarter(reading))
-                            .font(.headline)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.7)
-                        if reading.span != nil {
-                            Text("[\(Complications.ks(reading))]")
-                                .font(.footnote.monospacedDigit())
-                                .foregroundStyle(.secondary)
-                        }
-                    }
+                    Text(Complications.quarter(reading))
+                        .font(.headline)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                 }
                 if let progress = Complications.progress(reading) {
                     Gauge(value: progress, in: 0...1) { EmptyView() }
@@ -165,16 +172,16 @@ struct QuarterComplication: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         case .circular:
             VStack(spacing: 0) {
-                ReadingText(reading: reading, size: 15)
+                ReadingText(reading: reading, variant: variant, size: 15)
                 Text(Complications.quarter(reading).uppercased())
                     .font(.system(size: 8, weight: .semibold))
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
             }
         case .corner:
-            AnchorGlyphView(anchor: reading.anchor, radius: 10, lineWidth: 2.4, color: .primary)
+            GlyphView(glyph: Complications.position(reading, variant).glyph, radius: 10, lineWidth: 2.4, color: .primary)
         case .inline:
-            Text("\(Complications.plain(reading)) \(Complications.quarter(reading))")
+            Text("\(Complications.plain(reading, variant)) \(Complications.quarter(reading))")
         }
     }
 }
@@ -182,6 +189,7 @@ struct QuarterComplication: View {
 /// The sky and the Sun, no words: the dial reduced to what a slot can hold.
 struct DialComplication: View {
     let reading: Reading
+    let variant: DialVariant
     let slot: ComplicationSlot
     /// False in the tinted and vibrant rendering modes, where the sky is one colour.
     var fullColor = true
@@ -189,11 +197,11 @@ struct DialComplication: View {
     var body: some View {
         switch slot {
         case .inline:
-            Text(Complications.plain(reading))
+            Text(Complications.plain(reading, variant))
         case .corner:
-            MiniDial(model: DialModel(reading: reading, variant: .spans), fullColor: fullColor)
+            MiniDial(model: DialModel(reading: reading, variant: variant), fullColor: fullColor)
         default:
-            MiniDial(model: DialModel(reading: reading, variant: .spans), fullColor: fullColor)
+            MiniDial(model: DialModel(reading: reading, variant: variant), fullColor: fullColor)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
@@ -264,8 +272,8 @@ struct MiniDial: View {
         }
 
         let glyph = r * 0.09
-        AnchorGlyph.draw(.noon, in: context, at: point(0, r * 0.76), radius: glyph, lineWidth: max(1, glyph * 0.3), color: line)
-        AnchorGlyph.draw(.midnight, in: context, at: point(180, r * 0.76), radius: glyph, lineWidth: max(1, glyph * 0.3), color: line)
+        Glyph.noon.draw(in: context, at: point(0, r * 0.76), radius: glyph, lineWidth: max(1, glyph * 0.3), color: line)
+        Glyph.midnight.draw(in: context, at: point(180, r * 0.76), radius: glyph, lineWidth: max(1, glyph * 0.3), color: line)
 
         let sun = point(model.sunAngle, track)
         context.fill(circle(sun, r * 0.17), with: .color((fullColor ? Palette.sun : Color.primary).opacity(0.3)))
@@ -276,25 +284,26 @@ struct MiniDial: View {
 /// The Sun's progress along its arc, with the reading inside.
 struct GaugeComplication: View {
     let reading: Reading
+    let variant: DialVariant
     let slot: ComplicationSlot
 
     var body: some View {
+        let shown = Complications.position(reading, variant)
         switch slot {
         case .circular:
             if let progress = Complications.progress(reading) {
                 Gauge(value: progress, in: 0...1) {
-                    AnchorGlyphView(anchor: reading.anchor, radius: 4, lineWidth: 1.2, color: .primary)
+                    GlyphView(glyph: shown.glyph, radius: 4, lineWidth: 1.2, color: .primary)
                 } currentValueLabel: {
-                    Text(reading.displaySpan.map { "\(abs($0))" } ?? "")
-                        .font(.system(size: 18, weight: .semibold).monospacedDigit())
+                    Numerals.text(shown.number ?? "", unit: shown.unit, size: shown.unit == nil ? 18 : 14)
+                        .minimumScaleFactor(0.6)
                 }
                 .gaugeStyle(.accessoryCircular)
             } else {
-                ReadingText(reading: reading, size: 14)
+                ReadingText(reading: reading, variant: variant, size: 14)
             }
         default:
-            Text(reading.displaySpan.map { "\(abs($0))" } ?? Complications.ks(reading))
-                .font(.system(size: 20, weight: .semibold).monospacedDigit())
+            Numerals.text(shown.number ?? "", unit: shown.unit, size: 20)
         }
     }
 }
@@ -302,6 +311,7 @@ struct GaugeComplication: View {
 /// What comes next and how far away it is.
 struct HorizonComplication: View {
     let reading: Reading
+    let variant: DialVariant
     let slot: ComplicationSlot
 
     var body: some View {
@@ -312,16 +322,11 @@ struct HorizonComplication: View {
                     Text(next.name.uppercased())
                         .font(.caption2.weight(.semibold))
                         .foregroundStyle(.secondary)
+                    let left = next.left(variant)
                     HStack(alignment: .lastTextBaseline, spacing: 6) {
-                        if let spans = next.wholeSpans {
-                            Text("\(spans)")
-                                .font(.system(size: 28, weight: .semibold).monospacedDigit())
-                            Text(spans == 1 ? "span" : "spans")
-                                .font(.footnote)
-                        }
-                        Text(next.ks)
-                            .font(.footnote.monospacedDigit())
-                            .foregroundStyle(.secondary)
+                        Numerals.text(left.number, size: 28)
+                        Text(left.unit)
+                            .font(.footnote)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -330,23 +335,24 @@ struct HorizonComplication: View {
                     Text(next.name.prefix(4).uppercased())
                         .font(.system(size: 8, weight: .semibold))
                         .foregroundStyle(.secondary)
-                    Text(next.wholeSpans.map { "\($0)" } ?? next.ks)
-                        .font(.system(size: 17, weight: .semibold).monospacedDigit())
+                    short(next, size: 17)
                         .minimumScaleFactor(0.6)
                 }
             case .corner:
-                Text(next.wholeSpans.map { "\($0)" } ?? "")
-                    .font(.system(size: 18, weight: .semibold).monospacedDigit())
+                short(next, size: 18)
+                    .minimumScaleFactor(0.6)
             case .inline:
-                if let spans = next.wholeSpans {
-                    Text("\(next.name) in \(spans) \(spans == 1 ? "span" : "spans")")
-                } else {
-                    Text("\(next.name) in \(next.ks)")
-                }
+                Text(next.sentence(variant))
             }
         } else {
-            ReadingText(reading: reading, size: 14)
+            ReadingText(reading: reading, variant: variant, size: 14)
         }
+    }
+
+    /// `23` or `2.6 ks`: spans are bare numbers, offsets carry their unit.
+    private func short(_ next: NextEvent, size: CGFloat) -> Text {
+        let left = next.left(variant)
+        return Numerals.text(left.number, unit: left.unit == "ks" ? "ks" : nil, size: size)
     }
 }
 
@@ -354,23 +360,19 @@ struct HorizonComplication: View {
 /// next: the Home Screen's medium widget.
 struct DialCard: View {
     let reading: Reading
+    let variant: DialVariant
 
     var body: some View {
         HStack(spacing: 16) {
-            MiniDial(model: DialModel(reading: reading, variant: .spans))
+            MiniDial(model: DialModel(reading: reading, variant: variant))
             VStack(alignment: .leading, spacing: 4) {
-                ReadingText(reading: reading, size: 36, color: Palette.line)
+                ReadingText(reading: reading, variant: variant, size: 36, color: Palette.line)
                 Text(Complications.quarter(reading).uppercased())
                     .font(.footnote.weight(.medium))
                     .tracking(1)
                     .foregroundStyle(Palette.label)
-                if reading.span != nil {
-                    Text("[\(Complications.ks(reading))]")
-                        .font(.callout.monospacedDigit())
-                        .foregroundStyle(Palette.secondary)
-                }
-                if let next = NextEvent(reading), let spans = next.wholeSpans {
-                    Text("\(next.name) in \(spans) \(spans == 1 ? "span" : "spans")")
+                if let next = NextEvent(reading) {
+                    Text(next.sentence(variant))
                         .font(.footnote)
                         .foregroundStyle(Palette.label)
                 }

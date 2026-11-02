@@ -35,7 +35,7 @@ private struct Empty: View {
         if family == .accessoryInline {
             Text("Open Tagbogen to find the Sun")
         } else {
-            AnchorGlyphView(anchor: .noon, radius: 10, lineWidth: 2.4, color: .primary)
+            GlyphView(glyph: .noon, radius: 10, lineWidth: 2.4, color: .primary)
         }
     }
 }
@@ -47,7 +47,7 @@ struct ReadingWidget: Widget {
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("Reading")
-        .description("Spans from solar noon or solar midnight, beside its glyph.")
+        .description("The reading in the scale chosen in the app, beside its glyph.")
         .supportedFamilies([.accessoryCircular, .accessoryCorner, .accessoryRectangular, .accessoryInline])
     }
 }
@@ -59,10 +59,10 @@ struct ReadingWidgetView: View {
     var body: some View {
         if let reading = entry.reading {
             if family == .accessoryCorner {
-                ReadingComplication(reading: reading, slot: .corner)
-                    .widgetLabel(Complications.plain(reading))
+                ReadingComplication(reading: reading, variant: entry.variant, slot: .corner)
+                    .widgetLabel(Complications.plain(reading, entry.variant))
             } else {
-                ReadingComplication(reading: reading, slot: slot(family))
+                ReadingComplication(reading: reading, variant: entry.variant, slot: slot(family))
             }
         } else {
             Empty(family: family)
@@ -89,10 +89,10 @@ struct QuarterWidgetView: View {
     var body: some View {
         if let reading = entry.reading {
             if family == .accessoryCorner {
-                QuarterComplication(reading: reading, slot: .corner)
-                    .widgetLabel("\(Complications.plain(reading)) \(Complications.quarter(reading))")
+                QuarterComplication(reading: reading, variant: entry.variant, slot: .corner)
+                    .widgetLabel("\(Complications.plain(reading, entry.variant)) \(Complications.quarter(reading))")
             } else {
-                QuarterComplication(reading: reading, slot: slot(family))
+                QuarterComplication(reading: reading, variant: entry.variant, slot: slot(family))
             }
         } else {
             Empty(family: family)
@@ -120,10 +120,10 @@ struct DialWidgetView: View {
     var body: some View {
         if let reading = entry.reading {
             if family == .accessoryCorner {
-                DialComplication(reading: reading, slot: .corner, fullColor: renderingMode == .fullColor)
-                    .widgetLabel(Complications.plain(reading))
+                DialComplication(reading: reading, variant: entry.variant, slot: .corner, fullColor: renderingMode == .fullColor)
+                    .widgetLabel(Complications.plain(reading, entry.variant))
             } else {
-                DialComplication(reading: reading, slot: slot(family), fullColor: renderingMode == .fullColor)
+                DialComplication(reading: reading, variant: entry.variant, slot: slot(family), fullColor: renderingMode == .fullColor)
             }
         } else {
             Empty(family: family)
@@ -150,12 +150,12 @@ struct GaugeWidgetView: View {
     var body: some View {
         if let reading = entry.reading {
             if family == .accessoryCorner, let progress = Complications.progress(reading) {
-                GaugeComplication(reading: reading, slot: .corner)
+                GaugeComplication(reading: reading, variant: entry.variant, slot: .corner)
                     .widgetLabel {
                         Gauge(value: progress, in: 0...1) { EmptyView() }
                     }
             } else {
-                GaugeComplication(reading: reading, slot: slot(family))
+                GaugeComplication(reading: reading, variant: entry.variant, slot: slot(family))
             }
         } else {
             Empty(family: family)
@@ -170,7 +170,7 @@ struct HorizonWidget: Widget {
                 .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("Next")
-        .description("What comes next on the arc and how many spans away it is.")
+        .description("What comes next on the arc and how far away it is.")
         .supportedFamilies([.accessoryCircular, .accessoryCorner, .accessoryRectangular, .accessoryInline])
     }
 }
@@ -182,10 +182,10 @@ struct HorizonWidgetView: View {
     var body: some View {
         if let reading = entry.reading {
             if family == .accessoryCorner, let next = NextEvent(reading) {
-                HorizonComplication(reading: reading, slot: .corner)
-                    .widgetLabel(next.wholeSpans.map { "\(next.name) in \($0)" } ?? "\(next.name) in \(next.ks)")
+                HorizonComplication(reading: reading, variant: entry.variant, slot: .corner)
+                    .widgetLabel(next.sentence(entry.variant))
             } else {
-                HorizonComplication(reading: reading, slot: slot(family))
+                HorizonComplication(reading: reading, variant: entry.variant, slot: slot(family))
             }
         } else {
             Empty(family: family)

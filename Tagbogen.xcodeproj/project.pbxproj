@@ -98,10 +98,12 @@
 		BF0000000000000000000001 /* Exceptions for "Shared" folder in "TagbogenWidgets" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Dial/AnchorGlyph.swift,
+				Dial/Glyph.swift,
+				Dial/Numerals.swift,
 				Dial/DialModel.swift,
 				Dial/Palette.swift,
 				Support/AppGroup.swift,
+				Support/Settings.swift,
 				Widget/ArcProvider.swift,
 				Widget/Complications.swift,
 			);
@@ -110,10 +112,12 @@
 		BF0000000000000000000002 /* Exceptions for "Shared" folder in "TagbogenPhoneWidgets" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Dial/AnchorGlyph.swift,
+				Dial/Glyph.swift,
+				Dial/Numerals.swift,
 				Dial/DialModel.swift,
 				Dial/Palette.swift,
 				Support/AppGroup.swift,
+				Support/Settings.swift,
 				Widget/ArcProvider.swift,
 				Widget/Complications.swift,
 			);

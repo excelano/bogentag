@@ -24,8 +24,8 @@ struct DialView: View {
                     draw(in: context, size: size, scale: s)
                 }
                 if showsReadout {
-                    ReadoutView(reading: model.reading, scale: s, showsDate: showsDate)
-                    if showsArcLengths {
+                    ReadoutView(reading: model.reading, variant: model.variant, scale: s, showsDate: showsDate)
+                    if showsArcLengths && model.variant == .kiloseconds {
                         arcLengths(scale: s)
                     }
                 }
@@ -35,7 +35,9 @@ struct DialView: View {
         }
     }
 
-    /// The day arc's length up in the sky, the night arc's down in the night.
+    /// The day arc's length up in the sky, the night arc's down in the night,
+    /// on the kilosecond dial only: the span dial shows one scale, and every
+    /// arc is 200 spans.
     private func arcLengths(scale s: CGFloat) -> some View {
         ZStack {
             if let tagbogen = model.reading.day.tagbogen {
@@ -121,8 +123,8 @@ struct DialView: View {
                            style: StrokeStyle(lineWidth: 2.5 * s, lineCap: .round))
         }
 
-        AnchorGlyph.draw(.noon, in: context, at: point(0, 173), radius: 9 * s, lineWidth: 2.2 * s, color: Palette.line)
-        AnchorGlyph.draw(.midnight, in: context, at: point(180, 173), radius: 9 * s, lineWidth: 2.2 * s, color: Palette.line)
+        Glyph.noon.draw(in: context, at: point(0, 173), radius: 9 * s, lineWidth: 2.2 * s, color: Palette.line)
+        Glyph.midnight.draw(in: context, at: point(180, 173), radius: 9 * s, lineWidth: 2.2 * s, color: Palette.line)
 
         let sun = point(model.sunAngle, 160)
         context.fill(circle(sun, 20), with: .color(Palette.sun.opacity(0.25)))
@@ -147,8 +149,13 @@ enum ArcLengths {
         return evening + morning
     }
 
-    /// Kiloseconds to one decimal, floored like every readout.
+    /// Kiloseconds to one decimal, floored like every readout, as `39.6`.
+    static func kiloseconds(_ seconds: Double) -> String {
+        String(format: "%.1f", (seconds / 100).rounded(.down) / 10)
+    }
+
+    /// `39.6 ks`, for labels too small to set the decimals smaller.
     static func ks(_ seconds: Double) -> String {
-        String(format: "%.1f ks", (seconds / 100).rounded(.down) / 10)
+        "\(kiloseconds(seconds)) ks"
     }
 }

@@ -3,6 +3,7 @@
 // Built with AI assistance (Claude, Anthropic)
 
 import SwiftUI
+import WidgetKit
 
 struct SettingsScreen: View {
     var body: some View {
@@ -12,7 +13,7 @@ struct SettingsScreen: View {
                     .font(.headline)
                     .foregroundStyle(Palette.line)
                 setting("Dial") { DialVariantChoice() }
-                setting("Kilosecond decimals") { OffsetDecimalsChoice() }
+                setting("Precision") { PrecisionChoice() }
             }
             .padding(.horizontal)
         }
@@ -28,22 +29,31 @@ struct SettingsScreen: View {
     }
 }
 
-/// Spans or Kiloseconds dial.
+/// Spans or Kiloseconds dial. The widgets show the same scale, so they are
+/// redrawn when it changes.
 struct DialVariantChoice: View {
-    @AppStorage(Settings.dialVariantKey) private var variant = DialVariant.spans.rawValue
+    @AppStorage(Settings.dialVariantKey, store: AppGroup.defaults) private var variant = DialVariant.spans.rawValue
 
     var body: some View {
         ChoiceButtons(choices: DialVariant.allCases.map { ($0.rawValue, $0.title) }, selection: $variant)
+            .onChange(of: variant) { WidgetCenter.shared.reloadAllTimelines() }
     }
 }
 
-/// One, two or three decimals on the offset line: 100 s, 10 s or 1 s steps.
-struct OffsetDecimalsChoice: View {
-    @AppStorage(Settings.offsetDecimalsKey) private var decimals = Settings.defaultOffsetDecimals
+/// Low, medium or high, each button showing the decimals it gives the
+/// chosen dial's scale: `0`, `0.0`, `0.00` for spans, one more for kiloseconds.
+struct PrecisionChoice: View {
+    @AppStorage(Settings.precisionKey) private var precision = Precision.standard.rawValue
+    @AppStorage(Settings.dialVariantKey, store: AppGroup.defaults) private var variant = DialVariant.spans.rawValue
 
     var body: some View {
-        ChoiceButtons(choices: Settings.offsetDecimalsChoices.map { ($0, "0." + String(repeating: "0", count: $0)) },
-                      selection: $decimals)
+        let scale = DialVariant(rawValue: variant) ?? .spans
+        ChoiceButtons(choices: Precision.allCases.map { ($0.rawValue, Self.label($0.decimals(for: scale))) },
+                      selection: $precision)
+    }
+
+    private static func label(_ decimals: Int) -> String {
+        decimals == 0 ? "0" : "0." + String(repeating: "0", count: decimals)
     }
 }
 

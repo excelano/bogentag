@@ -25,6 +25,7 @@ struct DayScreen: View {
 
 struct DayView: View {
     let reading: Reading
+    @ScaledMetric(relativeTo: .body) private var bodySize: CGFloat = 17
 
     var body: some View {
         let day = reading.day
@@ -45,10 +46,10 @@ struct DayView: View {
                         .foregroundStyle(Palette.label)
                 }
                 Divider()
-                event("sunrise", number: "100", glyph: .noon, before: true, at: day.sunrise)
-                event("noon", number: nil, glyph: .noon, before: false, at: day.noon)
-                event("sunset", number: "100", glyph: .noon, before: false, at: day.sunset)
-                event("midnight", number: nil, glyph: .midnight, before: false, at: day.midnightEnd)
+                event("sunrise", glyph: .sunrise, at: day.sunrise)
+                event("noon", glyph: .noon, at: day.noon)
+                event("sunset", glyph: .sunset, at: day.sunset)
+                event("midnight", glyph: .midnight, at: day.midnightEnd)
             }
             .padding(.horizontal)
         }
@@ -61,7 +62,7 @@ struct DayView: View {
                 .tracking(0.8)
                 .foregroundStyle(Palette.label)
             HStack {
-                Text(ArcLengths.ks(length))
+                Numerals.text(ArcLengths.kiloseconds(length), size: bodySize, weight: .regular) + Text(" ks")
                 Spacer()
                 Text("span \(Int(span.rounded(.down))) s")
                     .foregroundStyle(Palette.secondary)
@@ -70,18 +71,13 @@ struct DayView: View {
         }
     }
 
-    /// One event: its name, its Bogenzeit notation, and the clock's time for it.
-    private func event(_ label: String, number: String?, glyph: SolarAnchor, before: Bool, at instant: Date?) -> some View {
+    /// One event: its name, its glyph, and the clock's time for it.
+    private func event(_ label: String, glyph: Glyph, at instant: Date?) -> some View {
         HStack(alignment: .top) {
             Text(label)
             Spacer()
             VStack(alignment: .trailing, spacing: 2) {
-                HStack(spacing: 4) {
-                    if before, let number { Text(number) }
-                    AnchorGlyphView(anchor: glyph, radius: 7, lineWidth: 1.8)
-                    if !before, let number { Text(number) }
-                }
-                .font(.body.weight(.medium).monospacedDigit())
+                GlyphView(glyph: glyph, radius: 7, lineWidth: 1.8)
                 Text(instant.map(Labels.clock) ?? "none")
                     .font(.footnote)
                     .foregroundStyle(Palette.secondary)

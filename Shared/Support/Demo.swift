@@ -13,7 +13,7 @@ import Foundation
 ///     --page spans    open on that dial (kiloseconds, spans), or on the watch's
 ///                     day or settings page
 ///     --civil         open with the civil view over the dial
-///     --decimals 3    show the kilosecond offset with that many decimals
+///     --precision high  show the readout at that precision (low, medium, high)
 ///     --page tour --tour-page 5
 ///                     open the explainer on that page, counted from 0 (iPhone)
 enum Demo {
@@ -21,7 +21,9 @@ enum Demo {
     static let active = CommandLine.arguments.contains("--demo")
     static let civil = CommandLine.arguments.contains("--civil")
     static let page: String? = argument(after: "--page")
-    static let decimals: Int? = argument(after: "--decimals").flatMap(Int.init)
+    static let precision: Precision? = argument(after: "--precision").flatMap { name in
+        Precision.allCases.first { "\($0)" == name }
+    }
     static let tourPage: Int? = argument(after: "--tour-page").flatMap(Int.init)
 
     private static func argument(after flag: String) -> String? {
@@ -33,7 +35,7 @@ enum Demo {
     static let active = false
     static let civil = false
     static let page: String? = nil
-    static let decimals: Int? = nil
+    static let precision: Precision? = nil
     static let tourPage: Int? = nil
     #endif
 

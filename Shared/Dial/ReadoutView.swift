@@ -5,19 +5,28 @@
 import Bogenzeit
 import SwiftUI
 
-/// The center of the dial: the Bogenzeit date, the span position with its
-/// anchor glyph, the offset in brackets, and the quarter. The number sits on
-/// the side of the glyph the positional rule gives it (Bogenzeit spec §3.2).
+/// The center of the dial: the Bogenzeit date, the position in the dial's
+/// own scale with its glyph, and the quarter. The number sits on the side of
+/// the glyph the positional rule gives it (Bogenzeit spec §3.2).
 struct ReadoutView: View {
     let reading: Reading
+    let variant: DialVariant
     let scale: CGFloat
     var showsDate = true
-    @AppStorage(Settings.offsetDecimalsKey) private var storedDecimals = Settings.defaultOffsetDecimals
+    @AppStorage(Settings.precisionKey) private var storedPrecision = Precision.standard.rawValue
+    @Environment(\.isLuminanceReduced) private var isLuminanceReduced
 
     /// The disc the readout sits in: the mockups' 100 units, and never so
     /// small that watch-sized type does not fit.
     static func discRadius(scale: CGFloat) -> CGFloat {
         max(100 * scale, 50)
+    }
+
+    /// The stored choice, or Low while the screen is dimmed and refreshes
+    /// about once a minute: no finer step than the refresh (§5.2).
+    private var precision: Precision {
+        if isLuminanceReduced { return .low }
+        return Demo.precision ?? Precision(rawValue: storedPrecision) ?? .standard
     }
 
     var body: some View {
@@ -26,11 +35,6 @@ struct ReadoutView: View {
                 caption(Labels.day(reading.day.day))
             }
             position
-            if reading.polar == nil {
-                Text("[\(offsetKs)]")
-                    .font(.system(size: max(19 * scale, 15), weight: .medium).monospacedDigit())
-                    .foregroundStyle(Palette.secondary)
-            }
             caption(context)
         }
         .frame(width: 2 * Self.discRadius(scale: scale) - 6)
@@ -47,43 +51,36 @@ struct ReadoutView: View {
 
     @ViewBuilder
     private var position: some View {
-        let glyph = AnchorGlyphView(anchor: reading.anchor, radius: 21 * scale, lineWidth: 4.5 * scale)
+        let shown = DisplayedPosition(reading, variant: variant, precision: precision)
+        let glyph = GlyphView(glyph: shown.glyph, radius: 21 * scale, lineWidth: 4.5 * scale)
         HStack(spacing: 8 * scale) {
-            if let span = reading.displaySpan {
-                if span < 0 {
-                    big("\(-span)")
-                    glyph
-                } else if span == 0 {
+            if let number = shown.number {
+                if shown.side == .before {
+                    big(number, unit: shown.unit)
                     glyph
                 } else {
                     glyph
-                    big("\(span)")
+                    big(number, unit: shown.unit)
                 }
             } else {
-                let steps = reading.displayOffsetSteps
-                if steps < 0 {
-                    big(offsetKs)
-                    glyph
-                } else if steps == 0 {
-                    glyph
-                } else {
-                    glyph
-                    big(offsetKs)
-                }
+                glyph
             }
         }
         .frame(height: 70 * scale)
     }
 
-    private func big(_ text: String) -> some View {
-        Text(text)
-            .font(.system(size: (reading.polar == nil ? 64 : 40) * scale, weight: .semibold).monospacedDigit())
+    /// The number at a size where the widest value of its scale and
+    /// precision fits beside the glyph: `99.99` at the full size, since its
+    /// decimals are smaller, and `43.1 ks`, `43.12 ks`, `43.123 ks` by precision.
+    private func big(_ number: String, unit: String?) -> some View {
+        let size = (unit == nil ? 64 : Self.offsetSizes[precision.rawValue]) * scale
+        return Numerals.text(number, unit: unit, size: size)
             .foregroundStyle(Palette.line)
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
     }
 
-    private var offsetKs: String {
-        Settings.offsetKs(reading.offset, decimals: Demo.decimals ?? storedDecimals)
-    }
+    private static let offsetSizes: [CGFloat] = [60, 52, 46]
 
     private var context: String {
         if let quarter = reading.quarter {

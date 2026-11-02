@@ -9,7 +9,7 @@ import SwiftUI
 /// tap puts over it (Tagbogen spec §2).
 struct DialScreen: View {
     @Environment(SunLocation.self) private var location
-    @AppStorage(Settings.dialVariantKey) private var storedVariant = DialVariant.spans.rawValue
+    @AppStorage(Settings.dialVariantKey, store: AppGroup.defaults) private var storedVariant = DialVariant.spans.rawValue
     @State private var showsCivil = Demo.civil
 
     /// The chosen dial, or the one a `--page` launch argument names.
@@ -53,7 +53,7 @@ struct WaitingView: View {
 
     var body: some View {
         VStack(spacing: 12) {
-            AnchorGlyphView(anchor: .noon, radius: 18, lineWidth: 3.5)
+            GlyphView(glyph: .noon, radius: 18, lineWidth: 3.5)
             Text(status == .denied
                  ? "Tagbogen needs your location to find the Sun's arc. Allow Location for Tagbogen in Settings."
                  : "Finding the Sun's arc for where you are.")

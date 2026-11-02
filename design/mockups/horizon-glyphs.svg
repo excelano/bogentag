@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="760" viewBox="0 0 900 760" font-family="Inter, DejaVu Sans, sans-serif"><rect width="900" height="760" fill="#0A1222"/>
+<text x="30" y="40" fill="#8FA3BF" font-size="15" letter-spacing="1.5">HORIZON GLYPHS: SIZING VARIANTS (r 21, stroke 4.5, digits 64)</text>
+<text x="30" y="106" fill="#8FA3BF" font-size="15">A  inscribed in the ring</text>
+<circle cx="360" cy="100" r="21" fill="none" stroke="#F2F5FA" stroke-width="4.5"/><circle cx="360" cy="100" r="6.07" fill="#F2F5FA"/>
+<circle cx="440" cy="100" r="21" fill="none" stroke="#F2F5FA" stroke-width="4.5"/>
+<polygon points="520.00,79.00 501.81,110.50 538.19,110.50" fill="none" stroke="#F2F5FA" stroke-width="4.5" stroke-linejoin="round"/>
+<polygon points="600.00,121.00 581.81,89.50 618.19,89.50" fill="none" stroke="#F2F5FA" stroke-width="4.5" stroke-linejoin="round"/>
+<text x="680" y="122" fill="#F2F5FA" font-size="64" font-weight="600">59</text>
+<polygon points="800.00,79.00 781.81,110.50 818.19,110.50" fill="none" stroke="#F2F5FA" stroke-width="4.5" stroke-linejoin="round"/>
+<line x1="330" y1="79" x2="840" y2="79" stroke="#FFE2A0" stroke-opacity="0.25"/><line x1="330" y1="121" x2="840" y2="121" stroke="#FFE2A0" stroke-opacity="0.25"/>
+<text x="30" y="196" fill="#8FA3BF" font-size="15">B  equilateral, height = ring</text>
+<circle cx="360" cy="190" r="21" fill="none" stroke="#F2F5FA" stroke-width="4.5"/><circle cx="360" cy="190" r="6.07" fill="#F2F5FA"/>
+<circle cx="440" cy="190" r="21" fill="none" stroke="#F2F5FA" stroke-width="4.5"/>
+<polygon points="520.00,169.00 495.75,211.00 544.25,211.00" fill="none" stroke="#F2F5FA" stroke-width="4.5" stroke-linejoin="round"/>
+<polygon points="600.00,211.00 575.75,169.00 624.25,169.00" fill="none" stroke="#F2F5FA" stroke-width="4.5" stroke-linejoin="round"/>
+<text x="680" y="212" fill="#F2F5FA" font-size="64" font-weight="600">59</text>
+<polygon points="800.00,169.00 775.75,211.00 824.25,211.00" fill="none" stroke="#F2F5FA" stroke-width="4.5" stroke-linejoin="round"/>
+<line x1="330" y1="169" x2="840" y2="169" stroke="#FFE2A0" stroke-opacity="0.25"/><line x1="330" y1="211" x2="840" y2="211" stroke="#FFE2A0" stroke-opacity="0.25"/>
+<text x="30" y="286" fill="#8FA3BF" font-size="15">C  height = width = ring</text>
+<circle cx="360" cy="280" r="21" fill="none" stroke="#F2F5FA" stroke-width="4.5"/><circle cx="360" cy="280" r="6.07" fill="#F2F5FA"/>
+<circle cx="440" cy="280" r="21" fill="none" stroke="#F2F5FA" stroke-width="4.5"/>
+<polygon points="520.00,259.00 499.00,301.00 541.00,301.00" fill="none" stroke="#F2F5FA" stroke-width="4.5" stroke-linejoin="round"/>
+<polygon points="600.00,301.00 579.00,259.00 621.00,259.00" fill="none" stroke="#F2F5FA" stroke-width="4.5" stroke-linejoin="round"/>
+<text x="680" y="302" fill="#F2F5FA" font-size="64" font-weight="600">59</text>
+<polygon points="800.00,259.00 779.00,301.00 821.00,301.00" fill="none" stroke="#F2F5FA" stroke-width="4.5" stroke-linejoin="round"/>
+<line x1="330" y1="259" x2="840" y2="259" stroke="#FFE2A0" stroke-opacity="0.25"/><line x1="330" y1="301" x2="840" y2="301" stroke="#FFE2A0" stroke-opacity="0.25"/>
+<text x="30" y="376" fill="#8FA3BF" font-size="15">D  equilateral, optical centre</text>
+<circle cx="360" cy="370" r="21" fill="none" stroke="#F2F5FA" stroke-width="4.5"/><circle cx="360" cy="370" r="6.07" fill="#F2F5FA"/>
+<circle cx="440" cy="370" r="21" fill="none" stroke="#F2F5FA" stroke-width="4.5"/>
+<polygon points="520.00,342.00 495.75,384.00 544.25,384.00" fill="none" stroke="#F2F5FA" stroke-width="4.5" stroke-linejoin="round"/>
+<polygon points="600.00,398.00 575.75,356.00 624.25,356.00" fill="none" stroke="#F2F5FA" stroke-width="4.5" stroke-linejoin="round"/>
+<text x="680" y="392" fill="#F2F5FA" font-size="64" font-weight="600">59</text>
+<polygon points="800.00,342.00 775.75,384.00 824.25,384.00" fill="none" stroke="#F2F5FA" stroke-width="4.5" stroke-linejoin="round"/>
+<line x1="330" y1="349" x2="840" y2="349" stroke="#FFE2A0" stroke-opacity="0.25"/><line x1="330" y1="391" x2="840" y2="391" stroke="#FFE2A0" stroke-opacity="0.25"/>
+<text x="30" y="470" fill="#8FA3BF" font-size="15" letter-spacing="1.5">AROUND SUNRISE AND SUNSET (variant C, Medium precision)</text>
+<circle cx="95" cy="540" r="21" fill="none" stroke="#F2F5FA" stroke-width="4.5"/><text x="130" y="562" fill="#F2F5FA" font-size="64" font-weight="600">99.9</text>
+<text x="170" y="600" fill="#8FA3BF" font-size="13" text-anchor="middle">last tenth before sunrise</text>
+<polygon points="450.00,519.00 429.00,561.00 471.00,561.00" fill="none" stroke="#F2F5FA" stroke-width="4.5" stroke-linejoin="round"/>
+<text x="450" y="600" fill="#8FA3BF" font-size="13" text-anchor="middle">sunrise, first tenth of a span</text>
+<text x="770" y="562" fill="#F2F5FA" font-size="64" font-weight="600" text-anchor="end">99.9</text><circle cx="805" cy="540" r="21" fill="none" stroke="#F2F5FA" stroke-width="4.5"/><circle cx="805" cy="540" r="6.07" fill="#F2F5FA"/>
+<text x="730" y="600" fill="#8FA3BF" font-size="13" text-anchor="middle">next</text>
+<circle cx="95" cy="660" r="21" fill="none" stroke="#F2F5FA" stroke-width="4.5"/><circle cx="95" cy="660" r="6.07" fill="#F2F5FA"/><text x="130" y="682" fill="#F2F5FA" font-size="64" font-weight="600">99.9</text>
+<text x="170" y="720" fill="#8FA3BF" font-size="13" text-anchor="middle">last tenth before sunset</text>
+<polygon points="450.00,681.00 429.00,639.00 471.00,639.00" fill="none" stroke="#F2F5FA" stroke-width="4.5" stroke-linejoin="round"/>
+<text x="450" y="720" fill="#8FA3BF" font-size="13" text-anchor="middle">sunset, first tenth of a span</text>
+<text x="770" y="682" fill="#F2F5FA" font-size="64" font-weight="600" text-anchor="end">99.9</text><circle cx="805" cy="660" r="21" fill="none" stroke="#F2F5FA" stroke-width="4.5"/>
+<text x="730" y="720" fill="#8FA3BF" font-size="13" text-anchor="middle">next</text>
+</svg>

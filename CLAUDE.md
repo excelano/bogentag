@@ -15,7 +15,7 @@ spec and `design/mockups/` the drawings.
     xcodebuild test -scheme "Tagbogen Watch App"    # on the Mac, on a watch simulator; reboot the simulator after
 
 A Debug build launched with `--demo` shows Houston on the spec's worked day; `--page spans` (or `kiloseconds`, `day`,
-`settings`, `tour`) and `--civil` pick the page, `--decimals` the offset's decimals, and
+`settings`, `tour`) and `--civil` pick the page, `--precision` (`low`, `medium`, `high`) the readout's precision, and
 `packaging/ios/shots.sh` takes the store screenshots from them. Releases: the apps in
 excelano/shipping, run from this directory.
 
@@ -25,9 +25,9 @@ The engine reproduces the reference step for step, including the declination bei
 noon's UTC hour and minute with the seconds dropped; an engine that is "more accurate" fails the
 vectors. Displayed spans and kiloseconds are the floor of the signed value, so an anchor or event
 shows only once it has been reached. Position replaces sign: number left of the glyph is before,
-right is after, no `+` or `−`. ☉ and ○ in anything rendered are drawn from one circle definition,
-never from a font, in running text included. No hours or minutes in a Bogenzeit readout; the clock
-watchOS draws in the corner is Apple's. Every Swift file is Tagbogen's own: only the project
-scaffolding was copied from a sibling, and the store text is written for Tagbogen alone, because App
-Review groups look-alike submissions as spam. Don't commit, push or publish to any store unless David
-asks.
+right is after, no `+` or `−`. ☉, ○, △ and ▽ in anything rendered are drawn from one definition in
+`Shared/Dial/Glyph.swift`, never from a font, in running text included. No hours or minutes in a
+Bogenzeit readout; the clock watchOS draws in the corner is Apple's. Every Swift file is Tagbogen's
+own: only the project scaffolding was copied from a sibling, and the store text is written for
+Tagbogen alone, because App Review groups look-alike submissions as spam. Don't commit, push or
+publish to any store unless David asks.
