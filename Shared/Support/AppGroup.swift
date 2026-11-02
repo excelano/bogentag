@@ -4,7 +4,7 @@
 
 import Foundation
 
-/// What the watch app leaves for its widgets: the coordinates in use.
+/// What each app leaves for its own widgets: the coordinates in use.
 enum AppGroup {
     /// Config/Tagbogen.xcconfig derives the same id for the entitlements.
     static let identifier = "group.com.excelano.tagbogen"

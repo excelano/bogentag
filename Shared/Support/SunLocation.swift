@@ -4,9 +4,7 @@
 
 import CoreLocation
 import Observation
-#if os(watchOS)
 import WidgetKit
-#endif
 
 /// The coordinates the dial is computed for. A fix replaces the place in use
 /// only when it is more than ten kilometres away (Bogenzeit spec §5.5);
@@ -79,8 +77,6 @@ final class SunLocation: NSObject, CLLocationManagerDelegate {
         place = adopted
         status = .fixed
         AppGroup.save(adopted)
-        #if os(watchOS)
         WidgetCenter.shared.reloadAllTimelines()
-        #endif
     }
 }

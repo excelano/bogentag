@@ -349,3 +349,33 @@ struct HorizonComplication: View {
         }
     }
 }
+
+/// The dial beside the reading, the quarter, the offset and what comes
+/// next: the Home Screen's medium widget.
+struct DialCard: View {
+    let reading: Reading
+
+    var body: some View {
+        HStack(spacing: 16) {
+            MiniDial(model: DialModel(reading: reading, variant: .spans))
+            VStack(alignment: .leading, spacing: 4) {
+                ReadingText(reading: reading, size: 36, color: Palette.line)
+                Text(Complications.quarter(reading).uppercased())
+                    .font(.footnote.weight(.medium))
+                    .tracking(1)
+                    .foregroundStyle(Palette.label)
+                if reading.span != nil {
+                    Text("[\(Complications.ks(reading))]")
+                        .font(.callout.monospacedDigit())
+                        .foregroundStyle(Palette.secondary)
+                }
+                if let next = NextEvent(reading), let spans = next.wholeSpans {
+                    Text("\(next.name) in \(spans) \(spans == 1 ? "span" : "spans")")
+                        .font(.footnote)
+                        .foregroundStyle(Palette.label)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+}
