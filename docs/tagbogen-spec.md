@@ -28,7 +28,7 @@ All Bogenzeit calculation runs on the watch, offline (no phone or network needed
 
 ## 3. Shared elements (all variants)
 
-- **Anchors:** ☉ at top (solar noon), ○ at bottom (solar midnight). They, and the horizon glyphs △ and ▽, are drawn as vector shapes from one definition (BZ spec §3.1 matching rule).
+- **Anchors:** ☉ at top (solar noon), ○ at bottom (solar midnight), and where the horizon meets the ring of anchors △ standing on it at sunrise and ▽ hanging from it at sunset, absent on a polar day or night. All four are drawn as vector shapes from one definition (BZ spec §3.1 matching rule).
 - **Sky:** day above the horizon, then civil, nautical and astronomical twilight bands, then night.
 - **Sun marker:** travels a fixed inner track.
 - **Quarter ticks:** at the 50-span points (the boundaries of Afterrise/Forenoon/Afternoon/Foreset and Afterset/Foremid/Aftermid/Forerise), and the current quarter's stretch of the outer ring lit in the Sun's colour.

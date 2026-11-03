@@ -190,6 +190,8 @@ struct QuarterWheel: View {
                 }
                 GlyphView(.noon, radius: 9, lineWidth: 2.2, color: Palette.line).position(x: c.x, y: c.y - r - 16)
                 GlyphView(.midnight, radius: 9, lineWidth: 2.2, color: Palette.line).position(x: c.x, y: c.y + r + 16)
+                GlyphView(.sunrise, radius: 9, lineWidth: 2.2, color: Palette.line).position(x: c.x - r - 16, y: c.y)
+                GlyphView(.sunset, radius: 9, lineWidth: 2.2, color: Palette.line).position(x: c.x + r + 16, y: c.y)
                 ForEach(Self.names, id: \.0) { name, angle in
                     let a = angle * .pi / 180
                     Text(name)

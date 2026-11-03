@@ -126,6 +126,13 @@ struct DialView: View {
 
         Glyph.noon.draw(in: context, at: point(0, 173), radius: 9 * s, lineWidth: 2.2 * s, color: Palette.line)
         Glyph.midnight.draw(in: context, at: point(180, 173), radius: 9 * s, lineWidth: 2.2 * s, color: Palette.line)
+        if let h = model.sunsetAngle, h > 0, h < 180 {
+            let y = chordY(h)
+            let x = (173 * s * 173 * s - (c.y - y) * (c.y - y)).squareRoot()
+            let lift = 12 * s
+            Glyph.sunrise.draw(in: context, at: CGPoint(x: c.x - x, y: y - lift), radius: 9 * s, lineWidth: 2.2 * s, color: Palette.line)
+            Glyph.sunset.draw(in: context, at: CGPoint(x: c.x + x, y: y + lift), radius: 9 * s, lineWidth: 2.2 * s, color: Palette.line)
+        }
 
         let sun = point(model.sunAngle, 160)
         context.fill(circle(sun, 20), with: .color(Palette.sun.opacity(0.25)))
