@@ -2,9 +2,9 @@
 # against the release being cut, so notes left from last time stop the release
 # rather than reaching the listing.
 
-version = "1.1.1"
+version = "1.1.2"
 
 [locales."en-us"]
 whats-new = """
-The solar calculations and the drawn symbols now come from a shared Bogenzeit engine. Every reading, dial, complication and widget should look and read as before; please report anything that differs.
+The dial now marks sunrise and sunset with their triangles where the horizon meets it, beside the noon and midnight anchors, and the quarter wheel in About Bogenzeit shows them at the ends of its horizon.
 """
