@@ -2,9 +2,9 @@
 # against the release being cut, so notes left from last time stop the release
 # rather than reaching the listing.
 
-version = "1.2.1"
+version = "1.2.2"
 
 [locales."en-us"]
 whats-new = """
-Tagbogen is now called Bogentag. It also runs on iPad: the dial fills the screen, and turned sideways the dial and its settings sit side by side.
+The first-run walkthrough now introduces the four quarters of the day (morning, afternoon, evening, night) and then the eight finer eighths beneath them, matching the current Bogenzeit terms.
 """
