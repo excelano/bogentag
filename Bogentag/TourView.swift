@@ -43,7 +43,7 @@ struct TourView: View {
         let spanDecember = december.daySpan.map { "\(Int($0.rounded(.down))) s" } ?? "none"
         return [
             TourPage(title: "Time on the Sun's arc", text: """
-            Every day the Sun rises, climbs to its highest point, sets, and passes beneath you to its lowest. Bogenzeit reads time off that arc: where the Sun is now, between those four events. The day arc runs from sunrise to sunset and the night arc from sunset to sunrise. Bogentag is the German word for the day arc, and the app's name.
+            Every day the Sun rises, climbs to its highest point, sets, and passes beneath you to its lowest. Bogenzeit reads time off that arc: where the Sun is now, between those four events. The day arc runs from sunrise to sunset and the night arc from sunset to sunrise. The day arc is the Tagbogen in German; the app's name, Bogentag, turns it around.
             """) {
                 DialView(model: DialModel(reading: reading, variant: .spans))
             },
@@ -83,10 +83,10 @@ struct TourView: View {
                     NotationExample(number: nil, glyph: .sunset, before: false, meaning: "sunset")
                 }
             },
-            TourPage(title: "Eight quarters", text: """
-            Each arc splits at its 50-span marks into four quarters, each named for the event nearest it: Fore- before it, After- after it. By day: Afterrise, Forenoon, Afternoon, Foreset. By night: Afterset, Foremid, Aftermid, Forerise. A quarter is about as long as it feels: a tenth of the day in Houston, shorter in winter and longer in summer.
+            TourPage(title: "Quarters and eighths", text: """
+            Before and after each anchor are the parts of the day you already name: before {noon} the morning, after it the afternoon; before {midnight} the evening, after it the night. The reading gives you these four quarters on its own — the glyph, and the side the number sits on. Halve each at its 50-span mark and you have the eight eighths the dial labels, named for the nearest event, Fore- before it and After- after it: Afterrise, Forenoon, Afternoon, Foreset by day; Afterset, Foremid, Aftermid, Forerise by night.
             """) {
-                QuarterWheel()
+                EighthWheel()
             },
             TourPage(title: "The date turns at solar midnight", text: """
             A Bogenzeit day runs from one solar midnight to the next, so the date changes at {midnight} rather than at 00:00. Tonight {midnight} falls at \(Labels.clock(day.midnightEnd)); until then it is still \(Labels.day(day.day)) here, whatever the calendar says.
@@ -170,8 +170,7 @@ struct NotationExample: View {
     }
 }
 
-/// The eight quarter names around a ring, day on top and night below.
-struct QuarterWheel: View {
+struct EighthWheel: View {
     private static let names: [(String, Double)] = [
         ("Forenoon", -22.5), ("Afternoon", 22.5), ("Foreset", 67.5), ("Afterset", 112.5),
         ("Foremid", 157.5), ("Aftermid", 202.5), ("Forerise", 247.5), ("Afterrise", 292.5),
@@ -183,10 +182,15 @@ struct QuarterWheel: View {
             let r = min(geometry.size.width, geometry.size.height) / 2 - 44
             ZStack {
                 Circle().stroke(Palette.line.opacity(0.25), lineWidth: 1).frame(width: 2 * r, height: 2 * r)
-                Rectangle().fill(Palette.line.opacity(0.4)).frame(width: 2 * r, height: 1)
-                ForEach([0.0, 45.0, 135.0], id: \.self) { angle in
-                    Rectangle().fill(Palette.line.opacity(0.4)).frame(width: 1, height: 2 * r)
-                        .rotationEffect(.degrees(angle))
+                Rectangle().fill(Palette.line.opacity(0.5)).frame(width: 2 * r, height: 1)
+                Rectangle().fill(Palette.line.opacity(0.5)).frame(width: 1, height: 2 * r)
+                ForEach([45.0, 135.0], id: \.self) { angle in
+                    Path { p in
+                        p.move(to: CGPoint(x: c.x, y: c.y - r))
+                        p.addLine(to: CGPoint(x: c.x, y: c.y + r))
+                    }
+                    .stroke(Palette.line.opacity(0.35), style: StrokeStyle(lineWidth: 1, dash: [2, 3]))
+                    .rotationEffect(.degrees(angle))
                 }
                 GlyphView(.noon, radius: 9, lineWidth: 2.2, color: Palette.line).position(x: c.x, y: c.y - r - 16)
                 GlyphView(.midnight, radius: 9, lineWidth: 2.2, color: Palette.line).position(x: c.x, y: c.y + r + 16)
