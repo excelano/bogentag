@@ -6,7 +6,7 @@
 # Shared/Support/Demo.swift reads: Houston on the spec's worked day, each
 # dial, and the civil view over each.
 #
-#     ./packaging/ios/shots.sh --app <Tagbogen.app> --device <udid> --lang en-us --outdir <dir>
+#     ./packaging/ios/shots.sh --app <Bogentag.app> --device <udid> --lang en-us --outdir <dir>
 #
 # Author: David M. Anderson
 # Built with AI assistance (Claude, Anthropic)

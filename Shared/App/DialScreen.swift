@@ -7,7 +7,7 @@ import BogenzeitUI
 import SwiftUI
 
 /// One dial, read for the place in use once a second, and the civil view a
-/// tap puts over it (Tagbogen spec §2).
+/// tap puts over it (Bogentag spec §2).
 struct DialScreen: View {
     @Environment(SunLocation.self) private var location
     @AppStorage(Settings.dialVariantKey, store: AppGroup.defaults) private var storedVariant = Scale.spans.rawValue
@@ -56,7 +56,7 @@ struct WaitingView: View {
         VStack(spacing: 12) {
             GlyphView(.noon, radius: 18, lineWidth: 3.5, color: Palette.line)
             Text(status == .denied
-                 ? "Tagbogen needs your location to find the Sun's arc. Allow Location for Tagbogen in Settings."
+                 ? "Bogentag needs your location to find the Sun's arc. Allow Location for Bogentag in Settings."
                  : "Finding the Sun's arc for where you are.")
                 .font(.footnote)
                 .foregroundStyle(Palette.secondary)

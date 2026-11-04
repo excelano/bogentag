@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B80000000000000000000001"
-               BuildableName = "Tagbogen Watch App.app"
-               BlueprintName = "Tagbogen Watch App"
-               ReferencedContainer = "container:Tagbogen.xcodeproj">
+               BuildableName = "Bogentag Watch App.app"
+               BlueprintName = "Bogentag Watch App"
+               ReferencedContainer = "container:Bogentag.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B80000000000000000000002"
-               BuildableName = "Tagbogen Watch AppTests.xctest"
-               BlueprintName = "Tagbogen Watch AppTests"
-               ReferencedContainer = "container:Tagbogen.xcodeproj">
+               BuildableName = "Bogentag Watch AppTests.xctest"
+               BlueprintName = "Bogentag Watch AppTests"
+               ReferencedContainer = "container:Bogentag.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -54,9 +54,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B80000000000000000000001"
-            BuildableName = "Tagbogen Watch App.app"
-            BlueprintName = "Tagbogen Watch App"
-            ReferencedContainer = "container:Tagbogen.xcodeproj">
+            BuildableName = "Bogentag Watch App.app"
+            BlueprintName = "Bogentag Watch App"
+            ReferencedContainer = "container:Bogentag.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B80000000000000000000001"
-            BuildableName = "Tagbogen Watch App.app"
-            BlueprintName = "Tagbogen Watch App"
-            ReferencedContainer = "container:Tagbogen.xcodeproj">
+            BuildableName = "Bogentag Watch App.app"
+            BlueprintName = "Bogentag Watch App"
+            ReferencedContainer = "container:Bogentag.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

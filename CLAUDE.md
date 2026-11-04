@@ -1,18 +1,18 @@
 # CLAUDE.md
 
-Tagbogen is the Apple Watch and iPhone app for Bogenzeit, the time standard whose spec, reference
+Bogentag is the Apple Watch and iPhone app for Bogenzeit, the time standard whose spec, reference
 and vectors are in excelano/bogenzeit; the spec there is normative and no definition in it changes
 without David. The engine, the display forms (`Scale`, `Precision`, `DisplayedPosition`) and the
 drawn glyphs come from the Swift package excelano/bogenzeit-swift, which the project depends on by
-URL; a change to any of them is made there and released as a new tag. `Tagbogen.xcodeproj` builds the iPhone
-app, the watch app it embeds and the widgets, all from `Shared/`. `docs/tagbogen-spec.md` is the face
+URL; a change to any of them is made there and released as a new tag. `Bogentag.xcodeproj` builds the iPhone
+app, the watch app it embeds and the widgets, all from `Shared/`. `docs/bogentag-spec.md` is the face
 spec and `design/mockups/` the drawings.
 
 ## Commands
 
     xcremote build                                  # the iPhone scheme, watch app embedded
     xcremote install                                # onto David's iPhone and watch, as ~/notes/shipping.md says
-    xcodebuild test -scheme "Tagbogen Watch App"    # on the Mac, on a watch simulator; reboot the simulator after
+    xcodebuild test -scheme "Bogentag Watch App"    # on the Mac, on a watch simulator; reboot the simulator after
 
 A Debug build launched with `--demo` shows Houston on the spec's worked day; `--page spans` (or `kiloseconds`, `day`,
 `settings`, `tour`) and `--civil` pick the page, `--precision` (`low`, `medium`, `high`) the readout's precision, and
@@ -25,7 +25,7 @@ Displayed spans and kiloseconds are the floor of the signed value, so an anchor 
 shows only once it has been reached. Position replaces sign: number left of the glyph is before,
 right is after, no `+` or `−`. ☉, ○, △ and ▽ in anything rendered are drawn from one definition in
 the package's `BogenzeitUI`, never from a font, in running text included. No hours or minutes in a
-Bogenzeit readout; the clock watchOS draws in the corner is Apple's. Every Swift file is Tagbogen's
+Bogenzeit readout; the clock watchOS draws in the corner is Apple's. Every Swift file is Bogentag's
 own: only the project scaffolding was copied from a sibling, and the store text is written for
-Tagbogen alone, because App Review groups look-alike submissions as spam. Don't commit, push or
+Bogentag alone, because App Review groups look-alike submissions as spam. Don't commit, push or
 publish to any store unless David asks.

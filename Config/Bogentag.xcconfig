@@ -1,4 +1,4 @@
-// Tagbogen.xcconfig
+// Bogentag.xcconfig
 // Author: David M. Anderson
 // Built with AI assistance (Claude, Anthropic)
 //
@@ -6,10 +6,10 @@
 
 DEVELOPMENT_TEAM = 9K6W5PMFYP
 // The App Store record's bundle id, the iPhone app's, which the watch app's extends.
-TAGBOGEN_CONTAINER_BUNDLE_ID = com.excelano.tagbogen
-TAGBOGEN_BUNDLE_ID = $(TAGBOGEN_CONTAINER_BUNDLE_ID).watchkitapp
-TAGBOGEN_DISPLAY_NAME = Tagbogen
+BOGENTAG_CONTAINER_BUNDLE_ID = com.excelano.tagbogen
+BOGENTAG_BUNDLE_ID = $(BOGENTAG_CONTAINER_BUNDLE_ID).watchkitapp
+BOGENTAG_DISPLAY_NAME = Bogentag
 // Shared by the watch app and its widgets; Shared/Support/AppGroup.swift names it too.
-TAGBOGEN_APP_GROUP = group.$(TAGBOGEN_CONTAINER_BUNDLE_ID)
+BOGENTAG_APP_GROUP = group.$(BOGENTAG_CONTAINER_BUNDLE_ID)
 
 #include "Version.xcconfig"

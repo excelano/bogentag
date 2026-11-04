@@ -6,7 +6,7 @@ version = "1.2.0"
 
 [locales."en-us"]
 whats-new = """
-Tagbogen now runs on iPad, with the dial filling the screen; turned sideways, the dial and its settings sit side by side.
+Bogentag now runs on iPad, with the dial filling the screen; turned sideways, the dial and its settings sit side by side.
 
 The dial now marks sunrise and sunset with their triangles where the horizon meets it, beside the noon and midnight anchors, and the quarter wheel in About Bogenzeit shows them at the ends of its horizon.
 """

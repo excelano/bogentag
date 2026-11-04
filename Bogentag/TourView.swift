@@ -6,7 +6,7 @@ import Bogenzeit
 import BogenzeitUI
 import SwiftUI
 
-/// The explainer (Tagbogen spec §5): eight pages, one per topic, each with
+/// The explainer (Bogentag spec §5): eight pages, one per topic, each with
 /// a live piece of the dial computed for the place in use, so the numbers on
 /// the page are the reader's own.
 struct TourView: View {
@@ -43,7 +43,7 @@ struct TourView: View {
         let spanDecember = december.daySpan.map { "\(Int($0.rounded(.down))) s" } ?? "none"
         return [
             TourPage(title: "Time on the Sun's arc", text: """
-            Every day the Sun rises, climbs to its highest point, sets, and passes beneath you to its lowest. Bogenzeit reads time off that arc: where the Sun is now, between those four events. The day arc runs from sunrise to sunset and the night arc from sunset to sunrise. Tagbogen is the German word for the day arc, and the app's name.
+            Every day the Sun rises, climbs to its highest point, sets, and passes beneath you to its lowest. Bogenzeit reads time off that arc: where the Sun is now, between those four events. The day arc runs from sunrise to sunset and the night arc from sunset to sunrise. Bogentag is the German word for the day arc, and the app's name.
             """) {
                 DialView(model: DialModel(reading: reading, variant: .spans))
             },

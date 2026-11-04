@@ -6,7 +6,7 @@ import Foundation
 
 /// What each app leaves for its own widgets: the coordinates in use.
 enum AppGroup {
-    /// Config/Tagbogen.xcconfig derives the same id for the entitlements.
+    /// Config/Bogentag.xcconfig derives the same id for the entitlements.
     static let identifier = "group.com.excelano.tagbogen"
 
     static var defaults: UserDefaults { UserDefaults(suiteName: identifier) ?? .standard }

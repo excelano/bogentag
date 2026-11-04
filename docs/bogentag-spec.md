@@ -1,8 +1,8 @@
-# Tagbogen — Spec (draft 0.1)
+# Bogentag — Spec (draft 0.1)
 
-Tagbogen is the watch face and app family that displays **Bogenzeit (BZ)**. The time standard itself is defined in `bogenzeit-spec.md`; Tagbogen only decides how it looks. Because the standard is fixed, Tagbogen can offer **several dial variants**.
+Bogentag is the watch face and app family that displays **Bogenzeit (BZ)**. The time standard itself is defined in `bogenzeit-spec.md`; Bogentag only decides how it looks. Because the standard is fixed, Bogentag can offer **several dial variants**.
 
-Status: draft. Mockups of variants 1 and 2 are on the Tagbogen design canvas. The variants are named Spans and Kiloseconds, for what the Sun's angle measures on each; Spans is the default.
+Status: draft. Mockups of variants 1 and 2 are on the Bogentag design canvas. The variants are named Spans and Kiloseconds, for what the Sun's angle measures on each; Spans is the default.
 
 ---
 
@@ -10,7 +10,7 @@ Status: draft. Mockups of variants 1 and 2 are on the Tagbogen design canvas. Th
 
 | Platform | Form | Notes |
 |---|---|---|
-| Wear OS | Full watch face (Watch Face Format) + app | Custom faces are allowed; this is where the full Tagbogen face lives. |
+| Wear OS | Full watch face (Watch Face Format) + app | Custom faces are allowed; this is where the full Bogentag face lives. |
 | Apple Watch | App + widgets (Smart Stack) + complications | Apple does not allow third-party watch faces. |
 | Phone (both) | Companion app | Explains Bogenzeit; settings; larger dial views. |
 

@@ -5,7 +5,7 @@
 import Bogenzeit
 import SwiftUI
 
-/// The tapped view (Tagbogen spec §2): UTC, the reference every reading is
+/// The tapped view (Bogentag spec §2): UTC, the reference every reading is
 /// computed from, large; the local clock with its zone and offset under it;
 /// the civil date; and today's sunrise and sunset as the local clock says them.
 struct CivilView: View {

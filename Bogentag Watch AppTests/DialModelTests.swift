@@ -4,7 +4,7 @@
 
 import Bogenzeit
 import XCTest
-@testable import Tagbogen_Watch_App
+@testable import Bogentag_Watch_App
 
 /// The dial geometry against the mockups, which were drawn for Houston on
 /// 1 November 2026 at 11:08 CST.

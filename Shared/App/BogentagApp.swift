@@ -1,11 +1,11 @@
-// TagbogenApp.swift
+// BogentagApp.swift
 // Author: David M. Anderson
 // Built with AI assistance (Claude, Anthropic)
 
 import SwiftUI
 
 @main
-struct TagbogenApp: App {
+struct BogentagApp: App {
     @State private var location = SunLocation()
 
     var body: some Scene {

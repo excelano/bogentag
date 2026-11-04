@@ -1,4 +1,4 @@
-// TagbogenPhoneWidgets.swift
+// BogentagPhoneWidgets.swift
 // Author: David M. Anderson
 // Built with AI assistance (Claude, Anthropic)
 
@@ -8,7 +8,7 @@ import SwiftUI
 import WidgetKit
 
 @main
-struct TagbogenPhoneWidgets: WidgetBundle {
+struct BogentagPhoneWidgets: WidgetBundle {
     var body: some Widget {
         PhoneDialWidget()
         PhoneReadingWidget()
@@ -32,7 +32,7 @@ private struct Empty: View {
 
     var body: some View {
         if family == .accessoryInline {
-            Text("Open Tagbogen to find the Sun")
+            Text("Open Bogentag to find the Sun")
         } else {
             GlyphView(.noon, radius: 10, lineWidth: 2.4, color: .primary)
         }

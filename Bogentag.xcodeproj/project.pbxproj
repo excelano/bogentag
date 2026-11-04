@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B10000000000000000000001 /* Tagbogen Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B20000000000000000000001 /* Tagbogen Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		B10000000000000000000002 /* TagbogenWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B20000000000000000000006 /* TagbogenWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B10000000000000000000001 /* Bogentag Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B20000000000000000000001 /* Bogentag Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B10000000000000000000002 /* BogentagWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B20000000000000000000006 /* BogentagWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B10000000000000000000003 /* Bogenzeit in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000001 /* Bogenzeit */; };
 		B10000000000000000000008 /* BogenzeitUI in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000005 /* BogenzeitUI */; };
 		B10000000000000000000004 /* Bogenzeit in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000002 /* Bogenzeit */; };
 		B10000000000000000000009 /* BogenzeitUI in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000006 /* BogenzeitUI */; };
 		B10000000000000000000005 /* Bogenzeit in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000003 /* Bogenzeit */; };
 		B1000000000000000000000A /* BogenzeitUI in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000007 /* BogenzeitUI */; };
-		B10000000000000000000006 /* TagbogenPhoneWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B20000000000000000000008 /* TagbogenPhoneWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B10000000000000000000006 /* BogentagPhoneWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B20000000000000000000008 /* BogentagPhoneWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B10000000000000000000007 /* Bogenzeit in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000004 /* Bogenzeit */; };
 		B1000000000000000000000B /* BogenzeitUI in Frameworks */ = {isa = PBXBuildFile; productRef = BC0000000000000000000008 /* BogenzeitUI */; };
 /* End PBXBuildFile section */
@@ -26,28 +26,28 @@
 			containerPortal = B90000000000000000000001 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B80000000000000000000001;
-			remoteInfo = "Tagbogen Watch App";
+			remoteInfo = "Bogentag Watch App";
 		};
 		B30000000000000000000002 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B90000000000000000000001 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B80000000000000000000001;
-			remoteInfo = "Tagbogen Watch App";
+			remoteInfo = "Bogentag Watch App";
 		};
 		B30000000000000000000003 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B90000000000000000000001 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B80000000000000000000004;
-			remoteInfo = TagbogenWidgets;
+			remoteInfo = BogentagWidgets;
 		};
 		B30000000000000000000004 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B90000000000000000000001 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B80000000000000000000005;
-			remoteInfo = TagbogenPhoneWidgets;
+			remoteInfo = BogentagPhoneWidgets;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -58,7 +58,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				B10000000000000000000001 /* Tagbogen Watch App.app in Embed Watch Content */,
+				B10000000000000000000001 /* Bogentag Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,7 +69,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				B10000000000000000000002 /* TagbogenWidgets.appex in Embed Foundation Extensions */,
+				B10000000000000000000002 /* BogentagWidgets.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -80,7 +80,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				B10000000000000000000006 /* TagbogenPhoneWidgets.appex in Embed Foundation Extensions */,
+				B10000000000000000000006 /* BogentagPhoneWidgets.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,18 +88,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B20000000000000000000001 /* Tagbogen Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tagbogen Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B20000000000000000000002 /* Tagbogen Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tagbogen Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B20000000000000000000003 /* Tagbogen.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tagbogen.xcconfig; sourceTree = "<group>"; };
+		B20000000000000000000001 /* Bogentag Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bogentag Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20000000000000000000002 /* Bogentag Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bogentag Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20000000000000000000003 /* Bogentag.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Bogentag.xcconfig; sourceTree = "<group>"; };
 		B20000000000000000000004 /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
-		B20000000000000000000005 /* Tagbogen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tagbogen.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B20000000000000000000006 /* TagbogenWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TagbogenWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		B20000000000000000000008 /* TagbogenPhoneWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TagbogenPhoneWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20000000000000000000005 /* Bogentag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bogentag.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20000000000000000000006 /* BogentagWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BogentagWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20000000000000000000008 /* BogentagPhoneWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BogentagPhoneWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B20000000000000000000007 /* Widgets-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Widgets-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		BF0000000000000000000001 /* Exceptions for "Shared" folder in "TagbogenWidgets" target */ = {
+		BF0000000000000000000001 /* Exceptions for "Shared" folder in "BogentagWidgets" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Dial/Glyph.swift,
@@ -111,9 +111,9 @@
 				Widget/ArcProvider.swift,
 				Widget/Complications.swift,
 			);
-			target = B80000000000000000000004 /* TagbogenWidgets */;
+			target = B80000000000000000000004 /* BogentagWidgets */;
 		};
-		BF0000000000000000000002 /* Exceptions for "Shared" folder in "TagbogenPhoneWidgets" target */ = {
+		BF0000000000000000000002 /* Exceptions for "Shared" folder in "BogentagPhoneWidgets" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Dial/Glyph.swift,
@@ -125,41 +125,41 @@
 				Widget/ArcProvider.swift,
 				Widget/Complications.swift,
 			);
-			target = B80000000000000000000005 /* TagbogenPhoneWidgets */;
+			target = B80000000000000000000005 /* BogentagPhoneWidgets */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		B50000000000000000000001 /* Tagbogen Watch App */ = {
+		B50000000000000000000001 /* Bogentag Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Tagbogen Watch App";
+			path = "Bogentag Watch App";
 			sourceTree = "<group>";
 		};
-		B50000000000000000000002 /* Tagbogen Watch AppTests */ = {
+		B50000000000000000000002 /* Bogentag Watch AppTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Tagbogen Watch AppTests";
+			path = "Bogentag Watch AppTests";
 			sourceTree = "<group>";
 		};
-		B50000000000000000000003 /* Tagbogen */ = {
+		B50000000000000000000003 /* Bogentag */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Tagbogen;
+			path = Bogentag;
 			sourceTree = "<group>";
 		};
-		B50000000000000000000004 /* TagbogenWidgets */ = {
+		B50000000000000000000004 /* BogentagWidgets */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = TagbogenWidgets;
+			path = BogentagWidgets;
 			sourceTree = "<group>";
 		};
-		B50000000000000000000006 /* TagbogenPhoneWidgets */ = {
+		B50000000000000000000006 /* BogentagPhoneWidgets */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = TagbogenPhoneWidgets;
+			path = BogentagPhoneWidgets;
 			sourceTree = "<group>";
 		};
 		B50000000000000000000005 /* Shared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				BF0000000000000000000001 /* Exceptions for "Shared" folder in "TagbogenWidgets" target */,
-				BF0000000000000000000002 /* Exceptions for "Shared" folder in "TagbogenPhoneWidgets" target */,
+				BF0000000000000000000001 /* Exceptions for "Shared" folder in "BogentagWidgets" target */,
+				BF0000000000000000000002 /* Exceptions for "Shared" folder in "BogentagPhoneWidgets" target */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -217,11 +217,11 @@
 			isa = PBXGroup;
 			children = (
 				B50000000000000000000005 /* Shared */,
-				B50000000000000000000003 /* Tagbogen */,
-				B50000000000000000000001 /* Tagbogen Watch App */,
-				B50000000000000000000002 /* Tagbogen Watch AppTests */,
-				B50000000000000000000004 /* TagbogenWidgets */,
-				B50000000000000000000006 /* TagbogenPhoneWidgets */,
+				B50000000000000000000003 /* Bogentag */,
+				B50000000000000000000001 /* Bogentag Watch App */,
+				B50000000000000000000002 /* Bogentag Watch AppTests */,
+				B50000000000000000000004 /* BogentagWidgets */,
+				B50000000000000000000006 /* BogentagPhoneWidgets */,
 				B70000000000000000000003 /* Config */,
 				B70000000000000000000002 /* Products */,
 			);
@@ -230,11 +230,11 @@
 		B70000000000000000000002 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B20000000000000000000001 /* Tagbogen Watch App.app */,
-				B20000000000000000000002 /* Tagbogen Watch AppTests.xctest */,
-				B20000000000000000000005 /* Tagbogen.app */,
-				B20000000000000000000006 /* TagbogenWidgets.appex */,
-				B20000000000000000000008 /* TagbogenPhoneWidgets.appex */,
+				B20000000000000000000001 /* Bogentag Watch App.app */,
+				B20000000000000000000002 /* Bogentag Watch AppTests.xctest */,
+				B20000000000000000000005 /* Bogentag.app */,
+				B20000000000000000000006 /* BogentagWidgets.appex */,
+				B20000000000000000000008 /* BogentagPhoneWidgets.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -242,7 +242,7 @@
 		B70000000000000000000003 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				B20000000000000000000003 /* Tagbogen.xcconfig */,
+				B20000000000000000000003 /* Bogentag.xcconfig */,
 				B20000000000000000000004 /* Version.xcconfig */,
 				B20000000000000000000007 /* Widgets-Info.plist */,
 			);
@@ -252,9 +252,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B80000000000000000000001 /* Tagbogen Watch App */ = {
+		B80000000000000000000001 /* Bogentag Watch App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE0000000000000000000002 /* Build configuration list for PBXNativeTarget "Tagbogen Watch App" */;
+			buildConfigurationList = BE0000000000000000000002 /* Build configuration list for PBXNativeTarget "Bogentag Watch App" */;
 			buildPhases = (
 				BA0000000000000000000001 /* Sources */,
 				B60000000000000000000001 /* Frameworks */,
@@ -267,21 +267,21 @@
 				BD0000000000000000000003 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				B50000000000000000000001 /* Tagbogen Watch App */,
+				B50000000000000000000001 /* Bogentag Watch App */,
 				B50000000000000000000005 /* Shared */,
 			);
-			name = "Tagbogen Watch App";
+			name = "Bogentag Watch App";
 			packageProductDependencies = (
 				BC0000000000000000000001 /* Bogenzeit */,
 				BC0000000000000000000005 /* BogenzeitUI */,
 			);
-			productName = "Tagbogen Watch App";
-			productReference = B20000000000000000000001 /* Tagbogen Watch App.app */;
+			productName = "Bogentag Watch App";
+			productReference = B20000000000000000000001 /* Bogentag Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B80000000000000000000002 /* Tagbogen Watch AppTests */ = {
+		B80000000000000000000002 /* Bogentag Watch AppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE0000000000000000000003 /* Build configuration list for PBXNativeTarget "Tagbogen Watch AppTests" */;
+			buildConfigurationList = BE0000000000000000000003 /* Build configuration list for PBXNativeTarget "Bogentag Watch AppTests" */;
 			buildPhases = (
 				BA0000000000000000000002 /* Sources */,
 				B60000000000000000000002 /* Frameworks */,
@@ -293,16 +293,16 @@
 				BD0000000000000000000001 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				B50000000000000000000002 /* Tagbogen Watch AppTests */,
+				B50000000000000000000002 /* Bogentag Watch AppTests */,
 			);
-			name = "Tagbogen Watch AppTests";
-			productName = "Tagbogen Watch AppTests";
-			productReference = B20000000000000000000002 /* Tagbogen Watch AppTests.xctest */;
+			name = "Bogentag Watch AppTests";
+			productName = "Bogentag Watch AppTests";
+			productReference = B20000000000000000000002 /* Bogentag Watch AppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		B80000000000000000000003 /* Tagbogen */ = {
+		B80000000000000000000003 /* Bogentag */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE0000000000000000000004 /* Build configuration list for PBXNativeTarget "Tagbogen" */;
+			buildConfigurationList = BE0000000000000000000004 /* Build configuration list for PBXNativeTarget "Bogentag" */;
 			buildPhases = (
 				BA0000000000000000000004 /* Sources */,
 				B60000000000000000000004 /* Frameworks */,
@@ -317,21 +317,21 @@
 				BD0000000000000000000004 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				B50000000000000000000003 /* Tagbogen */,
+				B50000000000000000000003 /* Bogentag */,
 				B50000000000000000000005 /* Shared */,
 			);
-			name = Tagbogen;
+			name = Bogentag;
 			packageProductDependencies = (
 				BC0000000000000000000002 /* Bogenzeit */,
 				BC0000000000000000000006 /* BogenzeitUI */,
 			);
-			productName = Tagbogen;
-			productReference = B20000000000000000000005 /* Tagbogen.app */;
+			productName = Bogentag;
+			productReference = B20000000000000000000005 /* Bogentag.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B80000000000000000000004 /* TagbogenWidgets */ = {
+		B80000000000000000000004 /* BogentagWidgets */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE0000000000000000000005 /* Build configuration list for PBXNativeTarget "TagbogenWidgets" */;
+			buildConfigurationList = BE0000000000000000000005 /* Build configuration list for PBXNativeTarget "BogentagWidgets" */;
 			buildPhases = (
 				BA0000000000000000000003 /* Sources */,
 				B60000000000000000000003 /* Frameworks */,
@@ -342,20 +342,20 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				B50000000000000000000004 /* TagbogenWidgets */,
+				B50000000000000000000004 /* BogentagWidgets */,
 			);
-			name = TagbogenWidgets;
+			name = BogentagWidgets;
 			packageProductDependencies = (
 				BC0000000000000000000003 /* Bogenzeit */,
 				BC0000000000000000000007 /* BogenzeitUI */,
 			);
-			productName = TagbogenWidgets;
-			productReference = B20000000000000000000006 /* TagbogenWidgets.appex */;
+			productName = BogentagWidgets;
+			productReference = B20000000000000000000006 /* BogentagWidgets.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		B80000000000000000000005 /* TagbogenPhoneWidgets */ = {
+		B80000000000000000000005 /* BogentagPhoneWidgets */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE0000000000000000000006 /* Build configuration list for PBXNativeTarget "TagbogenPhoneWidgets" */;
+			buildConfigurationList = BE0000000000000000000006 /* Build configuration list for PBXNativeTarget "BogentagPhoneWidgets" */;
 			buildPhases = (
 				BA0000000000000000000005 /* Sources */,
 				B60000000000000000000005 /* Frameworks */,
@@ -366,15 +366,15 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				B50000000000000000000006 /* TagbogenPhoneWidgets */,
+				B50000000000000000000006 /* BogentagPhoneWidgets */,
 			);
-			name = TagbogenPhoneWidgets;
+			name = BogentagPhoneWidgets;
 			packageProductDependencies = (
 				BC0000000000000000000004 /* Bogenzeit */,
 				BC0000000000000000000008 /* BogenzeitUI */,
 			);
-			productName = TagbogenPhoneWidgets;
-			productReference = B20000000000000000000008 /* TagbogenPhoneWidgets.appex */;
+			productName = BogentagPhoneWidgets;
+			productReference = B20000000000000000000008 /* BogentagPhoneWidgets.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -405,7 +405,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BE0000000000000000000001 /* Build configuration list for PBXProject "Tagbogen" */;
+			buildConfigurationList = BE0000000000000000000001 /* Build configuration list for PBXProject "Bogentag" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -422,11 +422,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B80000000000000000000003 /* Tagbogen */,
-				B80000000000000000000001 /* Tagbogen Watch App */,
-				B80000000000000000000002 /* Tagbogen Watch AppTests */,
-				B80000000000000000000004 /* TagbogenWidgets */,
-				B80000000000000000000005 /* TagbogenPhoneWidgets */,
+				B80000000000000000000003 /* Bogentag */,
+				B80000000000000000000001 /* Bogentag Watch App */,
+				B80000000000000000000002 /* Bogentag Watch AppTests */,
+				B80000000000000000000004 /* BogentagWidgets */,
+				B80000000000000000000005 /* BogentagPhoneWidgets */,
 			);
 		};
 /* End PBXProject section */
@@ -510,22 +510,22 @@
 /* Begin PBXTargetDependency section */
 		BD0000000000000000000001 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B80000000000000000000001 /* Tagbogen Watch App */;
+			target = B80000000000000000000001 /* Bogentag Watch App */;
 			targetProxy = B30000000000000000000001 /* PBXContainerItemProxy */;
 		};
 		BD0000000000000000000002 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B80000000000000000000001 /* Tagbogen Watch App */;
+			target = B80000000000000000000001 /* Bogentag Watch App */;
 			targetProxy = B30000000000000000000002 /* PBXContainerItemProxy */;
 		};
 		BD0000000000000000000003 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B80000000000000000000004 /* TagbogenWidgets */;
+			target = B80000000000000000000004 /* BogentagWidgets */;
 			targetProxy = B30000000000000000000003 /* PBXContainerItemProxy */;
 		};
 		BD0000000000000000000004 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B80000000000000000000005 /* TagbogenPhoneWidgets */;
+			target = B80000000000000000000005 /* BogentagPhoneWidgets */;
 			targetProxy = B30000000000000000000004 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -533,7 +533,7 @@
 /* Begin XCBuildConfiguration section */
 		BE1000000000000000000001 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B20000000000000000000003 /* Tagbogen.xcconfig */;
+			baseConfigurationReference = B20000000000000000000003 /* Bogentag.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -552,7 +552,7 @@
 		};
 		BE1000000000000000000002 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B20000000000000000000003 /* Tagbogen.xcconfig */;
+			baseConfigurationReference = B20000000000000000000003 /* Bogentag.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -574,18 +574,18 @@
 				CODE_SIGN_ENTITLEMENTS = Config/AppGroup.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(TAGBOGEN_DISPLAY_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(BOGENTAG_DISPLAY_NAME)";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Tagbogen reads the Sun's arc for where you are.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Bogentag reads the Sun's arc for where you are.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKApplication = YES;
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(TAGBOGEN_CONTAINER_BUNDLE_ID)";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(BOGENTAG_CONTAINER_BUNDLE_ID)";
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_BUNDLE_ID)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BOGENTAG_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -599,18 +599,18 @@
 				CODE_SIGN_ENTITLEMENTS = Config/AppGroup.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(TAGBOGEN_DISPLAY_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(BOGENTAG_DISPLAY_NAME)";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Tagbogen reads the Sun's arc for where you are.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Bogentag reads the Sun's arc for where you are.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKApplication = YES;
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(TAGBOGEN_CONTAINER_BUNDLE_ID)";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(BOGENTAG_CONTAINER_BUNDLE_ID)";
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_BUNDLE_ID)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BOGENTAG_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -622,9 +622,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_BUNDLE_ID).tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BOGENTAG_BUNDLE_ID).tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tagbogen Watch App.app/Tagbogen Watch App";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bogentag Watch App.app/Bogentag Watch App";
 			};
 			name = Debug;
 		};
@@ -634,9 +634,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_BUNDLE_ID).tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BOGENTAG_BUNDLE_ID).tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tagbogen Watch App.app/Tagbogen Watch App";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bogentag Watch App.app/Bogentag Watch App";
 			};
 			name = Release;
 		};
@@ -648,9 +648,9 @@
 				CODE_SIGN_ENTITLEMENTS = Config/AppGroup.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(TAGBOGEN_DISPLAY_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(BOGENTAG_DISPLAY_NAME)";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Tagbogen reads the Sun's arc for where you are.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Bogentag reads the Sun's arc for where you are.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -661,7 +661,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_CONTAINER_BUNDLE_ID)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BOGENTAG_CONTAINER_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -676,9 +676,9 @@
 				CODE_SIGN_ENTITLEMENTS = Config/AppGroup.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "$(TAGBOGEN_DISPLAY_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(BOGENTAG_DISPLAY_NAME)";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Tagbogen reads the Sun's arc for where you are.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Bogentag reads the Sun's arc for where you are.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -689,7 +689,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_CONTAINER_BUNDLE_ID)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BOGENTAG_CONTAINER_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -705,13 +705,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Config/Widgets-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = TagbogenWidgets;
+				INFOPLIST_KEY_CFBundleDisplayName = BogentagWidgets;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_BUNDLE_ID).widgets";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BOGENTAG_BUNDLE_ID).widgets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -725,13 +725,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Config/Widgets-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = TagbogenWidgets;
+				INFOPLIST_KEY_CFBundleDisplayName = BogentagWidgets;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_BUNDLE_ID).widgets";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BOGENTAG_BUNDLE_ID).widgets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -745,14 +745,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Config/Widgets-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = TagbogenPhoneWidgets;
+				INFOPLIST_KEY_CFBundleDisplayName = BogentagPhoneWidgets;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_CONTAINER_BUNDLE_ID).widgets";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BOGENTAG_CONTAINER_BUNDLE_ID).widgets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -768,14 +768,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Config/Widgets-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = TagbogenPhoneWidgets;
+				INFOPLIST_KEY_CFBundleDisplayName = BogentagPhoneWidgets;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(TAGBOGEN_CONTAINER_BUNDLE_ID).widgets";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BOGENTAG_CONTAINER_BUNDLE_ID).widgets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -787,7 +787,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BE0000000000000000000001 /* Build configuration list for PBXProject "Tagbogen" */ = {
+		BE0000000000000000000001 /* Build configuration list for PBXProject "Bogentag" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE1000000000000000000001 /* Debug */,
@@ -796,7 +796,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BE0000000000000000000002 /* Build configuration list for PBXNativeTarget "Tagbogen Watch App" */ = {
+		BE0000000000000000000002 /* Build configuration list for PBXNativeTarget "Bogentag Watch App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE1000000000000000000003 /* Debug */,
@@ -805,7 +805,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BE0000000000000000000003 /* Build configuration list for PBXNativeTarget "Tagbogen Watch AppTests" */ = {
+		BE0000000000000000000003 /* Build configuration list for PBXNativeTarget "Bogentag Watch AppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE1000000000000000000005 /* Debug */,
@@ -814,7 +814,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BE0000000000000000000004 /* Build configuration list for PBXNativeTarget "Tagbogen" */ = {
+		BE0000000000000000000004 /* Build configuration list for PBXNativeTarget "Bogentag" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE1000000000000000000007 /* Debug */,
@@ -823,7 +823,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BE0000000000000000000005 /* Build configuration list for PBXNativeTarget "TagbogenWidgets" */ = {
+		BE0000000000000000000005 /* Build configuration list for PBXNativeTarget "BogentagWidgets" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE1000000000000000000009 /* Debug */,
@@ -832,7 +832,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BE0000000000000000000006 /* Build configuration list for PBXNativeTarget "TagbogenPhoneWidgets" */ = {
+		BE0000000000000000000006 /* Build configuration list for PBXNativeTarget "BogentagPhoneWidgets" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE1000000000000000000011 /* Debug */,
