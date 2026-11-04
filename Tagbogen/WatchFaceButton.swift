@@ -4,10 +4,12 @@
 
 import ClockKit
 import SwiftUI
+import UIKit
 
 /// Offers the bundled `Tagbogen.watchface`, an Apple face preset carrying the
 /// Tagbogen complications, for adding to the paired watch. The button exists
-/// only when the file is in the bundle. Apple accepts a face only when its
+/// only on an iPhone, the one device a watch pairs with, and only when the
+/// file is in the bundle. Apple accepts a face only when its
 /// complications come from an app with an App Store id, so the file is made
 /// from a TestFlight or App Store build and never from a development one.
 struct WatchFaceButton: View {
@@ -16,7 +18,7 @@ struct WatchFaceButton: View {
     @State private var failure: String?
 
     var body: some View {
-        if let face = Self.face {
+        if let face = Self.face, UIDevice.current.userInterfaceIdiom == .phone {
             Button("Add the Tagbogen watch face") {
                 CLKWatchFaceLibrary().addWatchFace(at: face) { error in
                     let message = error?.localizedDescription

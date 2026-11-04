@@ -8,7 +8,7 @@
 # description 4,000, apple-review-notes 4,000.
 
 apple-review-notes = """
-Tagbogen shows the time as the Sun's position on its daily arc rather than as hours and minutes. It is an Apple Watch app with complications, delivered inside an iPhone app that shows the same dial and explains the system. Each works on its own: the watch app needs no iPhone nearby, and neither needs an account or a network connection.
+Tagbogen shows the time as the Sun's position on its daily arc rather than as hours and minutes. It is an Apple Watch app with complications, delivered inside an iPhone and iPad app that shows the same dial and explains the system. Each works on its own: the watch app needs no iPhone nearby, and neither needs an account or a network connection.
 
 PERMISSIONS
 On first open, each app asks for Location (while using the app). The Sun's path depends on where you are, so Tagbogen reads the device's position once, and again only after you have moved more than ten kilometres. Without the permission it explains what it needs and shows nothing else.
@@ -16,10 +16,10 @@ On first open, each app asks for Location (while using the app). The Sun's path 
 WHAT YOU WILL SEE
 The dial is a sky: blue above the horizon, bands of twilight below it, night at the bottom, with the Sun travelling a ring. A ring symbol with a dot marks solar noon at the top; the same ring without the dot marks solar midnight at the bottom. In the centre, a number beside the symbol says where the Sun is in spans, a hundred spans between sunrise and noon and a hundred between noon and sunset: 18 before the symbol means eighteen spans before solar noon. For the first moments after sunrise and sunset, a triangle pointing up or down stands in place of the number. Under it is the name of the current quarter of the day. On the Kiloseconds dial the number is the time from solar noon or midnight in kiloseconds instead.
 
-WHAT TO TRY ON IPHONE
+WHAT TO TRY ON IPHONE AND IPAD
 1. On first launch an eight-page explainer opens; the About Bogenzeit button reopens it.
 2. Tap the dial: UTC, the local time with its zone, the date and today's sunrise and sunset appear over it. Tap again to return.
-3. The two rows under the dial choose between the Spans dial, which draws every day the same shape, and the Kiloseconds dial, on which the Sun moves evenly and the horizon moves with the season, and the precision of the reading: whole spans or up to two decimals, or one to three decimals of a kilosecond. Each dial shows its reading in its own unit only.
+3. The two rows under the dial (beside it, with the iPad turned sideways) choose between the Spans dial, which draws every day the same shape, and the Kiloseconds dial, on which the Sun moves evenly and the horizon moves with the season, and the precision of the reading: whole spans or up to two decimals, or one to three decimals of a kilosecond. Each dial shows its reading in its own unit only.
 
 ON APPLE WATCH
 Turn the Digital Crown: the dial, a page with today's figures (the length of the day arc and the night arc, and sunrise, noon, sunset and midnight with their clock times), and Settings with the same two choices. Tap the dial for the clock. Complications are available in the circular, corner, rectangular and inline slots and show the current reading in the unit of the chosen dial; they update when the reading changes, roughly every two to four minutes.
@@ -43,7 +43,7 @@ When you need the clock, tap the dial: UTC, your local time with its zone and of
 
 On Apple Watch, turn the Digital Crown for a page of today's figures, the length of the day arc and the night arc and the clock times of the four events, and for the settings. Complications put the reading on your watch face, in the chosen dial's unit, in the circular, corner, rectangular and inline slots, with a gauge of the Sun's progress along its arc.
 
-The iPhone app shows the same dial, larger, and opens with a short tour of the system: the arc, the two anchors, spans, kiloseconds, how to read the notation, the eight quarters, and why the date changes at solar midnight rather than at twelve o'clock.
+The iPhone and iPad app shows the same dial, larger, and opens with a short tour of the system: the arc, the two anchors, spans, kiloseconds, how to read the notation, the eight quarters, and why the date changes at solar midnight rather than at twelve o'clock.
 
 Tagbogen uses the device's location once, and again only after you have moved more than ten kilometres. It has no account, no network connection, no ads and no analytics.
 """

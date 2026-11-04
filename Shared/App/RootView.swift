@@ -58,16 +58,25 @@ struct RootView: View {
         #endif
     }
 
+    /// The dial above its choices, or beside them in a window wider than tall.
     private var phone: some View {
-        VStack(spacing: 12) {
-            DialScreen()
-                .padding()
-            DialVariantChoice()
-            PrecisionChoice()
-            Button("About Bogenzeit") { showsTour = true }
-                .buttonStyle(ChoiceButtonStyle(selected: false))
-            WatchFaceButton()
-                .padding(.bottom)
+        GeometryReader { geometry in
+            let layout = geometry.size.width > geometry.size.height
+                ? AnyLayout(HStackLayout(spacing: 24))
+                : AnyLayout(VStackLayout(spacing: 12))
+            layout {
+                DialScreen()
+                    .padding()
+                VStack(spacing: 12) {
+                    DialVariantChoice()
+                    PrecisionChoice()
+                    Button("About Bogenzeit") { showsTour = true }
+                        .buttonStyle(ChoiceButtonStyle(selected: false))
+                    WatchFaceButton()
+                        .padding(.bottom)
+                }
+                .frame(maxWidth: 480)
+            }
         }
         .padding(.horizontal)
         .onAppear {
