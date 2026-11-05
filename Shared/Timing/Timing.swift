@@ -35,6 +35,10 @@ enum TimerUnit: String, Codable, CaseIterable, Sendable {
     case spans
     case kiloseconds
 
+    init(_ scale: Scale) {
+        self = scale == .spans ? .spans : .kiloseconds
+    }
+
     var scale: Scale { self == .spans ? .spans : .kiloseconds }
 }
 

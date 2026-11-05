@@ -8,10 +8,10 @@ struct StopwatchScreen: View {
     @Environment(SunLocation.self) private var location
     @Environment(Timing.self) private var timing
     @Environment(\.isLuminanceReduced) private var isLuminanceReduced
-    @AppStorage(Settings.precisionKey) private var storedPrecision = Precision.standard.rawValue
+    @AppStorage(Settings.dialVariantKey, store: AppGroup.defaults) private var variant = Scale.spans.rawValue
 
     private var precision: Precision {
-        Precision.shown(storedPrecision, dimmed: isLuminanceReduced)
+        isLuminanceReduced ? .low : .high
     }
 
     var body: some View {
@@ -36,10 +36,11 @@ struct StopwatchScreen: View {
         let elapsed = stopwatch?.elapsed(at: now) ?? .zero
         let running = stopwatch?.since != nil
         TimingCaption("STOPWATCH")
-        big(elapsed)
-        if elapsed.spans != nil {
-            TimingCaption(AmountText.amount(elapsed.seconds, .kiloseconds, precision, .down))
-        }
+        let shown = AmountText.number(amount(elapsed), unit(elapsed), precision, .down)
+        Numerals.text(shown, unit: AmountText.unit(shown, unit(elapsed)), size: TimingSize.big)
+            .foregroundStyle(Palette.line)
+            .lineLimit(1)
+            .minimumScaleFactor(0.6)
         HStack(spacing: 6) {
             if running {
                 Button("Stop") { timing.stopStopwatch(at: now) }
@@ -62,13 +63,12 @@ struct StopwatchScreen: View {
         }
     }
 
-    private func big(_ elapsed: Elapsed) -> some View {
-        let unit: TimerUnit = elapsed.spans == nil ? .kiloseconds : .spans
-        let shown = AmountText.number(elapsed.spans ?? elapsed.seconds, unit, precision, .down)
-        return Numerals.text(shown, unit: AmountText.unit(shown, unit), size: TimingSize.big)
-            .foregroundStyle(Palette.line)
-            .lineLimit(1)
-            .minimumScaleFactor(0.6)
+    private func unit(_ elapsed: Elapsed) -> TimerUnit {
+        elapsed.spans == nil ? .kiloseconds : TimerUnit(Scale(rawValue: variant) ?? .spans)
+    }
+
+    private func amount(_ elapsed: Elapsed) -> Double {
+        unit(elapsed) == .spans ? elapsed.spans ?? 0 : elapsed.seconds
     }
 
     private func lap(_ number: Int, _ split: Elapsed) -> some View {
@@ -76,12 +76,8 @@ struct StopwatchScreen: View {
             Text("Lap \(number)")
                 .foregroundStyle(Palette.label)
             Spacer()
-            if let spans = split.spans {
-                Text(AmountText.amount(spans, .spans, precision, .down))
-                    .foregroundStyle(Palette.line)
-            }
-            Text(AmountText.amount(split.seconds, .kiloseconds, precision, .down))
-                .foregroundStyle(Palette.secondary)
+            Text(AmountText.amount(amount(split), unit(split), precision, .down))
+                .foregroundStyle(Palette.line)
         }
         .font(.footnote.monospacedDigit())
         .lineLimit(1)
