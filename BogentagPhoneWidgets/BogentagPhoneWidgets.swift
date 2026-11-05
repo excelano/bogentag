@@ -89,7 +89,7 @@ struct PhoneReadingWidget: Widget {
 
 struct PhoneEighthWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "Quarter", provider: ArcProvider()) { entry in
+        StaticConfiguration(kind: "Eighth", provider: ArcProvider()) { entry in
             PhoneSlotView(entry: entry) { reading, variant, slot in AnyView(EighthComplication(reading: reading, variant: variant, slot: slot)) }
                 .containerBackground(.fill.tertiary, for: .widget)
         }

@@ -73,7 +73,7 @@ struct ReadingWidgetView: View {
 
 struct EighthWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "Quarter", provider: ArcProvider()) { entry in
+        StaticConfiguration(kind: "Eighth", provider: ArcProvider()) { entry in
             EighthWidgetView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
