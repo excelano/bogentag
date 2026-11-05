@@ -29,8 +29,8 @@ Location is read on the device and the coordinates in use are kept in the app's 
 """
 
 [locales."en-us"]
-website = "https://github.com/excelano/bogentag"
-support = "https://github.com/excelano/bogentag"
+website = "https://anderix.com/bogentag/"
+support = "https://excelano.com/support/?app=Bogentag&channel=App%20Store"
 privacy = "https://excelano.com/legal/#bogentag"
 description = """
 Bogentag tells time by the Sun. Instead of hours and minutes it shows where the Sun is on its arc for the day: how far it has climbed from sunrise, how long until solar noon, how far it has fallen toward sunset, and at night how far it has sunk toward solar midnight and how far it has come back. Every reading is computed from your position, offline, on the device in your hand or on your wrist.
