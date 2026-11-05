@@ -2,9 +2,9 @@
 # against the release being cut, so notes left from last time stop the release
 # rather than reaching the listing.
 
-version = "1.2.3"
+version = "1.2.4"
 
 [locales."en-us"]
 whats-new = """
-The first-run walkthrough gives the four quarters of the day and the eight eighths a page each, so every label on the eighths wheel is in view.
+The eight named parts of the day (Afterrise to Forerise) are now called eighths everywhere, matching the Bogenzeit standard: the Quarter widget and complication are now Eighth. If you had placed one, add the Eighth widget again.
 """
