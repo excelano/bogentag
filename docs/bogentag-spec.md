@@ -69,9 +69,10 @@ The app explains Bogenzeit to someone with no context. Planned topics:
 3. Spans: 100 per half-arc, stretching with the seasons.
 4. Kiloseconds: the fixed-length counterpart.
 5. Reading the notation: number left of the glyph = before, right = after.
-6. The eight quarters.
-7. Why the date changes at ○.
-8. Tap for civil time.
+6. The four quarters: morning, afternoon, evening, night.
+7. The eight eighths, Afterrise to Forerise.
+8. Why the date changes at ○.
+9. Tap for civil time.
 
 ---
 

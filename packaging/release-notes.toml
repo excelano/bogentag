@@ -2,9 +2,9 @@
 # against the release being cut, so notes left from last time stop the release
 # rather than reaching the listing.
 
-version = "1.2.2"
+version = "1.2.3"
 
 [locales."en-us"]
 whats-new = """
-The first-run walkthrough now introduces the four quarters of the day (morning, afternoon, evening, night) and then the eight finer eighths beneath them, matching the current Bogenzeit terms.
+The first-run walkthrough gives the four quarters of the day and the eight eighths a page each, so every label on the eighths wheel is in view.
 """

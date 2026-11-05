@@ -6,7 +6,7 @@ import Bogenzeit
 import BogenzeitUI
 import SwiftUI
 
-/// The explainer (Bogentag spec §5): eight pages, one per topic, each with
+/// The explainer (Bogentag spec §5): nine pages, one per topic, each with
 /// a live piece of the dial computed for the place in use, so the numbers on
 /// the page are the reader's own.
 struct TourView: View {
@@ -18,16 +18,18 @@ struct TourView: View {
         let place = location.place ?? Demo.place
         let now = Demo.now(.now)
         let reading = Reading(at: now, latitude: place.latitude, longitude: place.longitude)
+        let pages = pages(reading)
+        let last = pages.count - 1
         VStack(spacing: 0) {
             TabView(selection: $page) {
-                ForEach(Array(pages(reading).enumerated()), id: \.offset) { index, page in
+                ForEach(Array(pages.enumerated()), id: \.offset) { index, page in
                     page.tag(index)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .always))
             .indexViewStyle(.page(backgroundDisplayMode: .always))
-            Button(page == 7 ? "Done" : "Skip") { dismiss() }
-                .buttonStyle(ChoiceButtonStyle(selected: page == 7))
+            Button(page == last ? "Done" : "Skip") { dismiss() }
+                .buttonStyle(ChoiceButtonStyle(selected: page == last))
                 .padding()
         }
         .background(Palette.night)
@@ -83,10 +85,15 @@ struct TourView: View {
                     NotationExample(number: nil, glyph: .sunset, before: false, meaning: "sunset")
                 }
             },
-            TourPage(title: "Quarters and eighths", text: """
-            Before and after each anchor are the parts of the day you already name: before {noon} the morning, after it the afternoon; before {midnight} the evening, after it the night. The reading gives you these four quarters on its own — the glyph, and the side the number sits on. Halve each at its 50-span mark and you have the eight eighths the dial labels, named for the nearest event, Fore- before it and After- after it: Afterrise, Forenoon, Afternoon, Foreset by day; Afterset, Foremid, Aftermid, Forerise by night.
+            TourPage(title: "Four quarters", text: """
+            Before and after each anchor are the parts of the day you already name: before {noon} the morning, after it the afternoon; before {midnight} the evening, after it the night. The reading gives you these four quarters on its own, in the glyph and the side the number sits on.
             """) {
-                EighthWheel()
+                ArcWheel(names: ArcWheel.quarters)
+            },
+            TourPage(title: "Eight eighths", text: """
+            Halve each quarter at its 50-span mark and you have the eight eighths the dial labels, each named for the nearest event: Fore- before it, After- after it. By day: Afterrise, Forenoon, Afternoon, Foreset. By night: Afterset, Foremid, Aftermid, Forerise.
+            """) {
+                ArcWheel(names: ArcWheel.eighths)
             },
             TourPage(title: "The date turns at solar midnight", text: """
             A Bogenzeit day runs from one solar midnight to the next, so the date changes at {midnight} rather than at 00:00. Tonight {midnight} falls at \(Labels.clock(day.midnightEnd)); until then it is still \(Labels.day(day.day)) here, whatever the calendar says.
@@ -170,11 +177,18 @@ struct NotationExample: View {
     }
 }
 
-struct EighthWheel: View {
-    private static let names: [(String, Double)] = [
+/// The day's parts around a ring, ☉ on top and ○ below, each name at its
+/// angle clockwise from ☉; the quarter boundaries solid, the eighth ones dotted.
+struct ArcWheel: View {
+    static let quarters: [(String, Double)] = [
+        ("Morning", -45), ("Afternoon", 45), ("Evening", 135), ("Night", 225),
+    ]
+    static let eighths: [(String, Double)] = [
         ("Forenoon", -22.5), ("Afternoon", 22.5), ("Foreset", 67.5), ("Afterset", 112.5),
         ("Foremid", 157.5), ("Aftermid", 202.5), ("Forerise", 247.5), ("Afterrise", 292.5),
     ]
+
+    let names: [(String, Double)]
 
     var body: some View {
         GeometryReader { geometry in
@@ -184,7 +198,7 @@ struct EighthWheel: View {
                 Circle().stroke(Palette.line.opacity(0.25), lineWidth: 1).frame(width: 2 * r, height: 2 * r)
                 Rectangle().fill(Palette.line.opacity(0.5)).frame(width: 2 * r, height: 1)
                 Rectangle().fill(Palette.line.opacity(0.5)).frame(width: 1, height: 2 * r)
-                ForEach([45.0, 135.0], id: \.self) { angle in
+                ForEach(names.count == 8 ? [45.0, 135.0] : [], id: \.self) { angle in
                     Path { p in
                         p.move(to: CGPoint(x: c.x, y: c.y - r))
                         p.addLine(to: CGPoint(x: c.x, y: c.y + r))
@@ -196,7 +210,7 @@ struct EighthWheel: View {
                 GlyphView(.midnight, radius: 9, lineWidth: 2.2, color: Palette.line).position(x: c.x, y: c.y + r + 16)
                 GlyphView(.sunrise, radius: 9, lineWidth: 2.2, color: Palette.line).position(x: c.x - r - 16, y: c.y)
                 GlyphView(.sunset, radius: 9, lineWidth: 2.2, color: Palette.line).position(x: c.x + r + 16, y: c.y)
-                ForEach(Self.names, id: \.0) { name, angle in
+                ForEach(names, id: \.0) { name, angle in
                     let a = angle * .pi / 180
                     Text(name)
                         .font(.footnote.weight(.medium))
