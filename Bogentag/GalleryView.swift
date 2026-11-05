@@ -13,7 +13,7 @@ struct GalleryView: View {
 
     private let kinds: [(String, (Reading, ComplicationSlot) -> AnyView)] = [
         ("Reading", { AnyView(ReadingComplication(reading: $0, variant: Settings.dialVariant, slot: $1)) }),
-        ("Quarter", { AnyView(QuarterComplication(reading: $0, variant: Settings.dialVariant, slot: $1)) }),
+        ("Eighth", { AnyView(EighthComplication(reading: $0, variant: Settings.dialVariant, slot: $1)) }),
         ("Dial", { AnyView(DialComplication(reading: $0, variant: Settings.dialVariant, slot: $1)) }),
         ("Gauge", { AnyView(GaugeComplication(reading: $0, variant: Settings.dialVariant, slot: $1)) }),
         ("Next", { AnyView(HorizonComplication(reading: $0, variant: Settings.dialVariant, slot: $1)) }),

@@ -15,12 +15,12 @@ final class DialModelTests: XCTestCase {
         let m = DialModel(reading: houston, variant: .kiloseconds)
         XCTAssertEqual(m.sunAngle, -14.27, accuracy: 0.05)
         XCTAssertEqual(m.sunsetAngle!, 82.64, accuracy: 0.05)
-        XCTAssertEqual(m.quarterAngles[0], 41.32, accuracy: 0.05)
-        XCTAssertEqual(m.quarterAngles[2], 131.32, accuracy: 0.05)
+        XCTAssertEqual(m.eighthAngles[0], 41.32, accuracy: 0.05)
+        XCTAssertEqual(m.eighthAngles[2], 131.32, accuracy: 0.05)
         XCTAssertEqual(m.ringTicks.count, 87)
         XCTAssertEqual(m.ringTicks.filter(\.major).count, 18)
-        XCTAssertEqual(m.quarterArc!.start, 318.68, accuracy: 0.05)
-        XCTAssertEqual(m.quarterArc!.end, 360)
+        XCTAssertEqual(m.eighthArc!.start, 318.68, accuracy: 0.05)
+        XCTAssertEqual(m.eighthArc!.end, 360)
         XCTAssertFalse(m.usesSpanGeometry)
     }
 
@@ -28,12 +28,12 @@ final class DialModelTests: XCTestCase {
         let m = DialModel(reading: houston, variant: .spans)
         XCTAssertEqual(m.sunAngle, -15.55, accuracy: 0.05)
         XCTAssertEqual(m.sunsetAngle, 90)
-        XCTAssertEqual(m.quarterAngles, [45, -45, 135, -135])
+        XCTAssertEqual(m.eighthAngles, [45, -45, 135, -135])
         XCTAssertEqual(m.civilAngle!, 95.69, accuracy: 0.1)
         XCTAssertEqual(m.ringTicks.count, 40)
         XCTAssertEqual(m.ringTicks.filter(\.major).map(\.angle), [0, 45, 90, 135, 180, 225, 270, 315])
-        XCTAssertEqual(m.quarterArc?.start, 315)
-        XCTAssertEqual(m.quarterArc?.end, 360)
+        XCTAssertEqual(m.eighthArc?.start, 315)
+        XCTAssertEqual(m.eighthArc?.end, 360)
         XCTAssertTrue(m.usesSpanGeometry)
     }
 
@@ -42,8 +42,8 @@ final class DialModelTests: XCTestCase {
         let fixed = DialModel(reading: tromso, variant: .kiloseconds)
         let span = DialModel(reading: tromso, variant: .spans)
         XCTAssertNil(fixed.sunsetAngle)
-        XCTAssertTrue(fixed.quarterAngles.isEmpty)
-        XCTAssertNil(fixed.quarterArc)
+        XCTAssertTrue(fixed.eighthAngles.isEmpty)
+        XCTAssertNil(fixed.eighthArc)
         XCTAssertEqual(span.sunAngle, fixed.sunAngle)
         XCTAssertFalse(span.usesSpanGeometry)
     }

@@ -114,8 +114,8 @@ enum Complications {
         position(reading, variant).text
     }
 
-    static func quarter(_ reading: Reading) -> String {
-        reading.quarter?.name ?? (reading.polar == .alwaysAbove ? "Polar day" : "Polar night")
+    static func eighth(_ reading: Reading) -> String {
+        reading.eighth?.name ?? (reading.polar == .alwaysAbove ? "Polar day" : "Polar night")
     }
 
     /// How far along its arc the Sun is, sunrise to sunset or sunset to sunrise.
@@ -146,8 +146,8 @@ struct ReadingComplication: View {
     }
 }
 
-/// The reading with the quarter it falls in.
-struct QuarterComplication: View {
+/// The reading with the eighth it falls in.
+struct EighthComplication: View {
     let reading: Reading
     let variant: Scale
     let slot: ComplicationSlot
@@ -160,7 +160,7 @@ struct QuarterComplication: View {
                     ReadingText(reading: reading, variant: variant, size: 28)
                         .layoutPriority(1)
                     Spacer(minLength: 8)
-                    Text(Complications.quarter(reading))
+                    Text(Complications.eighth(reading))
                         .font(.headline)
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
@@ -174,7 +174,7 @@ struct QuarterComplication: View {
         case .circular:
             VStack(spacing: 0) {
                 ReadingText(reading: reading, variant: variant, size: 15)
-                Text(Complications.quarter(reading).uppercased())
+                Text(Complications.eighth(reading).uppercased())
                     .font(.system(size: 8, weight: .semibold))
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
@@ -182,7 +182,7 @@ struct QuarterComplication: View {
         case .corner:
             GlyphView(Complications.position(reading, variant).glyph, radius: 10, lineWidth: 2.4, color: .primary)
         case .inline:
-            Text("\(Complications.plain(reading, variant)) \(Complications.quarter(reading))")
+            Text("\(Complications.plain(reading, variant)) \(Complications.eighth(reading))")
         }
     }
 }
@@ -209,7 +209,7 @@ struct DialComplication: View {
 }
 
 /// The dial without ring or readout: bezel, sky with horizon and twilight,
-/// the lit quarter, the Sun, and the two anchors.
+/// the lit eighth, the Sun, and the two anchors.
 struct MiniDial: View {
     let model: DialModel
     var fullColor = true
@@ -238,7 +238,7 @@ struct MiniDial: View {
         }
 
         context.fill(circle(c, r), with: .color(fullColor ? Palette.bezel : Color.primary.opacity(0.15)))
-        if let arc = model.quarterArc {
+        if let arc = model.eighthArc {
             var lit = Path()
             lit.addArc(center: c, radius: r - r * 0.05, startAngle: .degrees(arc.start - 90), endAngle: .degrees(arc.end - 90), clockwise: false)
             context.stroke(lit, with: .color((fullColor ? Palette.sun : Color.primary).opacity(0.6)), lineWidth: r * 0.1)
@@ -357,7 +357,7 @@ struct HorizonComplication: View {
     }
 }
 
-/// The dial beside the reading, the quarter, the offset and what comes
+/// The dial beside the reading, the eighth, the offset and what comes
 /// next: the Home Screen's medium widget.
 struct DialCard: View {
     let reading: Reading
@@ -368,7 +368,7 @@ struct DialCard: View {
             MiniDial(model: DialModel(reading: reading, variant: variant))
             VStack(alignment: .leading, spacing: 4) {
                 ReadingText(reading: reading, variant: variant, size: 36, color: Palette.line)
-                Text(Complications.quarter(reading).uppercased())
+                Text(Complications.eighth(reading).uppercased())
                     .font(.footnote.weight(.medium))
                     .tracking(1)
                     .foregroundStyle(Palette.label)

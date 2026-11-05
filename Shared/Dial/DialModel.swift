@@ -11,7 +11,7 @@ import Foundation
 /// in the evening, nil when it never gets that low today, and 0 when it is
 /// that low even at noon. The ring's ticks are what the dial's angle
 /// measures: a kilosecond each on the kilosecond dial, ten spans each on the
-/// span dial, with the quarter boundaries long.
+/// span dial, with the eighth boundaries long.
 struct DialModel {
     struct Tick: Equatable {
         let angle: Double
@@ -25,10 +25,10 @@ struct DialModel {
     let civilAngle: Double?
     let nauticalAngle: Double?
     let astronomicalAngle: Double?
-    let quarterAngles: [Double]
+    let eighthAngles: [Double]
     let ringTicks: [Tick]
-    /// The current quarter's start and end angles, clockwise, for lighting its arc.
-    let quarterArc: (start: Double, end: Double)?
+    /// The current eighth's start and end angles, clockwise, for lighting its arc.
+    let eighthArc: (start: Double, end: Double)?
 
     /// The span dial has no span geometry on a polar day and draws kiloseconds instead.
     var usesSpanGeometry: Bool { variant == .spans && reading.polar == nil }
@@ -63,9 +63,9 @@ struct DialModel {
         }
 
         if let h = sunsetAngle, day.polar == nil {
-            quarterAngles = [h / 2, -h / 2, (180 + h) / 2, -(180 + h) / 2]
+            eighthAngles = [h / 2, -h / 2, (180 + h) / 2, -(180 + h) / 2]
         } else {
-            quarterAngles = []
+            eighthAngles = []
         }
 
         var ticks: [Tick] = []
@@ -81,9 +81,9 @@ struct DialModel {
         }
         ringTicks = ticks
 
-        if let h = sunsetAngle, day.polar == nil, let quarter = reading.quarter {
+        if let h = sunsetAngle, day.polar == nil, let eighth = reading.eighth {
             let rise = 360 - h
-            quarterArc = switch quarter {
+            eighthArc = switch eighth {
             case .afterrise: (rise, (rise + 360) / 2)
             case .forenoon: ((rise + 360) / 2, 360)
             case .afternoon: (0, h / 2)
@@ -94,7 +94,7 @@ struct DialModel {
             case .forerise: ((180 + rise) / 2, rise)
             }
         } else {
-            quarterArc = nil
+            eighthArc = nil
         }
     }
 }

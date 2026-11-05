@@ -12,7 +12,7 @@ struct BogentagPhoneWidgets: WidgetBundle {
     var body: some Widget {
         PhoneDialWidget()
         PhoneReadingWidget()
-        PhoneQuarterWidget()
+        PhoneEighthWidget()
         PhoneGaugeWidget()
         PhoneHorizonWidget()
     }
@@ -87,14 +87,14 @@ struct PhoneReadingWidget: Widget {
     }
 }
 
-struct PhoneQuarterWidget: Widget {
+struct PhoneEighthWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "Quarter", provider: ArcProvider()) { entry in
-            PhoneSlotView(entry: entry) { reading, variant, slot in AnyView(QuarterComplication(reading: reading, variant: variant, slot: slot)) }
+            PhoneSlotView(entry: entry) { reading, variant, slot in AnyView(EighthComplication(reading: reading, variant: variant, slot: slot)) }
                 .containerBackground(.fill.tertiary, for: .widget)
         }
-        .configurationDisplayName("Quarter")
-        .description("The reading and the quarter of the day it falls in.")
+        .configurationDisplayName("Eighth")
+        .description("The reading and the eighth of the day it falls in.")
         .supportedFamilies([.accessoryCircular, .accessoryRectangular, .accessoryInline])
     }
 }

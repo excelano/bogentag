@@ -8,7 +8,7 @@ import SwiftUI
 
 /// The dial, drawn to the mockups' 450-unit design and scaled to the space
 /// it is given: bezel and kilosecond ring, the sky with its horizon and
-/// twilight bands, the Sun on its track, quarter ticks, the two anchors,
+/// twilight bands, the Sun on its track, eighth ticks, the two anchors,
 /// and the center readout.
 struct DialView: View {
     let model: DialModel
@@ -76,7 +76,7 @@ struct DialView: View {
 
         context.fill(circle(c, 215), with: .color(Palette.bezel))
 
-        if let arc = model.quarterArc {
+        if let arc = model.eighthArc {
             var lit = Path()
             lit.addArc(center: c, radius: 205 * s, startAngle: .degrees(arc.start - 90), endAngle: .degrees(arc.end - 90), clockwise: false)
             context.stroke(lit, with: .color(Palette.sun.opacity(0.3)), lineWidth: 14 * s)
@@ -119,7 +119,7 @@ struct DialView: View {
         }
         sky.stroke(circle(c, 160), with: .color(Palette.line.opacity(0.25)), lineWidth: 1 * s)
 
-        for angle in model.quarterAngles {
+        for angle in model.eighthAngles {
             context.stroke(line(point(angle, 179), point(angle, 195)), with: .color(Palette.line.opacity(0.8)),
                            style: StrokeStyle(lineWidth: 2.5 * s, lineCap: .round))
         }

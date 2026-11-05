@@ -7,7 +7,7 @@ import BogenzeitUI
 import SwiftUI
 
 /// The center of the dial: the Bogenzeit date, the position in the dial's
-/// own scale with its glyph, and the quarter. The number sits on the side of
+/// own scale with its glyph, and the eighth. The number sits on the side of
 /// the glyph the positional rule gives it (Bogenzeit spec §3.2).
 struct ReadoutView: View {
     let reading: Reading
@@ -84,11 +84,11 @@ struct ReadoutView: View {
     private static let offsetSizes: [CGFloat] = [60, 52, 46]
 
     private var context: String {
-        if let quarter = reading.quarter {
+        if let eighth = reading.eighth {
             if let phase = reading.nightPhase, phase != .night {
-                return "\(quarter.name) | \(phase.name)".uppercased()
+                return "\(eighth.name) | \(phase.name)".uppercased()
             }
-            return quarter.name.uppercased()
+            return eighth.name.uppercased()
         }
         return reading.polar == .alwaysAbove ? "POLAR DAY" : "POLAR NIGHT"
     }

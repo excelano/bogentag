@@ -11,7 +11,7 @@ import WidgetKit
 struct BogentagWidgets: WidgetBundle {
     var body: some Widget {
         ReadingWidget()
-        QuarterWidget()
+        EighthWidget()
         DialWidget()
         GaugeWidget()
         HorizonWidget()
@@ -71,29 +71,29 @@ struct ReadingWidgetView: View {
     }
 }
 
-struct QuarterWidget: Widget {
+struct EighthWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "Quarter", provider: ArcProvider()) { entry in
-            QuarterWidgetView(entry: entry)
+            EighthWidgetView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
-        .configurationDisplayName("Quarter")
-        .description("The reading and the quarter of the day it falls in.")
+        .configurationDisplayName("Eighth")
+        .description("The reading and the eighth of the day it falls in.")
         .supportedFamilies([.accessoryCircular, .accessoryCorner, .accessoryRectangular, .accessoryInline])
     }
 }
 
-struct QuarterWidgetView: View {
+struct EighthWidgetView: View {
     let entry: ArcEntry
     @Environment(\.widgetFamily) private var family
 
     var body: some View {
         if let reading = entry.reading {
             if family == .accessoryCorner {
-                QuarterComplication(reading: reading, variant: entry.variant, slot: .corner)
-                    .widgetLabel("\(Complications.plain(reading, entry.variant)) \(Complications.quarter(reading))")
+                EighthComplication(reading: reading, variant: entry.variant, slot: .corner)
+                    .widgetLabel("\(Complications.plain(reading, entry.variant)) \(Complications.eighth(reading))")
             } else {
-                QuarterComplication(reading: reading, variant: entry.variant, slot: slot(family))
+                EighthComplication(reading: reading, variant: entry.variant, slot: slot(family))
             }
         } else {
             Empty(family: family)
