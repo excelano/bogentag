@@ -11,18 +11,19 @@ apple-review-notes = """
 Bogentag shows the time as the Sun's position on its daily arc rather than as hours and minutes. It is an Apple Watch app with complications, delivered inside an iPhone and iPad app that shows the same dial and explains the system. Each works on its own: the watch app needs no iPhone nearby, and neither needs an account or a network connection.
 
 PERMISSIONS
-On first open, each app asks for Location (while using the app). The Sun's path depends on where you are, so Bogentag reads the device's position once, and again only after you have moved more than ten kilometres. Without the permission it explains what it needs and shows nothing else.
+On first open, each app asks for Location (while using the app). Starting a timer asks for permission to send notifications, used only for the one that says the timer has ended. The Sun's path depends on where you are, so Bogentag reads the device's position once, and again only after you have moved more than ten kilometres. Without the permission it explains what it needs and shows nothing else.
 
 WHAT YOU WILL SEE
 The dial is a sky: blue above the horizon, bands of twilight below it, night at the bottom, with the Sun travelling a ring. A ring symbol with a dot marks solar noon at the top; the same ring without the dot marks solar midnight at the bottom. In the centre, a number beside the symbol says where the Sun is in spans, a hundred spans between sunrise and noon and a hundred between noon and sunset: 18 before the symbol means eighteen spans before solar noon. For the first moments after sunrise and sunset, a triangle pointing up or down stands in place of the number. Under it is the name of the current eighth of the day. On the Kiloseconds dial the number is the time from solar noon or midnight in kiloseconds instead.
 
 WHAT TO TRY ON IPHONE AND IPAD
-1. On first launch an eight-page explainer opens; the About Bogenzeit button reopens it.
+1. On first launch an eight-page explainer opens; About Bogenzeit in Settings (the gear at the top right) reopens it.
 2. Tap the dial: UTC, the local time with its zone, the date and today's sunrise and sunset appear over it. Tap again to return.
-3. The two rows under the dial (beside it, with the iPad turned sideways) choose between the Spans dial, which draws every day the same shape, and the Kiloseconds dial, on which the Sun moves evenly and the horizon moves with the season, and the precision of the reading: whole spans or up to two decimals, or one to three decimals of a kilosecond. Each dial shows its reading in its own unit only.
+3. Settings (the gear at the top right) chooses between the Spans dial, which draws every day the same shape, and the Kiloseconds dial, on which the Sun moves evenly and the horizon moves with the season, and the precision of the reading: whole spans or up to two decimals, or one to three decimals of a kilosecond. Each dial shows its reading in its own unit only.
+4. The Timer button under the dial sets a countdown in spans or kiloseconds. Set 2 spans and press Start: a gold arc on the dial runs from the Sun to where the timer ends, and a notification arrives when it does. The Stopwatch button counts in spans and kiloseconds, with laps.
 
 ON APPLE WATCH
-Turn the Digital Crown: the dial, a page with today's figures (the length of the day arc and the night arc, and sunrise, noon, sunset and midnight with their clock times), and Settings with the same two choices. Tap the dial for the clock. Complications are available in the circular, corner, rectangular and inline slots and show the current reading in the unit of the chosen dial; they update when the reading changes, roughly every two to four minutes.
+Turn the Digital Crown: the dial, the timer (turn the Crown on the number to set it), the stopwatch, a page with today's figures (the length of the day arc and the night arc, and sunrise, noon, sunset and midnight with their clock times), and Settings with the same two choices. Tap the dial for the clock. Complications are available in the circular, corner, rectangular and inline slots and show the current reading in the unit of the chosen dial; they update when the reading changes, roughly every two to four minutes.
 
 DATA
 Location is read on the device and the coordinates in use are kept in the app's storage, shared on the watch only with its own complications. Nothing is sent anywhere. Privacy policy: https://excelano.com/legal/#bogentag. Source code: https://github.com/excelano/bogentag.
@@ -41,7 +42,9 @@ Two dials. On the Spans dial the Sun moves in spans, every day the same shape, s
 
 When you need the clock, tap the dial: UTC, your local time with its zone and offset, the date, and today's sunrise and sunset appear over the dimmed sky. Tap again to return to the Sun.
 
-On Apple Watch, turn the Digital Crown for a page of today's figures, the length of the day arc and the night arc and the clock times of the four events, and for the settings. Complications put the reading on your watch face, in the chosen dial's unit, in the circular, corner, rectangular and inline slots, with a gauge of the Sun's progress along its arc.
+A timer and a stopwatch count in spans as well as kiloseconds. A span timer ends when the Sun has moved that many spans along its arc, so twenty spans set just before sunset last longer than twenty at noon, because night spans are longer than day spans in winter; before you start, the timer shows how long it will take. While it runs, an arc on the dial reaches from the Sun to where it ends, and a notification tells you when it has. The stopwatch shows both how far the Sun has moved and how much time has passed, lap by lap.
+
+On Apple Watch, turn the Digital Crown for the timer and stopwatch, a page of today's figures, the length of the day arc and the night arc and the clock times of the four events, and for the settings. Complications put the reading on your watch face, in the chosen dial's unit, in the circular, corner, rectangular and inline slots, with a gauge of the Sun's progress along its arc.
 
 The iPhone and iPad app shows the same dial, larger, and opens with a short tour of the system: the arc, the two anchors, spans, kiloseconds, how to read the notation, the four quarters and the eight eighths, and why the date changes at solar midnight rather than at twelve o'clock.
 
