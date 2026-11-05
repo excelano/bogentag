@@ -15,6 +15,7 @@ struct DialView: View {
     var showsReadout = true
     var showsDate = true
     var showsArcLengths = true
+    var arcs: [TimingArc] = []
 
     var body: some View {
         GeometryReader { geometry in
@@ -132,6 +133,15 @@ struct DialView: View {
             let lift = 12 * s
             Glyph.sunrise.draw(in: context, at: CGPoint(x: c.x - x, y: y - lift), radius: 9 * s, lineWidth: 2.2 * s, color: Palette.line)
             Glyph.sunset.draw(in: context, at: CGPoint(x: c.x + x, y: y + lift), radius: 9 * s, lineWidth: 2.2 * s, color: Palette.line)
+        }
+
+        for arc in arcs {
+            var path = Path()
+            path.addArc(center: c, radius: 160 * s, startAngle: .degrees(arc.from - 90), endAngle: .degrees(arc.to - 90), clockwise: false)
+            let color = arc.kind == .timer ? Palette.sun : Palette.line.opacity(0.7)
+            context.stroke(path, with: .color(color), style: StrokeStyle(lineWidth: 5 * s, lineCap: .round))
+            let far = arc.kind == .timer ? arc.to : arc.from
+            context.fill(circle(point(far, 160), 6), with: .color(color))
         }
 
         let sun = point(model.sunAngle, 160)

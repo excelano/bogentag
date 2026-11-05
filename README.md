@@ -8,7 +8,8 @@ live at https://github.com/excelano/bogenzeit; this repository is the face.
 
 Apple Watch takes no third-party faces, so the watch app's screen is the dial:
 a sky with its horizon and twilight bands, the Sun on its track, the two anchors
-drawn as shapes, and the reading in the centre. A tap shows the civil clock.
+drawn as shapes, and the reading in the centre. A tap shows the civil clock, and a timer and stopwatch
+count in spans as well as kiloseconds.
 Complications put the reading on an Apple face, and the iPhone app shows the
 same dial larger with a short tour of the system. `docs/bogentag-spec.md`
 describes the face and `design/mockups/` holds the drawings it was built to.

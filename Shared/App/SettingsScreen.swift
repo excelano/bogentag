@@ -7,6 +7,11 @@ import SwiftUI
 import WidgetKit
 
 struct SettingsScreen: View {
+    #if os(iOS)
+    @Environment(SunLocation.self) private var location
+    @State private var showsTour = false
+    #endif
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 14) {
@@ -15,9 +20,20 @@ struct SettingsScreen: View {
                     .foregroundStyle(Palette.line)
                 setting("Dial") { DialVariantChoice() }
                 setting("Precision") { PrecisionChoice() }
+                #if os(iOS)
+                Button("About Bogenzeit") { showsTour = true }
+                    .buttonStyle(ChoiceButtonStyle(selected: false))
+                WatchFaceButton()
+                    .frame(maxWidth: .infinity)
+                #endif
             }
             .padding(.horizontal)
         }
+        #if os(iOS)
+        .sheet(isPresented: $showsTour) {
+            TourView().environment(location)
+        }
+        #endif
     }
 
     private func setting(_ title: String, @ViewBuilder control: () -> some View) -> some View {
@@ -81,6 +97,8 @@ struct ChoiceButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.footnote.weight(.medium).monospacedDigit())
+            .lineLimit(1)
+            .minimumScaleFactor(0.7)
             .padding(.vertical, 8)
             .padding(.horizontal, 12)
             .frame(maxWidth: .infinity)

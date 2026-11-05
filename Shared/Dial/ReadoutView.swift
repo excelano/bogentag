@@ -26,8 +26,7 @@ struct ReadoutView: View {
     /// The stored choice, or Low while the screen is dimmed and refreshes
     /// about once a minute: no finer step than the refresh (§5.2).
     private var precision: Precision {
-        if isLuminanceReduced { return .low }
-        return Demo.precision ?? Precision(rawValue: storedPrecision) ?? .standard
+        Precision.shown(storedPrecision, dimmed: isLuminanceReduced)
     }
 
     var body: some View {
@@ -50,35 +49,11 @@ struct ReadoutView: View {
             .minimumScaleFactor(0.7)
     }
 
-    @ViewBuilder
     private var position: some View {
         let shown = DisplayedPosition(reading, scale: variant, precision: precision)
-        let glyph = GlyphView(shown.glyph, radius: 21 * scale, lineWidth: 4.5 * scale, color: Palette.line)
-        HStack(spacing: 8 * scale) {
-            if let number = shown.number {
-                if shown.side == .before {
-                    big(number, unit: shown.unit)
-                    glyph
-                } else {
-                    glyph
-                    big(number, unit: shown.unit)
-                }
-            } else {
-                glyph
-            }
-        }
-        .frame(height: 70 * scale)
-    }
-
-    /// The number at a size where the widest value of its scale and
-    /// precision fits beside the glyph: `99.99` at the full size, since its
-    /// decimals are smaller, and `43.1 ks`, `43.12 ks`, `43.123 ks` by precision.
-    private func big(_ number: String, unit: String?) -> some View {
-        let size = (unit == nil ? 64 : Self.offsetSizes[precision.rawValue]) * scale
-        return Numerals.text(number, unit: unit, size: size)
-            .foregroundStyle(Palette.line)
-            .lineLimit(1)
-            .minimumScaleFactor(0.8)
+        let size = (shown.unit == nil ? 64 : Self.offsetSizes[precision.rawValue]) * scale
+        return PositionView(shown: shown, size: size, glyphRadius: 21 * scale, lineWidth: 4.5 * scale, spacing: 8 * scale)
+            .frame(height: 70 * scale)
     }
 
     private static let offsetSizes: [CGFloat] = [60, 52, 46]
@@ -91,5 +66,45 @@ struct ReadoutView: View {
             return eighth.name.uppercased()
         }
         return reading.polar == .alwaysAbove ? "POLAR DAY" : "POLAR NIGHT"
+    }
+}
+
+extension Precision {
+    static func shown(_ stored: Int, dimmed: Bool) -> Precision {
+        if dimmed { return .low }
+        return Demo.precision ?? Precision(rawValue: stored) ?? .standard
+    }
+}
+
+struct PositionView: View {
+    let shown: DisplayedPosition
+    let size: CGFloat
+    let glyphRadius: CGFloat
+    let lineWidth: CGFloat
+    let spacing: CGFloat
+    var color = Palette.line
+
+    var body: some View {
+        let glyph = GlyphView(shown.glyph, radius: glyphRadius, lineWidth: lineWidth, color: color)
+        HStack(spacing: spacing) {
+            if let number = shown.number {
+                if shown.side == .before {
+                    numerals(number)
+                    glyph
+                } else {
+                    glyph
+                    numerals(number)
+                }
+            } else {
+                glyph
+            }
+        }
+    }
+
+    private func numerals(_ number: String) -> some View {
+        Numerals.text(number, unit: shown.unit, size: size)
+            .foregroundStyle(color)
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
     }
 }

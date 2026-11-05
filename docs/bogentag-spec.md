@@ -76,7 +76,19 @@ The app explains Bogenzeit to someone with no context. Planned topics:
 
 ---
 
-## 6. Open decisions
+## 6. Timer and stopwatch
+
+- **Span timer.** Set in spans or ks, in steps of the precision setting. A span timer ends when the clock has moved that many spans on from the moment it starts, carrying past ○ into the next day (BZ spec §3.8), so it lasts longer when its spans are longer: 20 spans started ten spans before sunset take ten day spans and ten night spans. The setter shows how long it will last; a ks timer shows how far the clock will move. The end is fixed at start for the place in use then, and a local notification announces it.
+- **Pause.** A paused span timer keeps the spans it has left, not the seconds, so they take whatever time they take once it runs again.
+- **Polar day or night.** No spans, so the timer is set in ks only, and a span timer cannot run across one.
+- **Stopwatch.** Counts what passes while it runs, the spans the clock moves and the ks, with laps.
+- **Readouts.** Remaining amounts are rounded up, so the 0 shows only at the end; elapsed amounts are floored like every readout.
+- **On the dial.** While a timer runs, an arc in the Sun's colour runs along the Sun's track from the Sun to where the timer ends; a running stopwatch draws its arc behind the Sun. On the Span dial a timer's arc is always the same angle for the same spans; on the Kilosecond dial it grows or shrinks with the time the spans take.
+- **Where.** Pages of their own on the watch; on the phone, Timer and Stopwatch open as half-height sheets under the dial. Each device keeps its own.
+
+---
+
+## 7. Open decisions
 
 1. Variant names.
 2. Watch sizes and shapes to target first (round Wear OS vs rectangular Apple Watch app screens).

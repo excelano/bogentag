@@ -10,6 +10,7 @@ import SwiftUI
 /// tap puts over it (Bogentag spec §2).
 struct DialScreen: View {
     @Environment(SunLocation.self) private var location
+    @Environment(Timing.self) private var timing
     @AppStorage(Settings.dialVariantKey, store: AppGroup.defaults) private var storedVariant = Scale.spans.rawValue
     @State private var showsCivil = Demo.civil
 
@@ -29,9 +30,10 @@ struct DialScreen: View {
             let now = Demo.now(context.date)
             if let place = location.place {
                 let reading = Reading(at: now, latitude: place.latitude, longitude: place.longitude)
+                let model = DialModel(reading: reading, variant: variant)
                 ZStack {
-                    DialView(model: DialModel(reading: reading, variant: variant), showsReadout: !showsCivil,
-                             showsArcLengths: !isWatch)
+                    DialView(model: model, showsReadout: !showsCivil, showsArcLengths: !isWatch,
+                             arcs: timing.arcs(on: model, at: now))
                         .opacity(showsCivil ? 0.35 : 1)
                     if showsCivil {
                         CivilView(reading: reading, now: now)
