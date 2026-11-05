@@ -2,9 +2,9 @@
 # against the release being cut, so notes left from last time stop the release
 # rather than reaching the listing.
 
-version = "1.3.0"
+version = "1.3.1"
 
 [locales."en-us"]
 whats-new = """
-A timer and a stopwatch that count in spans as well as kiloseconds. A span timer ends when the Sun has moved that many spans along its arc, so the same timer lasts longer across sunset; an arc on the dial shows where it ends, and a notification says when. On iPhone, the dial and precision choices and About Bogenzeit have moved into Settings, behind the gear at the top right.
+The timer starts from shorter presets, 1, 2, 5 and 10 spans or 0.2 to 2 kiloseconds, and on iPhone a tap on the amount lets you type one in. The timer and stopwatch now count in the dial's unit, spans or kiloseconds, one at a time, and always show it at high precision.
 """
