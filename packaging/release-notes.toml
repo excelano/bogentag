@@ -2,9 +2,9 @@
 # against the release being cut, so notes left from last time stop the release
 # rather than reaching the listing.
 
-version = "1.3.2"
+version = "1.3.3"
 
 [locales."en-us"]
 whats-new = """
-On Apple Watch, the timer's amount can now be changed: tap it for − and + and the presets of 1, 2, 5 and 10 spans or 0.2 to 2 kiloseconds, then tap Done. A finished timer reads 0 instead of -0.
+Settings now chooses the dial and the precision from menus, so Kiloseconds is no longer cut off on Apple Watch, and precision reads Low, Medium or High.
 """
