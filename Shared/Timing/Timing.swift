@@ -215,7 +215,8 @@ enum AmountText {
         let decimals = precision.decimals(for: unit.scale)
         let factor = pow(10, Double(decimals))
         let nudge = rounding == .up ? -1e-6 : 1e-6
-        let steps = max(0, (value * factor + nudge).rounded(rounding))
+        let rounded = (value * factor + nudge).rounded(rounding)
+        let steps = rounded > 0 ? rounded : 0
         return String(format: "%.\(decimals)f", steps / factor)
     }
 
