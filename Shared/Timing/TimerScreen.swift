@@ -11,6 +11,7 @@ struct TimerScreen: View {
     @AppStorage(Settings.dialVariantKey, store: AppGroup.defaults) private var variant = Scale.spans.rawValue
     @AppStorage("timerSpans") private var spanAmount = 5.0
     @AppStorage("timerKiloseconds") private var kilosecondAmount = 1.0
+    @State private var setting = false
 
     private var precision: Precision {
         isLuminanceReduced ? .low : .high
@@ -88,8 +89,21 @@ struct TimerScreen: View {
         if polar {
             TimingCaption("NO SPANS ON A POLAR DAY")
         }
-        AmountDial(amount: amount, unit: unit, precision: precision)
-        Button("Start") { timing.startTimer(amount.wrappedValue, unit, at: now, place: place) }
+        AmountDial(amount: amount, editing: $setting, unit: unit, precision: precision)
+        #if os(watchOS)
+        if setting {
+            Button("Done") { setting = false }
+                .buttonStyle(ChoiceButtonStyle(selected: true))
+        } else {
+            start(amount.wrappedValue, unit, end: end, now: now, place: place)
+        }
+        #else
+        start(amount.wrappedValue, unit, end: end, now: now, place: place)
+        #endif
+    }
+
+    private func start(_ amount: Double, _ unit: TimerUnit, end: Date?, now: Date, place: AppGroup.Place) -> some View {
+        Button("Start") { timing.startTimer(amount, unit, at: now, place: place) }
             .buttonStyle(ChoiceButtonStyle(selected: true))
             .disabled(end == nil)
     }
@@ -103,10 +117,10 @@ struct TimerScreen: View {
 
 struct AmountDial: View {
     @Binding var amount: Double
+    @Binding var editing: Bool
     let unit: TimerUnit
     let precision: Precision
     #if !os(watchOS)
-    @State private var editing = false
     @State private var draft = ""
     @FocusState private var typing: Bool
     #endif
@@ -124,13 +138,20 @@ struct AmountDial: View {
             .lineLimit(1)
             .minimumScaleFactor(0.6)
         #if os(watchOS)
-        numerals
-            .focusable()
-            .digitalCrownRotation(Binding { amount } set: { amount = clamped($0) },
-                                  from: resolution, through: most, by: step, sensitivity: .high,
-                                  isContinuous: false, isHapticFeedbackEnabled: true)
+        if editing {
+            HStack(spacing: TimingSize.gap) {
+                nudge("minus", -1)
+                nudge("plus", 1)
+            }
+        }
+        Button { editing.toggle() } label: { numerals }
+            .buttonStyle(.plain)
+            .accessibilityHint(editing ? "Done setting the amount" : "Set the amount")
+        if editing {
+            presetGrid
+        }
         #else
-        HStack(spacing: 12) {
+        HStack(spacing: TimingSize.gap) {
             nudge("minus", -1)
             Group {
                 if editing {
@@ -147,27 +168,59 @@ struct AmountDial: View {
             .frame(maxWidth: .infinity)
             nudge("plus", 1)
         }
-        HStack(spacing: 6) {
+        presetGrid
+        #endif
+    }
+
+    private var presetGrid: some View {
+        LazyVGrid(columns: Array(repeating: GridItem(spacing: 6), count: TimingSize.presetColumns), spacing: 6) {
             ForEach(presets, id: \.self) { preset in
                 Button(AmountText.trimmed(preset, unit)) {
-                    editing = false
+                    closeField()
                     amount = preset
                 }
-                .buttonStyle(ChoiceButtonStyle(selected: !editing && abs(amount - preset) < resolution / 2))
+                .buttonStyle(ChoiceButtonStyle(selected: abs(amount - preset) < resolution / 2 && !typingOpen))
             }
         }
-        #endif
     }
 
     private func clamped(_ value: Double) -> Double {
         min(max((value / resolution).rounded() * resolution, resolution), most)
     }
 
-    #if !os(watchOS)
     private var presets: [Double] {
         unit == .spans ? [1, 2, 5, 10] : [200, 500, 1000, 2000]
     }
 
+    private func nudge(_ symbol: String, _ steps: Double) -> some View {
+        Button {
+            closeField()
+            amount = clamped(amount + steps * step)
+        } label: {
+            Image(systemName: symbol)
+                .frame(width: TimingSize.nudge, height: TimingSize.nudge)
+        }
+        .buttonStyle(.bordered)
+        .buttonRepeatBehavior(.enabled)
+        .tint(Palette.sun)
+        .accessibilityLabel(steps < 0 ? "Less" : "More")
+    }
+
+    private var typingOpen: Bool {
+        #if os(watchOS)
+        false
+        #else
+        editing
+        #endif
+    }
+
+    private func closeField() {
+        #if !os(watchOS)
+        editing = false
+        #endif
+    }
+
+    #if !os(watchOS)
     private var field: some View {
         HStack(alignment: .firstTextBaseline, spacing: 6) {
             TextField("0", text: $draft)
@@ -195,20 +248,6 @@ struct AmountDial: View {
             }
         }
     }
-
-    private func nudge(_ symbol: String, _ steps: Double) -> some View {
-        Button {
-            editing = false
-            amount = clamped(amount + steps * step)
-        } label: {
-            Image(systemName: symbol)
-                .frame(width: 32, height: 32)
-        }
-        .buttonStyle(.bordered)
-        .buttonRepeatBehavior(.enabled)
-        .tint(Palette.sun)
-        .accessibilityLabel(steps < 0 ? "Less" : "More")
-    }
     #endif
 }
 
@@ -233,8 +272,14 @@ enum TimingSize {
     #if os(watchOS)
     static let big: CGFloat = 40
     static let small: CGFloat = 15
+    static let nudge: CGFloat = 20
+    static let gap: CGFloat = 4
+    static let presetColumns = 2
     #else
     static let big: CGFloat = 64
     static let small: CGFloat = 20
+    static let nudge: CGFloat = 32
+    static let gap: CGFloat = 12
+    static let presetColumns = 4
     #endif
 }

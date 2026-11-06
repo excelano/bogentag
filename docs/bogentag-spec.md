@@ -78,7 +78,7 @@ The app explains Bogenzeit to someone with no context. Planned topics:
 
 ## 6. Timer and stopwatch
 
-- **Span timer.** Set in the dial's unit, spans or ks: the crown and the phone's − and + move 0.1 span or 0.1 ks, the phone offers 1, 2, 5 and 10 spans or 0.2, 0.5, 1 and 2 ks, and a tap on the phone's amount types one in, to 0.01 span or 1 s. A span timer ends when the clock has moved that many spans on from the moment it starts, carrying past ○ into the next day (BZ spec §3.8), so it lasts longer when its spans are longer: 20 spans started ten spans before sunset take ten day spans and ten night spans. The end is fixed at start for the place in use then, and a local notification announces it.
+- **Span timer.** Set in the dial's unit, spans or ks: − and + move 0.1 span or 0.1 ks, presets offer 1, 2, 5 and 10 spans or 0.2, 0.5, 1 and 2 ks, and a tap on the phone's amount types one in, to 0.01 span or 1 s. On the watch they stay hidden until a tap on the amount, which puts − and + above it, the presets below and Done in place of Start. A span timer ends when the clock has moved that many spans on from the moment it starts, carrying past ○ into the next day (BZ spec §3.8), so it lasts longer when its spans are longer: 20 spans started ten spans before sunset take ten day spans and ten night spans. The end is fixed at start for the place in use then, and a local notification announces it.
 - **Pause.** A paused span timer keeps the spans it has left, not the seconds, so they take whatever time they take once it runs again.
 - **Polar day or night.** No spans, so the timer is set in ks only, and a span timer cannot run across one.
 - **Stopwatch.** Counts what passes while it runs, in the dial's unit, with laps.
