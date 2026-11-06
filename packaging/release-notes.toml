@@ -2,9 +2,9 @@
 # against the release being cut, so notes left from last time stop the release
 # rather than reaching the listing.
 
-version = "1.3.1"
+version = "1.3.2"
 
 [locales."en-us"]
 whats-new = """
-The timer starts from shorter presets, 1, 2, 5 and 10 spans or 0.2 to 2 kiloseconds, and on iPhone a tap on the amount lets you type one in. The timer and stopwatch now count in the dial's unit, spans or kiloseconds, one at a time, and always show it at high precision.
+On Apple Watch, the timer's amount can now be changed: tap it for − and + and the presets of 1, 2, 5 and 10 spans or 0.2 to 2 kiloseconds, then tap Done. A finished timer reads 0 instead of -0.
 """
