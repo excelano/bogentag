@@ -25,7 +25,6 @@ struct WatchFaceButton: View {
                     Task { @MainActor in failure = message }
                 }
             }
-            .buttonStyle(.bordered)
             .alert("The face could not be added", isPresented: Binding(get: { failure != nil }, set: { if !$0 { failure = nil } })) {
                 Button("OK") { failure = nil }
             } message: {
