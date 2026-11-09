@@ -289,22 +289,20 @@ struct GaugeComplication: View {
     let slot: ComplicationSlot
 
     var body: some View {
-        let shown = Complications.position(reading, variant)
         switch slot {
         case .circular:
             if let progress = Complications.progress(reading) {
                 Gauge(value: progress, in: 0...1) {
-                    GlyphView(shown.glyph, radius: 4, lineWidth: 1.2, color: .primary)
+                    EmptyView()
                 } currentValueLabel: {
-                    Numerals.text(shown.number ?? "", unit: shown.unit, size: shown.unit == nil ? 18 : 14)
-                        .minimumScaleFactor(0.6)
+                    ReadingText(reading: reading, variant: variant, size: Complications.position(reading, variant).unit == nil ? 15 : 12)
                 }
                 .gaugeStyle(.accessoryCircular)
             } else {
                 ReadingText(reading: reading, variant: variant, size: 14)
             }
         default:
-            Numerals.text(shown.number ?? "", unit: shown.unit, size: 20)
+            ReadingText(reading: reading, variant: variant, size: 18)
         }
     }
 }

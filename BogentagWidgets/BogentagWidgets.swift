@@ -11,6 +11,7 @@ import WidgetKit
 struct BogentagWidgets: WidgetBundle {
     var body: some Widget {
         ReadingWidget()
+        CornerWidget()
         EighthWidget()
         DialWidget()
         GaugeWidget()
@@ -67,6 +68,30 @@ struct ReadingWidgetView: View {
             }
         } else {
             Empty(family: family)
+        }
+    }
+}
+
+struct CornerWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "Corner", provider: ArcProvider()) { entry in
+            CornerWidgetView(entry: entry)
+                .containerBackground(.fill.tertiary, for: .widget)
+        }
+        .configurationDisplayName("Corner")
+        .description("The reading and its glyph, filling the corner.")
+        .supportedFamilies([.accessoryCorner])
+    }
+}
+
+struct CornerWidgetView: View {
+    let entry: ArcEntry
+
+    var body: some View {
+        if let reading = entry.reading {
+            ReadingText(reading: reading, variant: entry.variant, size: 18)
+        } else {
+            Empty(family: .accessoryCorner)
         }
     }
 }
