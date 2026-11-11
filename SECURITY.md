@@ -2,18 +2,20 @@
 
 ## Reporting a vulnerability
 
-Please report suspected vulnerabilities privately through GitHub Security Advisories at https://github.com/excelano/bogentag/security/advisories/new. If you would rather not use GitHub, email david.anderson@excelano.com instead. I aim to respond within seven days.
+Please report suspected vulnerabilities privately, using the **Report a vulnerability** button on the Security tab of this repository. If that button is not there, or you would rather not go through GitHub, email david.anderson@excelano.com instead. I aim to respond within seven days.
 
 Please do not open public issues for security problems.
 
 ## Supported versions
 
-The latest release receives fixes. A security fix ships through `main` in a new release on GitHub and, where the app is listed on the App Store, through it; there are no maintained release branches.
+The latest release receives security fixes. Older versions are not supported. A fix ships in a new App Store release.
 
-## Security model
+## What Bogentag can access
 
-**Bogentag has no network surface.** The apps make no network request, open no socket and link no networking or analytics code.
+Bogentag makes no network request, opens no socket and links no networking or analytics code.
 
-**Location is read only with permission, only on the device running the app, and only while the app is on screen.** A new position replaces the one in use only after a move of more than about ten kilometres. The iPhone app and the watch app do not exchange it.
+It reads location only with permission, only on the device running the app, and only while the app is on screen. A new position replaces the one in use only after a move of more than about ten kilometers. The iPhone app and the watch app do not exchange it. Starting a timer asks for permission to post notifications, and the only one posted is the local notification that announces the timer's end.
 
-**What it keeps stays on your devices.** The coordinates in use and the display settings are kept in the app's own preferences on each device; on the watch the coordinates are also in a container shared only with the app's own complications. Removing the app from a device removes them from it.
+## What Bogentag stores
+
+On each device, the coordinates in use and the chosen dial are kept in a container shared only between the app and its own widgets or complications. The precision setting, whether the tour has been seen, and a running timer or stopwatch are kept in the app's own preferences. Removing the app from a device removes all of it from that device.

@@ -1,8 +1,6 @@
-# Bogentag — Spec (draft 0.1)
+# Bogentag — Spec
 
-Bogentag is the watch face and app family that displays **Bogenzeit (BZ)**. The time standard itself is defined in `bogenzeit-spec.md`; Bogentag only decides how it looks. Because the standard is fixed, Bogentag can offer **several dial variants**.
-
-Status: draft. Mockups of variants 1 and 2 are on the Bogentag design canvas. The variants are named Spans and Kiloseconds, for what the Sun's angle measures on each; Spans is the default.
+Bogentag is the Apple Watch and iPhone app that displays **Bogenzeit (BZ)**. The time standard itself is defined in `bogenzeit-spec.md` in excelano/bogenzeit; Bogentag only decides how it looks. Because the standard is fixed, Bogentag can offer more than one dial. The two dials are named Spans and Kiloseconds, for what the Sun's angle measures on each; Spans is the default. `design/mockups/` holds the drawings they were built to.
 
 ---
 
@@ -10,11 +8,10 @@ Status: draft. Mockups of variants 1 and 2 are on the Bogentag design canvas. Th
 
 | Platform | Form | Notes |
 |---|---|---|
-| Wear OS | Full watch face (Watch Face Format) + app | Custom faces are allowed; this is where the full Bogentag face lives. |
-| Apple Watch | App + widgets (Smart Stack) + complications | Apple does not allow third-party watch faces. |
-| Phone (both) | Companion app | Explains Bogenzeit; settings; larger dial views. |
+| Apple Watch | App + complications, which also appear in the Smart Stack | Apple does not allow third-party watch faces, so the app's screen is the dial. |
+| iPhone and iPad | App + Home Screen and Lock Screen widgets | The same dial larger, the tour (§5), settings, timer and stopwatch. On an iPhone it offers an Apple face preset that carries the Bogentag complications. |
 
-All Bogenzeit calculation runs on the watch, offline (no phone or network needed).
+All Bogenzeit calculation runs on the device showing it, offline; the watch needs neither the phone nor a network.
 
 ---
 
@@ -31,7 +28,7 @@ All Bogenzeit calculation runs on the watch, offline (no phone or network needed
 - **Anchors:** ☉ at top (solar noon), ○ at bottom (solar midnight), and where the horizon meets the ring of anchors △ standing on it at sunrise and ▽ hanging from it at sunset, absent on a polar day or night. All four are drawn as vector shapes from one definition (BZ spec §3.1 matching rule).
 - **Sky:** day above the horizon, then civil, nautical and astronomical twilight bands, then night.
 - **Sun marker:** travels a fixed inner track.
-- **Eighth ticks:** at the 50-span points (the boundaries of Afterrise/Forenoon/Afternoon/Foreset and Afterset/Foremid/Aftermid/Forerise), and the current eighth's stretch of the outer ring lit in the Sun's colour.
+- **Eighth ticks:** at the 50-span points (the boundaries of Afterrise/Forenoon/Afternoon/Foreset and Afterset/Foremid/Aftermid/Forerise), and the current eighth's stretch of the outer ring lit in the Sun's color.
 - **Center readout:** date; the position in the dial's own unit with its glyph, spans on the Span dial (`17.3 ☉`) and the offset on the Kilosecond dial (`3.43 ks ☉`), never both, the decimals smaller than the whole part and the unit smaller still; eighth name. For the first step after sunrise or sunset the span position is △ or ▽ alone (BZ spec §3.2). A polar day has no spans, so both dials show the offset. Complications and widgets show the unit of the chosen dial.
 - **Precision:** one setting, Low, Medium or High, for whichever unit the dial shows: whole spans, one or two decimals; one, two or three decimals of ks (BZ spec §5.2). Medium by default. The readout drops to Low while the watch screen is dimmed, and complications always show Low, as neither refreshes often enough for a finer step.
 - **Arc lengths:** on the Kilosecond dial where the screen has room, `DAY ARC 39.6 ks` above the center readout in the sky and `NIGHT ARC 46.7 ks` below it in the night, the English terms on screen and the German ones in the standard. The Span dial has none, since every arc is 200 spans; the watch carries both lengths on its day page.
@@ -54,15 +51,11 @@ All Bogenzeit calculation runs on the watch, offline (no phone or network needed
 - Outer ring: uniform ks ticks (minor every 1 ks, major every 5 ks from ☉).
 - Eighths occupy uneven angles (day eighths smaller in winter).
 
-### 4.3 Further variants (to explore)
-
-To be added later, e.g. a minimal digital face, a complication-only layout, a high-latitude/polar-safe face.
-
 ---
 
-## 5. Onboarding and explanation (app)
+## 5. Onboarding and explanation (iPhone and iPad app)
 
-The app explains Bogenzeit to someone with no context. Planned topics:
+The app explains Bogenzeit to someone with no context in a paged tour, one page per topic:
 
 1. Time as position on the Sun's arc (Tagbogen and Nachtbogen).
 2. ☉ and ○: solar noon and solar midnight, and why they differ from 12:00 and 00:00.
@@ -83,15 +76,20 @@ The app explains Bogenzeit to someone with no context. Planned topics:
 - **Polar day or night.** No spans, so the timer is set in ks only, and a span timer cannot run across one.
 - **Stopwatch.** Counts what passes while it runs, in the dial's unit, with laps.
 - **Readouts.** One unit, the dial's, or ks on a polar day or night; a running timer keeps the unit it was set in. At high precision whatever the setting, low while the watch is dimmed. Remaining amounts are rounded up, so the 0 shows only at the end; elapsed amounts are floored like every readout.
-- **On the dial.** While a timer runs, an arc in the Sun's colour runs along the Sun's track from the Sun to where the timer ends; a running stopwatch draws its arc behind the Sun. On the Span dial a timer's arc is always the same angle for the same spans; on the Kilosecond dial it grows or shrinks with the time the spans take.
+- **On the dial.** While a timer runs, an arc in the Sun's color runs along the Sun's track from the Sun to where the timer ends; a running stopwatch draws its arc behind the Sun. On the Span dial a timer's arc is always the same angle for the same spans; on the Kilosecond dial it grows or shrinks with the time the spans take.
 - **Where.** Pages of their own on the watch; on the phone, Timer and Stopwatch open as half-height sheets under the dial. Each device keeps its own.
 
 ---
 
-## 7. Open decisions
+## 7. Complications and widgets
 
-1. Variant names.
-2. Watch sizes and shapes to target first (round Wear OS vs rectangular Apple Watch app screens).
-3. Always-on (ambient) versions of each variant.
-4. Apple Watch widget and complication set.
-5. Onboarding format (paged tour, glossary, or both).
+Each shows the unit of the chosen dial at Low precision (§3).
+
+- **Reading:** the position beside its glyph.
+- **Eighth:** the position and the eighth it falls in.
+- **Dial:** the sky and the Sun on its arc; on the watch, without words.
+- **Gauge:** how far along its arc the Sun is, with the position inside.
+- **Next:** the next anchor or horizon event and how far away it is.
+- **Corner** (watch only): the position and its glyph, filling the corner.
+
+The watch offers them in the circular, corner, rectangular and inline families its faces have room for. The iPhone offers Dial on the Home Screen and the Lock Screen, and the others on the Lock Screen.
