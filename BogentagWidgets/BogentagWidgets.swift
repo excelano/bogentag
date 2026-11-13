@@ -11,9 +11,7 @@ import WidgetKit
 struct BogentagWidgets: WidgetBundle {
     var body: some Widget {
         ReadingWidget()
-        CornerWidget()
         EighthWidget()
-        DialWidget()
         GaugeWidget()
         HorizonWidget()
     }
@@ -50,7 +48,7 @@ struct ReadingWidget: Widget {
         }
         .configurationDisplayName("Reading")
         .description("The reading in the scale chosen in the app, beside its glyph.")
-        .supportedFamilies([.accessoryCircular, .accessoryCorner, .accessoryRectangular, .accessoryInline])
+        .supportedFamilies([.accessoryCircular, .accessoryRectangular, .accessoryInline])
     }
 }
 
@@ -60,39 +58,9 @@ struct ReadingWidgetView: View {
 
     var body: some View {
         if let reading = entry.reading {
-            if family == .accessoryCorner {
-                ReadingComplication(reading: reading, variant: entry.variant, slot: .corner)
-                    .widgetCurvesContent()
-            } else {
-                ReadingComplication(reading: reading, variant: entry.variant, slot: slot(family))
-            }
+            ReadingComplication(reading: reading, variant: entry.variant, slot: slot(family))
         } else {
             Empty(family: family)
-        }
-    }
-}
-
-struct CornerWidget: Widget {
-    var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "Corner", provider: ArcProvider()) { entry in
-            CornerWidgetView(entry: entry)
-                .containerBackground(.fill.tertiary, for: .widget)
-        }
-        .configurationDisplayName("Corner")
-        .description("The reading and its glyph, filling the corner.")
-        .supportedFamilies([.accessoryCorner])
-    }
-}
-
-struct CornerWidgetView: View {
-    let entry: ArcEntry
-
-    var body: some View {
-        if let reading = entry.reading {
-            ReadingComplication(reading: reading, variant: entry.variant, slot: .corner)
-                .widgetCurvesContent()
-        } else {
-            Empty(family: .accessoryCorner)
         }
     }
 }
@@ -121,37 +89,6 @@ struct EighthWidgetView: View {
                     .widgetLabel(Complications.eighth(reading))
             } else {
                 EighthComplication(reading: reading, variant: entry.variant, slot: slot(family))
-            }
-        } else {
-            Empty(family: family)
-        }
-    }
-}
-
-struct DialWidget: Widget {
-    var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "Dial", provider: ArcProvider()) { entry in
-            DialWidgetView(entry: entry)
-                .containerBackground(.fill.tertiary, for: .widget)
-        }
-        .configurationDisplayName("Dial")
-        .description("The sky and the Sun on its arc, without words.")
-        .supportedFamilies([.accessoryCircular, .accessoryCorner, .accessoryRectangular])
-    }
-}
-
-struct DialWidgetView: View {
-    let entry: ArcEntry
-    @Environment(\.widgetFamily) private var family
-    @Environment(\.widgetRenderingMode) private var renderingMode
-
-    var body: some View {
-        if let reading = entry.reading {
-            if family == .accessoryCorner {
-                DialComplication(reading: reading, variant: entry.variant, slot: .corner, fullColor: renderingMode == .fullColor)
-                    .widgetLabel(Complications.plain(reading, entry.variant))
-            } else {
-                DialComplication(reading: reading, variant: entry.variant, slot: slot(family), fullColor: renderingMode == .fullColor)
             }
         } else {
             Empty(family: family)

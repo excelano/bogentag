@@ -145,7 +145,7 @@ struct ReadingComplication: View {
         case .circular:
             FittedReading(reading: reading, variant: variant, width: 0.94, height: 0.56)
         case .corner:
-            CornerText(text: Complications.line(reading, variant, size: 24))
+            CornerText(text: Complications.line(reading, variant, size: CornerText.size))
         case .rectangular:
             ReadingText(reading: reading, variant: variant, size: 30)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -189,7 +189,7 @@ struct EighthComplication: View {
                     .minimumScaleFactor(0.6)
             }
         case .corner:
-            CornerText(text: Complications.line(reading, variant, size: 24))
+            CornerText(text: Complications.line(reading, variant, size: CornerText.size))
         case .inline:
             Text("\(Complications.plain(reading, variant)) \(Complications.eighth(reading))")
         }
@@ -208,8 +208,6 @@ struct DialComplication: View {
         switch slot {
         case .inline:
             Text(Complications.plain(reading, variant))
-        case .corner:
-            MiniDial(model: DialModel(reading: reading, variant: variant), fullColor: fullColor)
         default:
             MiniDial(model: DialModel(reading: reading, variant: variant), fullColor: fullColor)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -309,7 +307,7 @@ struct GaugeComplication: View {
                 FittedReading(reading: reading, variant: variant, width: 0.94, height: 0.56)
             }
         default:
-            CornerText(text: Complications.line(reading, variant, size: 24))
+            CornerText(text: Complications.line(reading, variant, size: CornerText.size))
         }
     }
 }
@@ -338,6 +336,7 @@ struct FittedReading: View {
 
 /// Text in a corner, large enough to read once watchOS curves it along the bezel.
 struct CornerText: View {
+    static let size: CGFloat = 32
     let text: Text
 
     var body: some View {
@@ -402,7 +401,7 @@ struct HorizonComplication: View {
                         .minimumScaleFactor(0.6)
                 }
             case .corner:
-                CornerText(text: short(next, size: 24))
+                CornerText(text: short(next, size: CornerText.size))
             case .inline:
                 Text(next.sentence(variant))
             }
