@@ -21,11 +21,11 @@ excelano/shipping, run from this directory.
 
 ## Rules
 
-Displayed spans and kiloseconds are the floor of the signed value, so an anchor or event
-shows only once it has been reached. Position replaces sign: number left of the glyph is before,
-right is after, no `+` or `−`. ☉, ○, △ and ▽ in anything rendered are drawn from one definition in
-the package's `BogenzeitUI`, never from a font, in running text included. No hours or minutes in a
-Bogenzeit readout; the clock watchOS draws in the corner is Apple's. Every Swift file is Bogentag's
-own: only the project scaffolding was copied from a sibling, and the store text is written for
-Bogentag alone, because App Review groups look-alike submissions as spam. Don't commit, push or
-publish to any store unless David asks.
+Displayed spans and kiloseconds are the floor of the signed value, so an anchor or event shows only
+once it has been reached. Position replaces sign: number left of the glyph is before, right is
+after, no `+` or `−`. Views that can hold a drawing draw ☉, ○, △ and ▽ with
+`GlyphView` from the package's `BogenzeitUI`; text that cannot, such as the Inline complication and
+the curved corners, carries the Unicode characters (§3.1). No hours or minutes in a Bogenzeit readout; the clock watchOS draws in the corner is
+Apple's. Every Swift file is Bogentag's own: only the project scaffolding was copied from a
+sibling, and the store text is written for Bogentag alone, because App Review groups look-alike
+submissions as spam. Don't commit, push or publish to any store unless David asks.
