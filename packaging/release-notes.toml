@@ -2,9 +2,9 @@
 # against the release being cut, so notes left from last time stop the release
 # rather than reaching the listing.
 
-version = "1.3.5"
+version = "1.3.6"
 
 [locales."en-us"]
 whats-new = """
-The reading on the watch face is much easier to see. In a round slot, the Reading and Gauge complications draw it as large as the slot allows. In a corner, Gauge shows it in large type curved along the edge of the screen above the Sun's progress, like the battery, and Eighth and Next curve it above the eighth or the event they name. Gauge replaces the Corner complication, and the watch no longer offers the Dial complication, which was too small to read; the Dial widget stays on iPhone.
+Ask Siri what any time today is in Bogenzeit. Say "Convert a time with Bogentag", answer with a time such as 3 pm or fifteen hundred, and Siri reads it back for where you are, as in 54.1 Foreset, in the dial and precision you have chosen. The same action is in the Shortcuts app, where it hands the reading on to the next step.
 """
