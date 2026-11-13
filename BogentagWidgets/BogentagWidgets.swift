@@ -62,7 +62,7 @@ struct ReadingWidgetView: View {
         if let reading = entry.reading {
             if family == .accessoryCorner {
                 ReadingComplication(reading: reading, variant: entry.variant, slot: .corner)
-                    .widgetLabel(Complications.plain(reading, entry.variant))
+                    .widgetCurvesContent()
             } else {
                 ReadingComplication(reading: reading, variant: entry.variant, slot: slot(family))
             }
@@ -89,7 +89,8 @@ struct CornerWidgetView: View {
 
     var body: some View {
         if let reading = entry.reading {
-            ReadingText(reading: reading, variant: entry.variant, size: 18)
+            ReadingComplication(reading: reading, variant: entry.variant, slot: .corner)
+                .widgetCurvesContent()
         } else {
             Empty(family: .accessoryCorner)
         }
@@ -116,7 +117,8 @@ struct EighthWidgetView: View {
         if let reading = entry.reading {
             if family == .accessoryCorner {
                 EighthComplication(reading: reading, variant: entry.variant, slot: .corner)
-                    .widgetLabel("\(Complications.plain(reading, entry.variant)) \(Complications.eighth(reading))")
+                    .widgetCurvesContent()
+                    .widgetLabel(Complications.eighth(reading))
             } else {
                 EighthComplication(reading: reading, variant: entry.variant, slot: slot(family))
             }
@@ -177,6 +179,7 @@ struct GaugeWidgetView: View {
         if let reading = entry.reading {
             if family == .accessoryCorner, let progress = Complications.progress(reading) {
                 GaugeComplication(reading: reading, variant: entry.variant, slot: .corner)
+                    .widgetCurvesContent()
                     .widgetLabel {
                         Gauge(value: progress, in: 0...1) { EmptyView() }
                     }
@@ -209,7 +212,8 @@ struct HorizonWidgetView: View {
         if let reading = entry.reading {
             if family == .accessoryCorner, let next = NextEvent(reading) {
                 HorizonComplication(reading: reading, variant: entry.variant, slot: .corner)
-                    .widgetLabel(next.sentence(entry.variant))
+                    .widgetCurvesContent()
+                    .widgetLabel(next.name)
             } else {
                 HorizonComplication(reading: reading, variant: entry.variant, slot: slot(family))
             }

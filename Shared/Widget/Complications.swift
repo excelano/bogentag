@@ -114,6 +114,16 @@ enum Complications {
         position(reading, variant).text
     }
 
+    /// The reading as one `Text`, which a corner can curve along the bezel.
+    /// Curved text drops images, so it carries the glyph's Unicode character (§3.1).
+    static func line(_ reading: Reading, _ variant: Scale, size: CGFloat) -> Text {
+        let shown = position(reading, variant)
+        let glyph = Text(String(shown.glyph.character)).font(.system(size: size, weight: .semibold))
+        guard let number = shown.number else { return glyph }
+        let value = Numerals.text(number, unit: shown.unit, size: size)
+        return shown.side == .before ? value + Text(" ") + glyph : glyph + Text(" ") + value
+    }
+
     static func eighth(_ reading: Reading) -> String {
         reading.eighth?.name ?? (reading.polar == .alwaysAbove ? "Polar day" : "Polar night")
     }
@@ -133,10 +143,9 @@ struct ReadingComplication: View {
     var body: some View {
         switch slot {
         case .circular:
-            ReadingText(reading: reading, variant: variant, size: 17)
-                .minimumScaleFactor(0.7)
+            FittedReading(reading: reading, variant: variant, width: 0.94, height: 0.56)
         case .corner:
-            GlyphView(Complications.position(reading, variant).glyph, radius: 10, lineWidth: 2.4, color: .primary)
+            CornerText(text: Complications.line(reading, variant, size: 24))
         case .rectangular:
             ReadingText(reading: reading, variant: variant, size: 30)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -180,7 +189,7 @@ struct EighthComplication: View {
                     .minimumScaleFactor(0.6)
             }
         case .corner:
-            GlyphView(Complications.position(reading, variant).glyph, radius: 10, lineWidth: 2.4, color: .primary)
+            CornerText(text: Complications.line(reading, variant, size: 24))
         case .inline:
             Text("\(Complications.plain(reading, variant)) \(Complications.eighth(reading))")
         }
@@ -292,18 +301,73 @@ struct GaugeComplication: View {
         switch slot {
         case .circular:
             if let progress = Complications.progress(reading) {
-                Gauge(value: progress, in: 0...1) {
-                    EmptyView()
-                } currentValueLabel: {
-                    ReadingText(reading: reading, variant: variant, size: Complications.position(reading, variant).unit == nil ? 15 : 12)
+                ZStack {
+                    ArcRing(progress: progress)
+                    FittedReading(reading: reading, variant: variant, width: 0.8, height: 0.5)
                 }
-                .gaugeStyle(.accessoryCircular)
             } else {
-                ReadingText(reading: reading, variant: variant, size: 14)
+                FittedReading(reading: reading, variant: variant, width: 0.94, height: 0.56)
             }
         default:
-            ReadingText(reading: reading, variant: variant, size: 18)
+            CornerText(text: Complications.line(reading, variant, size: 24))
         }
+    }
+}
+
+/// The reading at the largest size that fits a box of the given fractions
+/// of the slot's side, so the glyph grows with the number.
+struct FittedReading: View {
+    let reading: Reading
+    let variant: Scale
+    let width: CGFloat
+    let height: CGFloat
+
+    var body: some View {
+        GeometryReader { geometry in
+            let side = min(geometry.size.width, geometry.size.height)
+            ViewThatFits(in: [.horizontal, .vertical]) {
+                ForEach(Array(stride(from: 40, through: 10, by: -1)), id: \.self) { size in
+                    ReadingText(reading: reading, variant: variant, size: CGFloat(size))
+                }
+            }
+            .frame(width: side * width, height: side * height)
+            .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+        }
+    }
+}
+
+/// Text in a corner, large enough to read once watchOS curves it along the bezel.
+struct CornerText: View {
+    let text: Text
+
+    var body: some View {
+        text
+            .lineLimit(1)
+            .minimumScaleFactor(0.6)
+    }
+}
+
+/// An open ring at the slot's edge, gap at the bottom, filled as far as
+/// the Sun has come: thinner than the system gauge, to leave the reading room.
+struct ArcRing: View {
+    let progress: Double
+
+    var body: some View {
+        GeometryReader { geometry in
+            let line = min(geometry.size.width, geometry.size.height) * 0.08
+            ZStack {
+                arc(1).stroke(Color.primary.opacity(0.25), style: StrokeStyle(lineWidth: line, lineCap: .round))
+                arc(progress).stroke(Color.primary, style: StrokeStyle(lineWidth: line, lineCap: .round))
+                    .widgetAccentable()
+            }
+            .padding(line / 2)
+        }
+    }
+
+    private func arc(_ fraction: Double) -> some Shape {
+        Circle()
+            .trim(from: 0, to: 0.75 * fraction)
+            .rotation(.degrees(135))
     }
 }
 
@@ -338,8 +402,7 @@ struct HorizonComplication: View {
                         .minimumScaleFactor(0.6)
                 }
             case .corner:
-                short(next, size: 18)
-                    .minimumScaleFactor(0.6)
+                CornerText(text: short(next, size: 24))
             case .inline:
                 Text(next.sentence(variant))
             }
