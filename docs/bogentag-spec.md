@@ -87,9 +87,8 @@ Each shows the unit of the chosen dial at Low precision (§3).
 
 - **Reading:** the position beside its glyph.
 - **Eighth:** the position and the eighth it falls in.
-- **Dial:** the sky and the Sun on its arc; on the watch, without words.
+- **Dial** (iPhone only): the sky and the Sun on its arc.
 - **Gauge:** how far along its arc the Sun is, with the position inside.
 - **Next:** the next anchor or horizon event and how far away it is.
-- **Corner** (watch only): the position and its glyph, filling the corner.
 
 The watch offers them in the circular, corner, rectangular and inline families its faces have room for. The iPhone offers Dial on the Home Screen and the Lock Screen, and the others on the Lock Screen.
