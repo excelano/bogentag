@@ -13,7 +13,8 @@ drawn as shapes, and the reading in the center. A tap shows the civil clock,
 and a timer and stopwatch count in spans as well as kiloseconds. Complications
 put the reading on an Apple face. The iPhone and iPad app shows the same dial
 larger with a short tour of the system, and its widgets put the reading on the
-Home Screen and the Lock Screen. `docs/bogentag-spec.md`
+Home Screen and the Lock Screen. On either, Siri and Shortcuts read any time
+today in Bogenzeit. `docs/bogentag-spec.md`
 describes the face and `design/mockups/` holds the drawings it was built to.
 
 ## What is here

@@ -92,3 +92,12 @@ Each shows the unit of the chosen dial at Low precision (§3).
 - **Next:** the next anchor or horizon event and how far away it is.
 
 The watch offers them in the circular, corner, rectangular and inline families its faces have room for. The iPhone offers Dial on the Home Screen and the Lock Screen, and the others on the Lock Screen.
+
+---
+
+## 8. Siri and Shortcuts
+
+- **Convert Time.** Reads a civil time on today's date in Bogenzeit for the place in use, in the chosen dial's unit and precision. Siri asks for the time, so the phrase is "Convert a time with Bogentag" and the answer is "3 pm" or "fifteen hundred": an App Shortcut phrase cannot carry a free-form time.
+- **Spoken form.** The eighth takes the glyph's place, since it already tells before from after: `54.1 Foreset`, `3.43 kiloseconds Foreset`. A position with no number is the glyph's name, `Sunset` or `Solar noon`; a polar day, which has no eighths, says `3.43 kiloseconds after noon`.
+- **Shortcuts value.** The written form, `☉ 54.1` (BZ spec §3.1).
+- **No place yet.** Siri asks the person to open Bogentag once.
