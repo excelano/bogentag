@@ -49,7 +49,7 @@ struct PhoneDialWidget: Widget {
         }
         .configurationDisplayName("Dial")
         .description("The sky and the Sun on its arc.")
-        .supportedFamilies([.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular])
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryCircular, .accessoryRectangular])
     }
 }
 
@@ -66,6 +66,8 @@ struct PhoneDialView: View {
                     .padding(2)
             case .systemMedium:
                 DialCard(reading: reading, variant: entry.variant)
+            case .systemLarge:
+                DialView(model: DialModel(reading: reading, variant: entry.variant), precision: .low)
             default:
                 DialComplication(reading: reading, variant: entry.variant, slot: slot(family), fullColor: renderingMode == .fullColor)
             }

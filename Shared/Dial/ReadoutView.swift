@@ -14,6 +14,7 @@ struct ReadoutView: View {
     let variant: Scale
     let scale: CGFloat
     var showsDate = true
+    var fixed: Precision?
     @AppStorage(Settings.precisionKey) private var storedPrecision = Precision.standard.rawValue
     @Environment(\.isLuminanceReduced) private var isLuminanceReduced
 
@@ -26,7 +27,7 @@ struct ReadoutView: View {
     /// The stored choice, or Low while the screen is dimmed and refreshes
     /// about once a minute: no finer step than the refresh (§5.2).
     private var precision: Precision {
-        Precision.shown(storedPrecision, dimmed: isLuminanceReduced)
+        fixed ?? Precision.shown(storedPrecision, dimmed: isLuminanceReduced)
     }
 
     var body: some View {

@@ -31,6 +31,10 @@ struct GalleryView: View {
                     .padding(16)
                     .frame(width: 338, height: 158)
                     .background(RoundedRectangle(cornerRadius: 22).fill(Palette.night).stroke(Palette.line.opacity(0.2)))
+                DialView(model: DialModel(reading: reading, variant: Settings.dialVariant), precision: .low)
+                    .padding(16)
+                    .frame(width: 338, height: 354)
+                    .background(RoundedRectangle(cornerRadius: 22).fill(Palette.night).stroke(Palette.line.opacity(0.2)))
                 ForEach(kinds, id: \.0) { name, make in
                     Text(name).font(.headline)
                     HStack(alignment: .center, spacing: 14) {

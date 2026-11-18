@@ -15,6 +15,7 @@ struct DialView: View {
     var showsReadout = true
     var showsDate = true
     var showsArcLengths = true
+    var precision: Precision?
     var arcs: [TimingArc] = []
 
     var body: some View {
@@ -26,7 +27,7 @@ struct DialView: View {
                     draw(in: context, size: size, scale: s)
                 }
                 if showsReadout {
-                    ReadoutView(reading: model.reading, variant: model.variant, scale: s, showsDate: showsDate)
+                    ReadoutView(reading: model.reading, variant: model.variant, scale: s, showsDate: showsDate, fixed: precision)
                     if showsArcLengths && model.variant == .kiloseconds {
                         arcLengths(scale: s)
                     }
@@ -155,6 +156,17 @@ struct DialView: View {
             context.stroke(path, with: .color(Palette.line.opacity(0.12)), lineWidth: 1 * s)
         }
     }
+}
+
+struct TimingArc: Equatable {
+    enum Kind {
+        case timer
+        case stopwatch
+    }
+
+    let kind: Kind
+    let from: Double
+    let to: Double
 }
 
 /// Today's arc lengths as the dial and the day page state them.

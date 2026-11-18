@@ -102,7 +102,6 @@
 		BF0000000000000000000001 /* Exceptions for "Shared" folder in "BogentagWidgets" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Dial/Glyph.swift,
 				Dial/Numerals.swift,
 				Dial/DialModel.swift,
 				Dial/Palette.swift,
@@ -116,11 +115,14 @@
 		BF0000000000000000000002 /* Exceptions for "Shared" folder in "BogentagPhoneWidgets" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Dial/Glyph.swift,
-				Dial/Numerals.swift,
 				Dial/DialModel.swift,
+				Dial/DialView.swift,
+				Dial/Numerals.swift,
 				Dial/Palette.swift,
+				Dial/ReadoutView.swift,
 				Support/AppGroup.swift,
+				Support/Demo.swift,
+				Support/Labels.swift,
 				Support/Settings.swift,
 				Widget/ArcProvider.swift,
 				Widget/Complications.swift,

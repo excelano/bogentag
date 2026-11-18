@@ -245,17 +245,6 @@ enum AmountText {
     }
 }
 
-struct TimingArc: Equatable {
-    enum Kind {
-        case timer
-        case stopwatch
-    }
-
-    let kind: Kind
-    let from: Double
-    let to: Double
-}
-
 extension DialModel {
     func sweep(_ elapsed: Elapsed) -> Double {
         let degrees = usesSpanGeometry ? (elapsed.spans.map { $0 * 0.9 } ?? elapsed.seconds / 240) : elapsed.seconds / 240

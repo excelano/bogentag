@@ -208,6 +208,19 @@ struct DialComplication: View {
         switch slot {
         case .inline:
             Text(Complications.plain(reading, variant))
+        case .rectangular:
+            HStack(spacing: 8) {
+                MiniDial(model: DialModel(reading: reading, variant: variant), fullColor: fullColor)
+                    .aspectRatio(1, contentMode: .fit)
+                VStack(alignment: .leading, spacing: 2) {
+                    ReadingText(reading: reading, variant: variant, size: 24)
+                    Text(Complications.eighth(reading).uppercased())
+                        .font(.caption2.weight(.semibold))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
         default:
             MiniDial(model: DialModel(reading: reading, variant: variant), fullColor: fullColor)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
