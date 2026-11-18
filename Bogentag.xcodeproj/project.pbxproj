@@ -124,8 +124,10 @@
 				Support/Demo.swift,
 				Support/Labels.swift,
 				Support/Settings.swift,
+				Timing/TimerAmount.swift,
 				Widget/ArcProvider.swift,
 				Widget/Complications.swift,
+				Widget/TimerActivity.swift,
 			);
 			target = B80000000000000000000005 /* BogentagPhoneWidgets */;
 		};
@@ -653,6 +655,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "$(BOGENTAG_DISPLAY_NAME)";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Bogentag reads the Sun's arc for where you are.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -681,6 +684,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "$(BOGENTAG_DISPLAY_NAME)";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Bogentag reads the Sun's arc for where you are.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

@@ -15,6 +15,7 @@ struct BogentagPhoneWidgets: WidgetBundle {
         PhoneEighthWidget()
         PhoneGaugeWidget()
         PhoneHorizonWidget()
+        TimerActivityWidget()
     }
 }
 
@@ -136,6 +137,46 @@ struct PhoneSlotView: View {
             make(reading, entry.variant, slot(family))
         } else {
             Empty(family: family)
+        }
+    }
+}
+
+struct TimerActivityWidget: Widget {
+    var body: some WidgetConfiguration {
+        ActivityConfiguration(for: TimerAttributes.self) { context in
+            TimerActivityView(attributes: context.attributes, state: context.state, done: context.isStale)
+                .activityBackgroundTint(Palette.night)
+                .activitySystemActionForegroundColor(Palette.line)
+        } dynamicIsland: { context in
+            DynamicIsland {
+                DynamicIslandExpandedRegion(.leading) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        TimerActivityCaption(context.attributes.status(context.state, done: context.isStale))
+                        TimerActivityCaption(AmountText.set(context.attributes.amount, context.attributes.unit).uppercased())
+                    }
+                    .padding(.leading, 6)
+                }
+                DynamicIslandExpandedRegion(.trailing) {
+                    VStack(alignment: .trailing, spacing: 2) {
+                        TimerActivityCaption(context.attributes.headlineLabel(context.state, done: context.isStale))
+                        TimerActivityHeadline(attributes: context.attributes, state: context.state, size: 24)
+                    }
+                    .padding(.trailing, 6)
+                }
+                DynamicIslandExpandedRegion(.bottom) {
+                    TimerActivityBar(attributes: context.attributes, state: context.state, done: context.isStale)
+                        .padding(.horizontal, 6)
+                }
+            } compactLeading: {
+                Image(systemName: "timer")
+                    .foregroundStyle(Palette.sun)
+            } compactTrailing: {
+                TimerActivityHeadline(attributes: context.attributes, state: context.state, size: 15, precision: .low)
+            } minimal: {
+                Image(systemName: "timer")
+                    .foregroundStyle(Palette.sun)
+            }
+            .keylineTint(Palette.sun)
         }
     }
 }

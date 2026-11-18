@@ -19,6 +19,21 @@ struct GalleryView: View {
         ("Next", { AnyView(HorizonComplication(reading: $0, variant: Settings.dialVariant, slot: $1)) }),
     ]
 
+    private var timerAttributes: TimerAttributes {
+        TimerAttributes(unit: TimerUnit(Settings.dialVariant), amount: Settings.dialVariant == .spans ? 20 : 2000, place: Demo.place)
+    }
+
+    private var timerSamples: [(state: TimerAttributes.ContentState, done: Bool)] {
+        let now = reading.instant
+        let end = SpanTimer.end(after: timerAttributes.amount, timerAttributes.unit, from: now, at: Demo.place) ?? now
+        let run = now.addingTimeInterval(-end.timeIntervalSince(now) / 3)...end
+        return [
+            (TimerAttributes.ContentState(run: run, left: timerAttributes.amount), false),
+            (TimerAttributes.ContentState(run: nil, left: timerAttributes.amount * 0.6), false),
+            (TimerAttributes.ContentState(run: run, left: timerAttributes.amount), true),
+        ]
+    }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 14) {
@@ -35,6 +50,12 @@ struct GalleryView: View {
                     .padding(16)
                     .frame(width: 338, height: 354)
                     .background(RoundedRectangle(cornerRadius: 22).fill(Palette.night).stroke(Palette.line.opacity(0.2)))
+                Text("Live Activity").font(.headline)
+                ForEach(Array(timerSamples.enumerated()), id: \.offset) { _, sample in
+                    TimerActivityView(attributes: timerAttributes, state: sample.state, done: sample.done)
+                        .frame(width: 360)
+                        .background(RoundedRectangle(cornerRadius: 22).fill(Palette.night).stroke(Palette.line.opacity(0.2)))
+                }
                 ForEach(kinds, id: \.0) { name, make in
                     Text(name).font(.headline)
                     HStack(alignment: .center, spacing: 14) {

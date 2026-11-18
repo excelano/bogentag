@@ -9,7 +9,7 @@ Bogentag is the Apple Watch and iPhone app that displays **Bogenzeit (BZ)**. The
 | Platform | Form | Notes |
 |---|---|---|
 | Apple Watch | App + complications, which also appear in the Smart Stack | Apple does not allow third-party watch faces, so the app's screen is the dial. |
-| iPhone and iPad | App + Home Screen and Lock Screen widgets | The same dial larger, the tour (§5), settings, timer and stopwatch. On an iPhone it offers an Apple face preset that carries the Bogentag complications. |
+| iPhone and iPad | App + Home Screen and Lock Screen widgets, and a Live Activity for the timer | The same dial larger, the tour (§5), settings, timer and stopwatch. On an iPhone it offers an Apple face preset that carries the Bogentag complications. |
 
 All Bogenzeit calculation runs on the device showing it, offline; the watch needs neither the phone nor a network.
 
@@ -78,6 +78,7 @@ The app explains Bogenzeit to someone with no context in a paged tour, one page 
 - **Readouts.** One unit, the dial's, or ks on a polar day or night; a running timer keeps the unit it was set in. At high precision whatever the setting, low while the watch is dimmed. Remaining amounts are rounded up, so the 0 shows only at the end; elapsed amounts are floored like every readout.
 - **On the dial.** While a timer runs, an arc in the Sun's color runs along the Sun's track from the Sun to where the timer ends; a running stopwatch draws its arc behind the Sun. On the Span dial a timer's arc is always the same angle for the same spans; on the Kilosecond dial it grows or shrinks with the time the spans take.
 - **Where.** Pages of their own on the watch; on the phone, Timer and Stopwatch open as half-height sheets under the dial. Each device keeps its own.
+- **Live Activity.** On the iPhone a running span timer is a Live Activity on the Lock Screen and in the Dynamic Island: where it ends, at high precision (`ENDS AT ☉ 2.72`), and a bar in the Sun's color that iOS fills by itself, since the activity is not updated while the app is in the background. The bar measures time, so on a span timer that crosses sunrise or sunset it runs at a different pace from the spans. A paused timer shows what is left and where its bar stopped; once the end has passed it reads `ENDED AT`, until the app clears it.
 
 ---
 
